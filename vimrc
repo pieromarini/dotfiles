@@ -1,5 +1,5 @@
 " Piero Marini
-" Last Edit: 12/4/17
+" Last Edit: 12/5/17
 " Vim 8 Config file
 
 syntax on
@@ -62,6 +62,3 @@ set background=dark
 colorscheme solarized8_dark_high
 
 hi Normal ctermbg=NONE
-
-nmap ,+ :call Solarized8Contrast(+v:count1)
-nmap ,- :call Solarized8Contrast(-v:count1)

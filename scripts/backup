@@ -1,0 +1,18 @@
+#! /usr/bin/bash
+
+echo "Backing up dotfiles..."
+cp ~/.vimrc ~/.backup/vimrc
+cp ~/.bashrc ~/.backup/bashrc
+cp ~/.dir_colors ~/.backup/dir_colors
+cp ~/.tmux.conf ~/.backup/tmux.conf
+
+echo "Backing up configs..."
+cp ~/.config/termite/config ~/.backup/config/termite/
+cp ~/powerline-shell/config.py ~/.backup/powerline-shell/
+
+echo "Backing up scripts..."
+cp ~/scripts/udev.bash ~/.backup/scripts/
+cp ~/scripts/work.bash ~/.backup/scripts/
+cp /usr/bin/backup ~/.backup/scripts/
+
+echo "Done."
