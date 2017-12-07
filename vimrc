@@ -1,5 +1,5 @@
 " Piero Marini
-" Last Edit: 12/5/17
+" Last Edit: 12/7/17
 " Vim 8 Config file
 
 syntax on
@@ -31,19 +31,38 @@ set noswapfile
 set wildmenu
 set nowritebackup
 
+"""" START MAPPINGS """"
+let mapleader = ","
+
 map <C-N> :NERDTreeToggle<CR>
-nnoremap ,d :YcmShowDetailedDiagnostic<CR>
+nmap <Leader>d :YcmShowDetailedDiagnostic<CR>
 
-nnoremap ,<Space> :nohlsearch<CR>
-
-" Copy Paste
-noremap <C-v> "+p
-noremap <C-c> "+y
-noremap ,p "*p
-noremap ,y "*y
+nmap <Leader><Space> :nohlsearch<CR>
 
 " YCM C#
-nnoremap <F5> :YcmCompleter ReloadSolution<CR>
+nmap <F5> :YcmCompleter ReloadSolution<CR>
+
+" BOL / EOL swap. Also spanish keyboard '^' too far away.
+nnoremap $ ^
+nnoremap & $
+nnoremap ^ &
+
+" # of matches for a pattern
+nnoremap <Leader>* *<C-O>:%s///gn<CR>
+
+" Replace under cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
+" Copy Paste from system Clipboard
+nnoremap <C-v> "+p
+nnoremap <C-c> "+y
+nnoremap <Leader>p "*p
+nnoremap <Leader>y "*y
+
+" Remove trailing whitespace.
+autocmd FileType c,cpp,cs,python,css,html,javascript,python autocmd BufWritePre <buffer> %s/\s\+$//e
+
+"""" END MAPPINGS """"
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
