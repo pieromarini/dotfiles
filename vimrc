@@ -67,17 +67,29 @@ autocmd FileType c,cpp,cs,python,css,html,javascript,python autocmd BufWritePre 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ALE
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'python': ['autopep8'],
+\}
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8', 'autopep8'],
+\}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fix_on_save = 1
 
 let g:airline_theme='solarized'
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#warning_symbol = '⚠ '
+let g:airline#extensions#ale#error_symbol = '⚠ '
 set background=dark
 colorscheme solarized8_dark_high
 
 hi Normal ctermbg=NONE
+
+packloadall
+silent! helptags ALL
