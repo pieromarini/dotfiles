@@ -75,14 +75,18 @@ TERM xterm-termite
 #FILE 00 # regular file: use no color at all
 
 # File Types
-.py 01;31
-.cs 01;31
+.py 00;31
+.cs 00;31
 
-.php 01;31
+.php 00;31
 
-.js 01;31
-.html 01;31
-.css 01;31
+.js 00;31
+.html 00;31
+.css 00;31
+
+.csv 01;32
+.xlsx 01;32
+.xml 01;32
 
 DIR 01;35 # directory
 LINK 01;37;44 # symbolic link. (If you set this to 'target' instead of a

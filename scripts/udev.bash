@@ -8,6 +8,7 @@ function unity-dev {
     ITEMS="$HOME/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/Item/"
     STATS="$HOME/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/Stats/"
     EQUIPMENT="$HOME/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/Equipment/"
+    ABILITY="$HOME/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/AbilitySystem/"
 
     tmux start-server
     cd $BASE
@@ -20,6 +21,8 @@ function unity-dev {
     tmux new-window -t Unity:4 -n Stats
     cd $EQUIPMENT
     tmux new-window -t Unity:5 -n Equipment
+    cd $ABILITY
+    tmux new-window -t Unity:6 -n AbilitySystem
 
     tmux select-window -t Unity:1
     tmux attach-session -t Unity

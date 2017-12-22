@@ -1,7 +1,14 @@
 # Piero Marini
-# Last Edit: 12/4/17
+# Last Edit: 12/19/17
 
 source /etc/profile
+
+export LANG=en_US.UTF-8
+
+# Python VirtualEnv
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Development/Python
+source /usr/bin/virtualenvwrapper.sh
 
 #############################
 ########## Aliases ##########
