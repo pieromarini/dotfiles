@@ -17,6 +17,9 @@ source /usr/bin/virtualenvwrapper.sh
 # Directory Aliases
 alias mkdir='mkdir -p' # Always create necessary directories.
 alias ..='cd ..' # Back a directory.
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 # End Directory Aliases
 
 # ls Aliases
@@ -98,6 +101,20 @@ function extract(){
     else
         echo "'$1' is not a valid file!"
     fi
+}
+
+# Determine size of a file or total size of a directory
+function fs() {
+	if du -b /dev/null > /dev/null 2>&1; then
+		local arg=-sbh;
+	else
+		local arg=-sh;
+	fi
+	if [[ -n "$@" ]]; then
+		du $arg -- "$@";
+	else
+		du $arg .[^.]* ./*;
+	fi;
 }
 
 # Get current host related info.
