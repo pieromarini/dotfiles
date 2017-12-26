@@ -76,11 +76,13 @@ let g:ycm_show_diagnostics_ui = 0
 
 " ALE
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'prettier'],
+\   'css': ['prettier'],
 \   'python': ['autopep8'],
 \}
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'prettier'],
+\   'css': ['prettier'],
 \   'python': ['flake8', 'autopep8'],
 \}
 
@@ -93,7 +95,7 @@ let g:ale_fix_on_save = 1
 let g:ale_cs_mcsc_source = '/home/piero/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/'
 " C# Assemblies for Unity
 " let g:ale_cs_mcsc_assembly_path = ['/opt/UnityBeta/Editor/Data/']
-let g:ale_cs_mcsc_assemblies = ['/opt/UnityBeta/Editor/Data/Managed/UnityEditor.dll', '/opt/UnityBeta/Editor/Data/Managed/UnityEngine.dll']
+let g:ale_cs_mcsc_assemblies = ['/opt/UnityBeta/Editor/Data/Managed/UnityEditor.dll', '/opt/UnityBeta/Editor/Data/Managed/UnityEngine.dll', '/opt/UnityBeta/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll']
 
 
 " START StatusLine
