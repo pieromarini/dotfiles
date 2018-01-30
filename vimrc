@@ -71,6 +71,8 @@ nnoremap <Leader>v <C-v>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
+
 " Turn off YCM linter
 let g:ycm_show_diagnostics_ui = 0
 
@@ -92,7 +94,7 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fix_on_save = 1
 
 " Unity Project
-let g:ale_cs_mcsc_source = '/home/piero/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/'
+let g:ale_cs_mcsc_source = '/home/piero/Development/Unity3D/TheOriginOfEvil/Assets/'
 " C# Assemblies for Unity
 " let g:ale_cs_mcsc_assembly_path = ['/opt/UnityBeta/Editor/Data/']
 let g:ale_cs_mcsc_assemblies = ['/opt/UnityBeta/Editor/Data/Managed/UnityEditor.dll', '/opt/UnityBeta/Editor/Data/Managed/UnityEngine.dll', '/opt/UnityBeta/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll']
