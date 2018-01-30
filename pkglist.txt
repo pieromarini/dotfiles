@@ -14,6 +14,8 @@ bison
 blender
 bluedevil
 bluez-utils
+boost
+boostnote
 breeze
 breeze-gtk
 breeze-kde4
@@ -61,13 +63,16 @@ git
 glibc
 gnome-keyring
 gnome-twitch
+go
 gptfdisk
 grep
 grub
+grub-customizer
 gsfonts
 gvim
 gwenview
 gzip
+htop
 inetutils
 intel-ucode
 iproute2
@@ -82,7 +87,6 @@ kcron
 kde-cli-tools
 kde-gtk-config
 kdecoration
-kdemultimedia-kmix
 kdeplasma-addons
 kdialog
 kfind
@@ -91,6 +95,7 @@ kgpg
 khotkeys
 kinfocenter
 kmenuedit
+kmix
 knetattach
 knotes
 konsole
@@ -125,7 +130,6 @@ linux-headers
 llvm
 logrotate
 lsof
-lutris
 lvm2
 m4
 make
@@ -134,10 +138,13 @@ man-pages
 mdadm
 mesa-demos
 milou
+msbuild-bin
 nano
+ncurses5-compat-libs
 network-manager-applet
 networkmanager
 networkmanager-openvpn
+nmap
 noto-fonts-emoji
 ntfs-3g
 ntp
@@ -157,6 +164,7 @@ pciutils
 pcmciautils
 pepper-flash
 perl
+php
 pkg-config
 plasma-desktop
 plasma-integration
@@ -165,7 +173,6 @@ plasma-pa
 plasma-sdk
 plasma-workspace
 plasma-workspace-wallpapers
-playonlinux
 polkit-kde-agent
 powerdevil
 print-manager
@@ -177,6 +184,7 @@ python-pip
 razer-driver-dkms
 reflector
 reiserfsprogs
+rpmextract
 rsync
 ruby
 s-nail
@@ -185,7 +193,7 @@ sddm-kcm
 sdl_ttf
 sed
 shadow
-skypeforlinux-bin
+shfmt
 slack-desktop
 spectacle
 spotify
@@ -213,9 +221,9 @@ user-manager
 util-linux
 vi
 wget
+whatsapp-desktop
 which
 whois
-winetricks
 wireless_tools
 xdg-desktop-portal-kde
 xfsprogs
