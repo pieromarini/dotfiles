@@ -15,4 +15,7 @@ cp ~/scripts/udev.bash ~/.backup/scripts/
 cp ~/scripts/work.bash ~/.backup/scripts/
 cp /usr/bin/backup ~/.backup/scripts/
 
+echo "Updating installed packages..."
+pacman -Qqe > ~/.backup/pkglist.txt
+
 echo "Done."
