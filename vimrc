@@ -1,6 +1,6 @@
-" Piero Marini
-" Last Edit: 21/2/2018
 " Vim 8 Config file
+" Last Edit: 21 Feb 2018
+" Author: Piero Marini
 
 syntax on
 filetype on
@@ -68,15 +68,6 @@ nnoremap <Leader>v <C-v>
 
 """" END MAPPINGS """"
 
-let g:user_emmet_leader_key='<C-A>'
-
-"""" SNIPPETS """"
-
-" Html Base Skeleton
-nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
-
-"""" END SNIPPETS """"
-
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
@@ -87,15 +78,15 @@ let g:ycm_show_diagnostics_ui = 0
 
 " ALE
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'css': ['prettier'],
-\   'python': ['autopep8'],
-\}
+            \   'javascript': ['eslint'],
+            \   'css': ['prettier'],
+            \   'python': ['autopep8'],
+            \}
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'css': ['prettier'],
-\   'python': ['flake8', 'autopep8'],
-\}
+            \   'javascript': ['eslint'],
+            \   'css': ['prettier'],
+            \   'python': ['flake8', 'autopep8'],
+            \}
 
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -105,87 +96,91 @@ let g:ale_fix_on_save = 1
 " Unity Project
 let g:ale_cs_mcsc_source = '/home/piero/Development/Unity3D/TheOriginOfEvil/Assets/'
 " C# Assemblies for Unity
-" let g:ale_cs_mcsc_assembly_path = ['/opt/UnityBeta/Editor/Data/']
 let g:ale_cs_mcsc_assemblies = ['/opt/Unity3D/Editor/Data/Managed/UnityEditor.dll', '/opt/Unity3D/Editor/Data/Managed/UnityEngine.dll', '/opt/Unity3D/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll']
 
 
 " START StatusLine
 
 function! LinterStatus() abort
-  let l:symbol = '●'
-  let l:symbol_warning= '⚠'
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
+    let l:symbol = '●'
+    let l:symbol_warning= '⚠'
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
 
-  return printf(
-        \   '%s %d %s %d',
-        \   l:symbol,
-        \   l:all_errors,
-        \   l:symbol_warning,
-        \   l:all_non_errors
-        \)
+    return printf(
+                \   '%s %d %s %d',
+                \   l:symbol,
+                \   l:all_errors,
+                \   l:symbol_warning,
+                \   l:all_non_errors
+                \)
 endfunction
 
 let g:currentmode={
-    \ 'n'  : 'N ',
-    \ 'no' : 'N·Operator Pending ',
-    \ 'v'  : 'V ',
-    \ 'V'  : 'V·Line ',
-    \ '^V' : 'V·Block ',
-    \ 's'  : 'Select ',
-    \ 'S'  : 'S·Line ',
-    \ '^S' : 'S·Block ',
-    \ 'i'  : 'I ',
-    \ 'R'  : 'R ',
-    \ 'Rv' : 'V·Replace ',
-    \ 'c'  : 'Command ',
-    \ 'cv' : 'Vim Ex ',
-    \ 'ce' : 'Ex ',
-    \ 'r'  : 'Prompt ',
-    \ 'rm' : 'More ',
-    \ 'r?' : 'Confirm ',
-    \ '!'  : 'Shell ',
-    \ 't'  : 'Terminal '
-    \}
+            \ 'n'  : 'N ',
+            \ 'no' : 'N·Operator Pending ',
+            \ 'v'  : 'V ',
+            \ 'V'  : 'V·Line ',
+            \ '^V' : 'V·Block ',
+            \ 's'  : 'Select ',
+            \ 'S'  : 'S·Line ',
+            \ '^S' : 'S·Block ',
+            \ 'i'  : 'I ',
+            \ 'R'  : 'R ',
+            \ 'Rv' : 'V·Replace ',
+            \ 'c'  : 'Command ',
+            \ 'cv' : 'Vim Ex ',
+            \ 'ce' : 'Ex ',
+            \ 'r'  : 'Prompt ',
+            \ 'rm' : 'More ',
+            \ 'r?' : 'Confirm ',
+            \ '!'  : 'Shell ',
+            \ 't'  : 'Terminal '
+            \}
 
 function! ReadOnly()
-  if &readonly || !&modifiable
-    return ''
-  else
-    return ''
+    if &readonly || !&modifiable
+        return ''
+    else
+        return ''
 endfunction
 
 function! GitInfo()
-  let git = fugitive#head()
-  if git != ''
-    return ' '.fugitive#head()
-  else
-    return ''
+    let git = fugitive#head()
+    if git != ''
+        return ' '.fugitive#head()
+    else
+        return ''
 endfunction
 
 " Automatically change the statusline color depending on mode
-function! StatulineUpdate()
-  if (mode() =~# '\v(n|no)')
-    exe 'hi! User1 ctermbg=102 ctermfg=231'
-    exe 'hi! User9 ctermbg=8 ctermfg=102'
-  elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-    exe 'hi! User1 ctermbg=125 ctermfg=231'
-    exe 'hi! User9 ctermbg=8 ctermfg=125'
-  elseif (mode() ==# 'i')
-    exe 'hi! User1 ctermbg=136 ctermfg=231'
-    exe 'hi! User9 ctermbg=8 ctermfg=136'
-  else
-    exe 'hi! User1 ctermbg=160 ctermfg=231'
-    exe 'hi! User9 ctermbg=8 ctermfg=160'
-  endif
+function! StatuslineUpdate()
+    let m = mode()
+    if (!has_key(g:currentmode, m))
+        let g:currentmode[m] = 'V·Block '
+    endif
 
-  return ''
+    if (m =~# '\v(n|no)')
+        exe 'hi! User1 ctermbg=102 ctermfg=231'
+        exe 'hi! User9 ctermbg=8 ctermfg=102'
+    elseif (m =~# '\v(v|V)' || g:currentmode[m] ==# 'V·Block ' || get(g:currentmode, m, '') ==# 't')
+        exe 'hi! User1 ctermbg=125 ctermfg=231'
+        exe 'hi! User9 ctermbg=8 ctermfg=125'
+    elseif (m ==# 'i')
+        exe 'hi! User1 ctermbg=136 ctermfg=231'
+        exe 'hi! User9 ctermbg=8 ctermfg=136'
+    else
+        exe 'hi! User1 ctermbg=160 ctermfg=231'
+        exe 'hi! User9 ctermbg=8 ctermfg=160'
+    endif
+
+    return ''
 endfunction
 
 
 set statusline=
-set statusline+=%{StatulineUpdate()}                       " Changing the statusline color
+set statusline+=%{StatuslineUpdate()}                       " Changing the statusline color
 set statusline+=%1*\ %{toupper(g:currentmode[mode()])}%9* " Current mode
 set statusline+=%4*\ %{GitInfo()}                          " Git
 set statusline+=%2*\ [%n]                                  " buffer
@@ -212,6 +207,69 @@ hi User6 ctermfg=160 ctermbg=246
 hi User7 ctermfg=102 ctermbg=246
 hi User8 ctermfg=246 ctermbg=8
 hi User9 ctermfg=102 ctermbg=8
+
+
+""" EMMET VIM """
+let g:user_emmet_leader_key='<C-A>'
+
+"""" SNIPPETS """"
+
+" Html Base Skeleton
+nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
+
+
+"""" END SNIPPETS """"
+
+
+""" Auto Closing Brackets '[]' and Parenthesis '()' """
+""" This doesn't write the closing character if it's already present. """
+inoremap        (  ()<Left>
+inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap        [  []<Left>
+inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+
+""" Auto Closing Single and Double Quotes """
+""" This doesn't write the closing character if it's already present. """
+inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == '"' ? '<Right>' : '""<Left>'
+
+""" Auto Closing for Braces '{}' """
+""" Insert closing braces and check if it is the last character on the line. """
+""" If TRUE it inserts the closing brace and positions you inside the braces. """
+""" If FALSE it inserts the closing brace 2 lines below and positions you inside the code block. """
+function! ConditionalPairMap(open, close)
+    let line = getline('.')
+    let column = col('.')
+    if column < col('$') || stridx(line, a:close, column + 1) != -1
+        return a:open . a:close . "\<Left>"
+    else
+        return a:open ."\<CR>" . a:close . "\<Esc>\O"
+    endif
+endf
+inoremap <expr> { ConditionalPairMap('{', '}')
+
+""" On Buffer Save, search for ' Last Edit: ' and add the current date after. """
+""" ' Last Edit: ' can have up to 10 characters before (they are retained). """
+""" Restores cursor and window position """
+function! LastModified()
+    if &modified
+        let save_cursor = getpos(".")
+        let n = min([10, line("$")])
+        keepjumps exe '1,' . n . 's#^\(.\{,10}Last Edit: \).*#\1' .
+                    \ strftime('%d %b %Y') . '#e'
+        call histdel('search', -1)
+        call setpos('.', save_cursor)
+    endif
+endf
+
+""" Automatic Signature for C# files """
+nnoremap <Leader>sig :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
+            \ \| :g/File:.*/s//\=printf("File: %s", expand('%:t'))<CR>
+            \ \| :g/Last Edit:.*/s//\=printf("Last Edit: %s", strftime('%d %b %Y'))<CR>
+            \ \| :nohlsearch<CR>
+
+autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
+autocmd BufWritePre .vimrc call LastModified()
 
 
 packloadall
