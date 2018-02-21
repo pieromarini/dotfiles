@@ -1,5 +1,5 @@
 " Piero Marini
-" Last Edit: 12/19/17
+" Last Edit: 21/2/2018
 " Vim 8 Config file
 
 syntax on
@@ -67,6 +67,15 @@ nnoremap <Leader>v <C-v>
 " autocmd FileType c,cpp,cs,python,css,html,javascript,python autocmd BufWritePre <buffer> %s/\s\+$//e
 
 """" END MAPPINGS """"
+
+let g:user_emmet_leader_key='<C-A>'
+
+"""" SNIPPETS """"
+
+" Html Base Skeleton
+nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
+
+"""" END SNIPPETS """"
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
