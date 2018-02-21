@@ -6,6 +6,10 @@ cp ~/.bashrc ~/.backup/bashrc
 cp ~/.dir_colors ~/.backup/dir_colors
 cp ~/.tmux.conf ~/.backup/tmux.conf
 
+echo "Backing up Vim files..."
+cp ~/.vim/ftplugin/*.vim ~/.backup/vim/ftplugin/
+cp ~/.vim/snippets/* ~/.backup/vim/snippets/
+
 echo "Backing up configs..."
 cp ~/.config/termite/config ~/.backup/config/termite/
 cp ~/powerline-shell/config.py ~/.backup/powerline-shell/

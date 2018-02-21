@@ -2,6 +2,19 @@
 " Last Edit: 21 Feb 2018
 " Author: Piero Marini
 
+
+""" Plugin List """
+
+" ALE (Async Linting)
+" YouCompleteMe (Auto-Complete)
+" NerdTree (Tree)
+" Emmet-Vim (Html/Css Fast Typing)
+" Vim-Fugitive (Git)
+" Vim-Vue (Syntax Highlighting for .vue files)
+" Vim-Tmux-Navigator (Integration for tmux panels with vim splits)
+
+""" End Plugin List """
+
 syntax on
 filetype on
 filetype plugin on
