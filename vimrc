@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 21 Feb 2018
+" Last Edit: 22 Feb 2018
 " Author: Piero Marini
 
 
@@ -282,7 +282,7 @@ nnoremap <Leader>sig :-1read $HOME/.vim/snippets/cs_signature.txt<CR>
             \ \| :nohlsearch<CR>
 
 autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
-autocmd BufWritePre .vimrc call LastModified()
+autocmd BufWritePre .vimrc,.tmux.conf call LastModified()
 
 
 packloadall
