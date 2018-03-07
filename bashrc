@@ -5,6 +5,13 @@ source /etc/profile
 
 export LANG=en_US.UTF-8
 
+export WORK=~/Development/Work/
+
+export TOE=~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/
+
+export VIMRC=~/.vimrc
+export BASHRC=~/.bashrc
+
 # Python VirtualEnv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Development/Python
@@ -57,6 +64,62 @@ fi
 ###############################
 ######### Functions ###########
 ###############################
+
+# Bulk Helpers
+function remove-prefix(){
+    if [ $# -ne 2 ] 
+    then 
+        echo "Usage: remove-prefix [files_expr] [prefix_to_delete]"
+        echo "Ex: remove-prefix '*.ext' 'prefix'"
+        return 1
+    fi
+
+    for f in $1; do
+        mv "$f" "${f#$2}";
+    done
+}
+
+function add-prefix(){
+    if [ $# -ne 2 ] 
+    then 
+        echo "Usage: add-prefix [files_expr] [prefix_to_add]"
+        echo "Ex: add-prefix '*.ext' 'prefix'"
+        echo "Returns: prefix*.ext"
+        return 1
+    fi
+
+    for f in $1; do
+        mv "$f" "$2$f";
+    done
+}
+
+function add-suffix(){
+    if [ $# -ne 2 ] 
+    then 
+        echo "Usage: add-suffix [files_expr] [suffix_to_add]"
+        echo "Ex: add-suffix '*.ext' 'suffix'"
+        echo "Returns: *suffix.ext"
+        return 1
+    fi
+
+    for f in $1; do 
+        mv "$f" "${f%.*}$2.${f##*.}"
+    done
+}
+
+function remove-suffix(){
+    if [ $# -ne 2 ] 
+    then 
+        echo "Usage: remove-suffix [files_expr] [suffix_to_remove]"
+        echo "Ex: remove-suffix '*.ext' 'suffix'"
+        return 1
+    fi
+
+    for f in $1; do 
+        mv "$f" "${f/$2/}";
+    done
+}
+# End Bulk Helpers
 
 # Swap two filenames.
 function swap(){

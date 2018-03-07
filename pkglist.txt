@@ -1,5 +1,6 @@
 alsa-plugins
 alsa-utils
+apache
 ark
 artwiz-fonts
 audiocd-kio
@@ -183,6 +184,8 @@ pcmciautils
 pepper-flash
 perl
 php
+php-apache
+phpmyadmin
 pkg-config
 plasma-desktop
 plasma-integration
@@ -246,6 +249,7 @@ which
 whois
 wine-staging
 wireless_tools
+xampp
 xdg-desktop-portal-kde
 xfsprogs
 xorg-fonts-type1

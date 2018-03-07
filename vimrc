@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 22 Feb 2018
+" Last Edit: 01 Mar 2018
 " Author: Piero Marini
 
 
@@ -204,8 +204,6 @@ set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileform
 set statusline+=%6*\ %{LinterStatus()}\                    " ALE errors
 set statusline+=%7*%1*%3p%%(%L)\ ☰\ %l:\ %2c\             " %(Total) Line: Col
 
-" END STATUS LINE
-
 colorscheme solarized8_dark_high
 
 hi Normal ctermbg=NONE
@@ -221,6 +219,8 @@ hi User7 ctermfg=102 ctermbg=246
 hi User8 ctermfg=246 ctermbg=8
 hi User9 ctermfg=102 ctermbg=8
 
+" END STATUS LINE
+
 
 """ EMMET VIM """
 let g:user_emmet_leader_key='<C-A>'
@@ -233,6 +233,30 @@ nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
 
 """" END SNIPPETS """"
 
+"""" BETTER SEARCHING """"
+
+"""" Grep Operator.SOURCE:'http://learnvimscriptthehardway.stevelosh.com/chapters/34.html'
+nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
+vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+function! s:GrepOperator(type)
+    let saved_unnamed_register = @@
+
+    if a:type ==# 'v'
+        normal! `<v`>y
+    elseif a:type ==# 'char'
+        normal! `[v`]y
+    else
+        return
+    endif
+
+    silent execute "grep! -R " . shellescape(@@) . " ."
+    copen
+
+    let @@ = saved_unnamed_register
+endfunction
+
+"""" END BETTER SEARCHING """"
 
 """ Auto Closing Brackets '[]' and Parenthesis '()' """
 """ This doesn't write the closing character if it's already present. """
@@ -259,7 +283,13 @@ function! ConditionalPairMap(open, close)
         return a:open ."\<CR>" . a:close . "\<Esc>\O"
     endif
 endf
-inoremap <expr> { ConditionalPairMap('{', '}')
+
+inoremap <expr> {<CR> ConditionalPairMap('{', '}')
+inoremap { {}<Left>
+inoremap {{ {
+
+""" Useful for Vue Template files. 
+autocmd FileType vue inoremap {{<CR> {{ }}<Left><Left><Left>
 
 """ On Buffer Save, search for ' Last Edit: ' and add the current date after. """
 """ ' Last Edit: ' can have up to 10 characters before (they are retained). """
