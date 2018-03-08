@@ -44,6 +44,8 @@ alias lh='ls --ignore="*.meta"' # Special ls to hide meta files from Unity3D.
 
 # End ls Aliases
 
+alias open='xdg-open'
+
 # Tmux Sessions
 udev(){
     /home/piero/scripts/udev.bash
@@ -132,11 +134,6 @@ function swap(){
     mv "$1" $TMPFILE
     mv "$2" "$1"
     mv $TMPFILE "$2"
-}
-
-# Xdg-open shortcut
-function open(){
-    xdg-open $1
 }
 
 # Update Pacman Mirror with Reflector

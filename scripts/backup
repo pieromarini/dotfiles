@@ -22,4 +22,13 @@ cp /usr/bin/backup ~/.backup/scripts/
 echo "Updating installed packages..."
 pacman -Qqe > ~/.backup/pkglist.txt
 
+echo "Uploading to GitHub"
+(
+cd ~/.backup && git add .
+echo "Commit Message: "
+read commit
+git commit -m "$commit"
+git push origin master
+)
+
 echo "Done."
