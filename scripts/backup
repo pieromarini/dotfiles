@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#!/usr/bin/bash
 
 echo "Backing up dotfiles..."
 cp ~/.vimrc ~/.backup/vimrc
@@ -25,8 +25,8 @@ pacman -Qqe > ~/.backup/pkglist.txt
 echo "Uploading to GitHub"
 (
 cd ~/.backup && git add .
-echo "Commit Message: "
-read commit
+printf 'Commit Message: '
+read -r commit
 git commit -m "$commit"
 git push origin master
 )

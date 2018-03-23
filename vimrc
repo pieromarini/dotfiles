@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 01 Mar 2018
+" Last Edit: 20 Mar 2018
 " Author: Piero Marini
 
 
@@ -229,13 +229,13 @@ let g:user_emmet_leader_key='<C-A>'
 
 " Html Base Skeleton
 nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
-
+nnoremap <Leader>main :-1read $HOME/.vim/snippets/main.py<CR>o
 
 """" END SNIPPETS """"
 
 """" BETTER SEARCHING """"
 
-"""" Grep Operator.SOURCE:'http://learnvimscriptthehardway.stevelosh.com/chapters/34.html'
+"""" Grep Operator. SOURCE:'http://learnvimscriptthehardway.stevelosh.com/chapters/34.html'
 nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 

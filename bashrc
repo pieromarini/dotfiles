@@ -53,6 +53,9 @@ udev(){
 work(){
     /home/piero/scripts/work.bash
 }
+vuedev(){
+    /home/piero/scripts/vue.bash
+}
 # End Tmux Sessions
 
 # Use dircolors to set $LC_COLORS
@@ -200,6 +203,15 @@ function tmuxattach(){
     tmux attach-session -t $1
 }
 # End Tmux Session shortcuts
+
+# Apache Dev
+function wordpress-devserver(){
+    echo "Starting Apache & MySQL"
+    sudo systemctl start mysqld httpd
+    systemctl status mysqld httpd
+}
+
+# End Apache Dev
 
 # Powerline-Shell Functions
 function _update_ps1() {

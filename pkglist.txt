@@ -80,11 +80,13 @@ intel-ucode
 iproute2
 iputils
 jfsutils
+jpegoptim
 jre8-openjdk
 kactivitymanagerd
 kate
 kcalc
 kcharselect
+kcolorchooser
 kcron
 kde-cli-tools
 kde-gtk-config
