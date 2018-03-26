@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 20 Mar 2018
+" Last Edit: 26 Mar 2018
 " Author: Piero Marini
 
 
@@ -227,11 +227,22 @@ let g:user_emmet_leader_key='<C-A>'
 
 """" SNIPPETS """"
 
-" Html Base Skeleton
-nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
-nnoremap <Leader>main :-1read $HOME/.vim/snippets/main.py<CR>o
+"""" SNIPPETS """"
+
+autocmd FileType html nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
+autocmd FileType python nnoremap <Leader>main :-1read $HOME/.vim/snippets/main.py<CR>o
+autocmd FileType tex,plaintex nnoremap <Leader>tex :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
 
 """" END SNIPPETS """"
+
+
+"""" SCRIPT EXECUTION/COMPILING """"
+
+autocmd FileType python nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<CR>
+autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!pdflatex' shellescape(@%, 1)<CR>
+
+"""" END SCRIPT EXECUTION/COMPILING """"
+
 
 """" BETTER SEARCHING """"
 
@@ -290,6 +301,7 @@ inoremap {{ {
 
 """ Useful for Vue Template files. 
 autocmd FileType vue inoremap {{<CR> {{ }}<Left><Left><Left>
+
 
 """ On Buffer Save, search for ' Last Edit: ' and add the current date after. """
 """ ' Last Edit: ' can have up to 10 characters before (they are retained). """

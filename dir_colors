@@ -79,6 +79,10 @@ TERM xterm-termite
 .cs 00;31
 
 .php 00;31
+.tex 00;31
+
+.c 00;31
+.cpp 00;31
 
 .js 00;31
 .html 00;31
