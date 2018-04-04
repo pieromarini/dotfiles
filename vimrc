@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 26 Mar 2018
+" Last Edit: 28 Mar 2018
 " Author: Piero Marini
 
 
@@ -318,7 +318,7 @@ function! LastModified()
 endf
 
 """ Automatic Signature for C# files """
-nnoremap <Leader>sig :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
+autocmd FileType cs nnoremap <Leader>sig :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
             \ \| :g/File:.*/s//\=printf("File: %s", expand('%:t'))<CR>
             \ \| :g/Last Edit:.*/s//\=printf("Last Edit: %s", strftime('%d %b %Y'))<CR>
             \ \| :nohlsearch<CR>
