@@ -1,13 +1,17 @@
-# Piero Marini
-# Last Edit: 12/19/17
+
+#   File: .bashrc
+#   Last Edit: 04 Apr 2018
+#   Author: Piero Marini
 
 source /etc/profile
 
 export LANG=en_US.UTF-8
 
+# Quick Navigation #
 export WORK=~/Development/Work/
 
 export TOE=~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/
+export UTEC=~/Documents/Utec/2018-1/
 
 export VIMRC=~/.vimrc
 export BASHRC=~/.bashrc

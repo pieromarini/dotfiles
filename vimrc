@@ -1,12 +1,11 @@
 " Vim 8 Config file
-" Last Edit: 28 Mar 2018
+" Last Edit: 04 Apr 2018
 " Author: Piero Marini
 
 
 """ Plugin List """
 
-" ALE (Async Linting)
-" YouCompleteMe (Auto-Complete)
+" ALE (Async Linting) " YouCompleteMe (Auto-Complete)
 " NerdTree (Tree)
 " Emmet-Vim (Html/Css Fast Typing)
 " Vim-Fugitive (Git)
@@ -239,7 +238,10 @@ autocmd FileType tex,plaintex nnoremap <Leader>tex :-1read $HOME/.vim/snippets/t
 """" SCRIPT EXECUTION/COMPILING """"
 
 autocmd FileType python nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!pdflatex' shellescape(@%, 1)<CR>
+
+" Compiles .tex files and opens its corresponding generated .pdf file.
+autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex' shellescape(@%, 1)<CR>
+autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
 
 """" END SCRIPT EXECUTION/COMPILING """"
 
@@ -285,6 +287,7 @@ inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == '"' ? '<Right>' : '""<
 """ Insert closing braces and check if it is the last character on the line. """
 """ If TRUE it inserts the closing brace and positions you inside the braces. """
 """ If FALSE it inserts the closing brace 2 lines below and positions you inside the code block. """
+""" Doesn't insert brace if next character is a brace. """
 function! ConditionalPairMap(open, close)
     let line = getline('.')
     let column = col('.')
@@ -295,6 +298,7 @@ function! ConditionalPairMap(open, close)
     endif
 endf
 
+inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 inoremap <expr> {<CR> ConditionalPairMap('{', '}')
 inoremap { {}<Left>
 inoremap {{ {
@@ -303,8 +307,8 @@ inoremap {{ {
 autocmd FileType vue inoremap {{<CR> {{ }}<Left><Left><Left>
 
 
-""" On Buffer Save, search for ' Last Edit: ' and add the current date after. """
-""" ' Last Edit: ' can have up to 10 characters before (they are retained). """
+""" Search for 'Last Edit:' and add the current date after. """
+""" 'Last Edit:' can have up to 10 characters before (they are retained). """
 """ Restores cursor and window position """
 function! LastModified()
     if &modified
@@ -324,7 +328,7 @@ autocmd FileType cs nnoremap <Leader>sig :-1read $HOME/.vim/snippets/cs_signatur
             \ \| :nohlsearch<CR>
 
 autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
-autocmd BufWritePre .vimrc,.tmux.conf call LastModified()
+autocmd BufWritePre .vimrc,.tmux.conf,.bashrc call LastModified()
 
 
 packloadall
