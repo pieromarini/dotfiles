@@ -12,7 +12,7 @@ cp ~/.vim/snippets/* ~/.backup/vim/snippets/
 
 echo "Backing up configs..."
 cp ~/.config/termite/config ~/.backup/config/termite/
-cp ~/powerline-shell/config.py ~/.backup/powerline-shell/
+cp ~/.powerline-shell.json ~/.backup/powerline-shell.json
 
 echo "Backing up scripts..."
 cp ~/scripts/udev.bash ~/.backup/scripts/

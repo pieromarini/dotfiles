@@ -1,20 +1,15 @@
 
 #   File: .bashrc
-#   Last Edit: 04 Apr 2018
+#   Last Edit: 08 Apr 2018
 #   Author: Piero Marini
 
 source /etc/profile
 
 export LANG=en_US.UTF-8
 
-# Quick Navigation #
-export WORK=~/Development/Work/
-
-export TOE=~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/
-export UTEC=~/Documents/Utec/2018-1/
-
 export VIMRC=~/.vimrc
 export BASHRC=~/.bashrc
+
 
 # Python VirtualEnv
 export WORKON_HOME=$HOME/.virtualenvs
@@ -39,7 +34,7 @@ alias lx='ls -lXB' # Sort by extension.
 alias lk='ls -lS' # Sort by size.
 alias lt='ls -lt' # Sort by date.
 
-alias ll="ls -lvF --group-directories-first" # Directories first, alphanumeric sorting.
+alias ll='ls -lvF --group-directories-first' # Directories first, alphanumeric sorting.
 alias lm='ll |more' # Pipe to more.
 alias lr='ll -R' # Recursive ls.
 alias la='ll -A' # Show hidden files.
@@ -50,17 +45,13 @@ alias lh='ls --ignore="*.meta"' # Special ls to hide meta files from Unity3D.
 
 alias open='xdg-open'
 
-# Tmux Sessions
-udev(){
-    /home/piero/scripts/udev.bash
-}
-work(){
-    /home/piero/scripts/work.bash
-}
-vuedev(){
-    /home/piero/scripts/vue.bash
-}
-# End Tmux Sessions
+# Quick Navigation
+alias utec='cd ~/Documents/Utec/2018-1/'
+alias toe='cd ~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/'
+
+alias udev='/home/piero/scripts/udev.bash'
+alias work='/home/piero/scripts/work.bash'
+alias vuedev='/home/piero/scripts/vue.bash'
 
 # Use dircolors to set $LC_COLORS
 if [ -f /usr/bin/dircolors ]; then
@@ -172,16 +163,16 @@ function extract(){
 
 # Determine size of a file or total size of a directory
 function fs() {
-	if du -b /dev/null > /dev/null 2>&1; then
-		local arg=-sbh;
-	else
-		local arg=-sh;
-	fi
-	if [[ -n "$@" ]]; then
-		du $arg -- "$@";
-	else
-		du $arg .[^.]* ./*;
-	fi;
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh;
+    else
+        local arg=-sh;
+    fi
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@";
+    else
+        du $arg .[^.]* ./*;
+    fi;
 }
 
 # Get current host related info.
@@ -189,7 +180,7 @@ function ii(){
     echo -e "\nYou are logged on ${BRed}$HOST"
     echo -e "\n${BRed}Additionnal information:$NC " ; uname -a
     echo -e "\n${BRed}Users logged on:$NC " ; w -hs |
-             cut -d " " -f1 | sort | uniq
+        cut -d " " -f1 | sort | uniq
     echo -e "\n${BRed}Current date :$NC " ; date
     echo -e "\n${BRed}Machine stats :$NC " ; uptime
     echo -e "\n${BRed}Memory stats :$NC " ; free
@@ -219,9 +210,10 @@ function wordpress-devserver(){
 
 # Powerline-Shell Functions
 function _update_ps1() {
-    PS1="$(~/powerline-shell.py $? 2> /dev/null)"
+    PS1=$(powerline-shell $?)
 }
-if [ "$TERM" != "linux" ]; then
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 # End Powerline-Shell Functions

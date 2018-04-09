@@ -1,12 +1,13 @@
 " Vim 8 Config file
-" Last Edit: 04 Apr 2018
+" Last Edit: 06 Apr 2018
 " Author: Piero Marini
 
 
 """ Plugin List """
 
-" ALE (Async Linting) " YouCompleteMe (Auto-Complete)
-" NerdTree (Tree)
+" ALE (Async Linting) 
+" YouCompleteMe (Auto-Complete)
+" NerdTree (Directory Tree)
 " Emmet-Vim (Html/Css Fast Typing)
 " Vim-Fugitive (Git)
 " Vim-Vue (Syntax Highlighting for .vue files)
@@ -23,6 +24,7 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+set hidden
 
 set number
 set cursorline
@@ -83,7 +85,7 @@ nnoremap <Leader>v <C-v>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " Turn off YCM linter
 let g:ycm_show_diagnostics_ui = 0
@@ -298,8 +300,8 @@ function! ConditionalPairMap(open, close)
     endif
 endf
 
-inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 inoremap <expr> {<CR> ConditionalPairMap('{', '}')
+inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 inoremap { {}<Left>
 inoremap {{ {
 

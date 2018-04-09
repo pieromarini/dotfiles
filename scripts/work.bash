@@ -6,7 +6,6 @@ function mauripro-dev {
 
     cd $Work
     tmux start-server
-    cd $MPS
     tmux new-session -d -s Work -n Main
     cd $Utils
     tmux new-window -t Work:2 -n Utilities
