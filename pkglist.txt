@@ -204,6 +204,7 @@ psmisc
 pulseaudio
 pulseaudio-alsa
 python-pip
+qtcam-git
 razer-driver-dkms
 reflector
 reiserfsprogs

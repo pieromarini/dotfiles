@@ -1,6 +1,6 @@
 
 #   File: .bashrc
-#   Last Edit: 08 Apr 2018
+#   Last Edit: 24 Apr 2018
 #   Author: Piero Marini
 
 source /etc/profile
@@ -49,7 +49,8 @@ alias open='xdg-open'
 alias utec='cd ~/Documents/Utec/2018-1/'
 alias toe='cd ~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/'
 
-alias udev='/home/piero/scripts/udev.bash'
+# Tmux Sessions
+alias gamedev='/home/piero/scripts/udev.bash'
 alias work='/home/piero/scripts/work.bash'
 alias vuedev='/home/piero/scripts/vue.bash'
 
@@ -70,7 +71,7 @@ function remove-prefix(){
     if [ $# -ne 2 ] 
     then 
         echo "Usage: remove-prefix [files_expr] [prefix_to_delete]"
-        echo "Ex: remove-prefix '*.ext' 'prefix'"
+        echo "Ex: remove-prefix '*.extension' 'prefix'"
         return 1
     fi
 
@@ -83,8 +84,8 @@ function add-prefix(){
     if [ $# -ne 2 ] 
     then 
         echo "Usage: add-prefix [files_expr] [prefix_to_add]"
-        echo "Ex: add-prefix '*.ext' 'prefix'"
-        echo "Returns: prefix*.ext"
+        echo "Ex: add-prefix '*.extension' 'prefix'"
+        echo "Returns: prefix*.extension"
         return 1
     fi
 
@@ -97,8 +98,8 @@ function add-suffix(){
     if [ $# -ne 2 ] 
     then 
         echo "Usage: add-suffix [files_expr] [suffix_to_add]"
-        echo "Ex: add-suffix '*.ext' 'suffix'"
-        echo "Returns: *suffix.ext"
+        echo "Ex: add-suffix '*.extension' 'suffix'"
+        echo "Returns: *suffix.extension"
         return 1
     fi
 
@@ -111,7 +112,8 @@ function remove-suffix(){
     if [ $# -ne 2 ] 
     then 
         echo "Usage: remove-suffix [files_expr] [suffix_to_remove]"
-        echo "Ex: remove-suffix '*.ext' 'suffix'"
+        echo "Ex: remove-suffix '*suffix.extension' 'suffix'"
+        echo "Returns: *.extension"
         return 1
     fi
 

@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 06 Apr 2018
+" Last Edit: 24 Apr 2018
 " Author: Piero Marini
 
 
@@ -20,15 +20,21 @@ filetype on
 filetype plugin on
 filetype indent on
 
-set expandtab
+set autoindent
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+set smarttab
+set smartindent
 set hidden
 
 set number
 set cursorline
+
+set foldenable
 set foldlevelstart=10
+set foldnestmax=10
+set foldmethod=indent
 
 set hlsearch
 set incsearch
@@ -45,14 +51,29 @@ set noswapfile
 set wildmenu
 set nowritebackup
 
-
 """" START MAPPINGS """"
+
+" NO.
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 let mapleader = ","
 
 map <C-N> :NERDTreeToggle<CR>
-nmap <Leader>d :YcmShowDetailedDiagnostic<CR>
+nmap <Leader>? :YcmShowDetailedDiagnostic<CR>
+
+nmap <Leader>def :YcmCompleter GoToDefinition<CR>
+nmap <Leader>dec :YcmCompleter GoToDeclaration<CR>
+
+nmap <Leader>n :ALENext<CR>
+nmap <Leader>b :ALEPrevious<CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
+
+" Folding
+nnoremap <Space> za
 
 " YCM C#
 nmap <F5> :YcmCompleter ReloadSolution<CR>
@@ -82,6 +103,9 @@ nnoremap <Leader>v <C-v>
 
 """" END MAPPINGS """"
 
+" YCM
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
@@ -95,11 +119,13 @@ let g:ale_fixers = {
             \   'javascript': ['eslint'],
             \   'css': ['prettier'],
             \   'python': ['autopep8'],
+            \   'cpp': ['clang-format']
             \}
 let g:ale_linters = {
             \   'javascript': ['eslint'],
             \   'css': ['prettier'],
             \   'python': ['flake8', 'autopep8'],
+            \   'cpp': ['clangcheck']
             \}
 
 let g:ale_echo_msg_error_str = 'E'
@@ -226,22 +252,28 @@ hi User9 ctermfg=102 ctermbg=8
 """ EMMET VIM """
 let g:user_emmet_leader_key='<C-A>'
 
-"""" SNIPPETS """"
+""" END EMMET VIM """
+
 
 """" SNIPPETS """"
 
-autocmd FileType html nnoremap <Leader>html :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
-autocmd FileType python nnoremap <Leader>main :-1read $HOME/.vim/snippets/main.py<CR>o
-autocmd FileType tex,plaintex nnoremap <Leader>tex :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
+autocmd FileType html nnoremap <Leader>sk :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
+autocmd FileType python nnoremap <Leader>sk :-1read $HOME/.vim/snippets/main.py<CR>o
+autocmd FileType tex,plaintex nnoremap <Leader>sk :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
+autocmd FileType cpp nnoremap <Leader>sk :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
 
 """" END SNIPPETS """"
+
+" Opens corresponding .h or .cpp file in current directory.
+autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 
 """" SCRIPT EXECUTION/COMPILING """"
 
-autocmd FileType python nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<CR>
+autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
-" Compiles .tex files and opens its corresponding generated .pdf file.
+autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
+
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
 
@@ -251,8 +283,8 @@ autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellesc
 """" BETTER SEARCHING """"
 
 """" Grep Operator. SOURCE:'http://learnvimscriptthehardway.stevelosh.com/chapters/34.html'
-nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
-vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+nnoremap <Leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
+vnoremap <Leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 
 function! s:GrepOperator(type)
     let saved_unnamed_register = @@
@@ -272,6 +304,13 @@ function! s:GrepOperator(type)
 endfunction
 
 """" END BETTER SEARCHING """"
+
+
+"""" C++ Better Highlighting. """"
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_concepts_highlight = 1
 
 """ Auto Closing Brackets '[]' and Parenthesis '()' """
 """ This doesn't write the closing character if it's already present. """

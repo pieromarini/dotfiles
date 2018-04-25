@@ -75,18 +75,20 @@ TERM xterm-termite
 #FILE 00 # regular file: use no color at all
 
 # File Types
-.py 00;31
-.cs 00;31
+.py 00;35
+.cs 00;35
 
 .php 00;31
+
 .tex 00;31
 
-.c 00;31
-.cpp 00;31
+.c 00;33
+.cpp 00;33
+.h 00;33
 
-.js 00;31
-.html 00;31
+.html 00;34
 .css 00;31
+.js 00;33
 
 .csv 01;32
 .xlsx 01;32
@@ -112,61 +114,47 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
 EXEC 04;01;37
 
-# List any file extensions like '.gz' or '.tar' that you would like ls
-# to colorize below. Put the extension, a space, and the color init string.
-# (and any comments you want to add after a '#')
-# If you use DOS-style suffixes, you may want to uncomment the following:
-#.cmd 01;32 # executables (bright green)
-#.exe 01;32
-#.com 01;32
-#.btm 01;32
-#.bat 01;32
-# Or if you want to colorize scripts even if they do not have the
-# executable bit actually set.
-#.sh 01;32
-#.csh 01;32
- # archives or compressed (bright red)
-.tar 01;37
-.tgz 01;37
-.arc 01;37
-.arj 01;37
-.taz 01;37
-.lha 01;37
-.lz4 01;37
-.lzh 01;37
-.lzma 01;37
-.tlz 01;37
-.txz 01;37
-.tzo 01;37
-.t7z 01;37
-.zip 01;37
-.z 01;37
-.Z 01;37
-.dz 01;37
-.gz 01;37
-.lrz 01;37
-.lz 01;37
-.lzo 01;37
-.xz 01;37
-.bz2 01;37
-.bz 01;37
-.tbz 01;37
-.tbz2 01;37
-.tz 01;37
-.deb 01;37
-.rpm 01;37
-.jar 01;37
-.war 01;37
-.ear 01;37
-.sar 01;37
-.rar 01;37
-.alz 01;37
-.ace 01;37
-.zoo 01;37
-.cpio 01;37
-.7z 01;37
-.rz 01;37
-.cab 01;37
+.tar 00;37
+.tgz 00;37
+.arc 00;37
+.arj 00;37
+.taz 00;37
+.lha 00;37
+.lz4 00;37
+.lzh 00;37
+.lzma 00;37
+.tlz 00;37
+.txz 00;37
+.tzo 00;37
+.t7z 00;37
+.zip 00;37
+.z 00;37
+.Z 00;37
+.dz 00;37
+.gz 00;37
+.lrz 00;37
+.lz 00;37
+.lzo 00;37
+.xz 00;37
+.bz2 00;37
+.bz 00;37
+.tbz 00;37
+.tbz2 00;37
+.tz 00;37
+.deb 00;37
+.rpm 00;37
+.jar 00;37
+.war 00;37
+.ear 00;37
+.sar 00;37
+.rar 00;37
+.alz 00;37
+.ace 00;37
+.zoo 00;37
+.cpio 00;37
+.7z 00;37
+.rz 00;37
+.cab 00;37
 # image formats
 .jpg 01;32
 .jpeg 01;32
