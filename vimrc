@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 24 Apr 2018
+" Last Edit: 09 May 2018
 " Author: Piero Marini
 
 
@@ -20,6 +20,8 @@ filetype on
 filetype plugin on
 filetype indent on
 
+let python_highlight_all=1
+
 set autoindent
 set shiftwidth=4
 set softtabstop=4
@@ -32,14 +34,14 @@ set number
 set cursorline
 
 set foldenable
+set foldmethod=indent
+set foldlevel=99
 set foldlevelstart=10
 set foldnestmax=10
-set foldmethod=indent
 
 set hlsearch
 set incsearch
 
-set laststatus=2
 set lazyredraw
 
 set ruler
@@ -51,7 +53,10 @@ set noswapfile
 set wildmenu
 set nowritebackup
 
-"""" START MAPPINGS """"
+" Terminal Mode
+set termsize=12x191
+
+"""" START Mappings """"
 
 " NO.
 noremap <Up> <NOP>
@@ -59,13 +64,26 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+nnoremap <A-a> <C-a>
+nnoremap <A-x> <C-x>
+
 let mapleader = ","
 
+" Splits Resizing.
+nnoremap <silent> <Leader>= <C-w>=
+nnoremap <silent> <Leader>+ :exe "resize +10"<CR>
+nnoremap <silent> <Leader>- :exe "resize -10"<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize +10"<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize -10"<CR>
+
 map <C-N> :NERDTreeToggle<CR>
+
 nmap <Leader>? :YcmShowDetailedDiagnostic<CR>
 
-nmap <Leader>def :YcmCompleter GoToDefinition<CR>
-nmap <Leader>dec :YcmCompleter GoToDeclaration<CR>
+nmap <Leader>t :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" YCM C#
+nmap <F5> :YcmCompleter ReloadSolution<CR>
 
 nmap <Leader>n :ALENext<CR>
 nmap <Leader>b :ALEPrevious<CR>
@@ -74,9 +92,6 @@ nmap <Leader><Space> :nohlsearch<CR>
 
 " Folding
 nnoremap <Space> za
-
-" YCM C#
-nmap <F5> :YcmCompleter ReloadSolution<CR>
 
 " BOL / EOL swap. Also spanish keyboard '^' too far away.
 nnoremap $ ^
@@ -87,7 +102,7 @@ nnoremap ^ &
 nnoremap <Leader>* *<C-O>:%s///gn<CR>
 
 " Replace under cursor
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
 
 " Copy Paste from system Clipboard
 noremap <C-c> "+y
@@ -98,12 +113,23 @@ nnoremap <Leader>y "*y
 " Visual Block Select
 nnoremap <Leader>v <C-v>
 
+"""" END MAPPINGS """"
+
 " Remove trailing whitespace.
 " autocmd FileType c,cpp,cs,python,css,html,javascript,python autocmd BufWritePre <buffer> %s/\s\+$//e
 
-"""" END MAPPINGS """"
+"""" YouCompleteMe """"
 
-" YCM
+" Determine if inside a virtualenv for proper completion.
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -114,7 +140,7 @@ let g:ycm_server_python_interpreter = '/usr/bin/python'
 " Turn off YCM linter
 let g:ycm_show_diagnostics_ui = 0
 
-" ALE
+"""" ALE """"
 let g:ale_fixers = {
             \   'javascript': ['eslint'],
             \   'css': ['prettier'],
@@ -158,26 +184,26 @@ function! LinterStatus() abort
 endfunction
 
 let g:currentmode={
-            \ 'n'  : 'N ',
-            \ 'no' : 'N·Operator Pending ',
-            \ 'v'  : 'V ',
-            \ 'V'  : 'V·Line ',
-            \ '^V' : 'V·Block ',
-            \ 's'  : 'Select ',
-            \ 'S'  : 'S·Line ',
-            \ '^S' : 'S·Block ',
-            \ 'i'  : 'I ',
-            \ 'R'  : 'R ',
-            \ 'Rv' : 'V·Replace ',
-            \ 'c'  : 'Command ',
-            \ 'cv' : 'Vim Ex ',
-            \ 'ce' : 'Ex ',
-            \ 'r'  : 'Prompt ',
-            \ 'rm' : 'More ',
-            \ 'r?' : 'Confirm ',
-            \ '!'  : 'Shell ',
-            \ 't'  : 'Terminal '
-            \}
+      \ 'n'  : 'Normal ',
+      \ 'no' : 'N·Operator Pending ',
+      \ 'v'  : 'Visual ',
+      \ 'V'  : 'V·Line ',
+      \ '' : 'V·Block ',
+      \ 's'  : 'Select ',
+      \ 'S'  : 'S·Line ',
+      \ '' : 'S·Block ',
+      \ 'i'  : 'Insert ',
+      \ 'R'  : 'Replace ',
+      \ 'Rv' : 'V·Replace ',
+      \ 'c'  : 'Command ',
+      \ 'cv' : 'Vim Ex ',
+      \ 'ce' : 'Ex ',
+      \ 'r'  : 'Prompt ',
+      \ 'rm' : 'More ',
+      \ 'r?' : 'Confirm ',
+      \ '!'  : 'Shell ',
+      \ 't'  : 'Terminal '
+      \}
 
 function! ReadOnly()
     if &readonly || !&modifiable
@@ -197,35 +223,37 @@ endfunction
 " Automatically change the statusline color depending on mode
 function! StatuslineUpdate()
     let m = mode()
-    if (!has_key(g:currentmode, m))
-        let g:currentmode[m] = 'V·Block '
-    endif
-
     if (m =~# '\v(n|no)')
-        exe 'hi! User1 ctermbg=102 ctermfg=231'
-        exe 'hi! User9 ctermbg=8 ctermfg=102'
+        exe 'hi! User1 ctermbg=39 ctermfg=231'
+        exe 'hi! User7 ctermbg=246 ctermfg=39'
+        exe 'hi! User9 ctermbg=8 ctermfg=39'
     elseif (m =~# '\v(v|V)' || g:currentmode[m] ==# 'V·Block ' || get(g:currentmode, m, '') ==# 't')
         exe 'hi! User1 ctermbg=125 ctermfg=231'
+        exe 'hi! User7 ctermbg=246 ctermfg=125'
         exe 'hi! User9 ctermbg=8 ctermfg=125'
     elseif (m ==# 'i')
         exe 'hi! User1 ctermbg=136 ctermfg=231'
+        exe 'hi! User7 ctermbg=246 ctermfg=136'
         exe 'hi! User9 ctermbg=8 ctermfg=136'
     else
         exe 'hi! User1 ctermbg=160 ctermfg=231'
+        exe 'hi! User7 ctermbg=246 ctermfg=160'
         exe 'hi! User9 ctermbg=8 ctermfg=160'
     endif
 
     return ''
 endfunction
 
-
+set laststatus=2
 set statusline=
 set statusline+=%{StatuslineUpdate()}                       " Changing the statusline color
 set statusline+=%1*\ %{toupper(g:currentmode[mode()])}%9* " Current mode
 set statusline+=%4*\ %{GitInfo()}                          " Git
 set statusline+=%2*\ [%n]                                  " buffer
 set statusline+=%2*\ %f\ %{ReadOnly()}\ %m\ %w\            " File+path
+
 set statusline+=%2*\ %=                                    " Space
+
 set statusline+=%8*%5*\ %y                                " FileType
 set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileformat
 set statusline+=%6*\ %{LinterStatus()}\                    " ALE errors
@@ -235,32 +263,32 @@ colorscheme solarized8_dark_high
 
 hi Normal ctermbg=NONE
 
-hi User1 ctermfg=231 ctermbg=102
+hi User1 ctermfg=231 ctermbg=39 
 hi User2 ctermfg=231 ctermbg=8
 hi User4 ctermfg=160 ctermbg=8
 hi User5 ctermfg=231 ctermbg=246
 hi User6 ctermfg=160 ctermbg=246
 
 " Used for rendering the separators correctly.
-hi User7 ctermfg=102 ctermbg=246
+hi User7 ctermfg=39 ctermbg=246
 hi User8 ctermfg=246 ctermbg=8
-hi User9 ctermfg=102 ctermbg=8
+hi User9 ctermfg=39 ctermbg=8
 
 " END STATUS LINE
 
 
 """ EMMET VIM """
-let g:user_emmet_leader_key='<C-A>'
+let g:user_emmet_leader_key='<C-E>'
 
 """ END EMMET VIM """
 
 
 """" SNIPPETS """"
 
-autocmd FileType html nnoremap <Leader>sk :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
-autocmd FileType python nnoremap <Leader>sk :-1read $HOME/.vim/snippets/main.py<CR>o
-autocmd FileType tex,plaintex nnoremap <Leader>sk :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
-autocmd FileType cpp nnoremap <Leader>sk :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
+autocmd FileType html nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
+autocmd FileType python nnoremap <Leader>m :-1read $HOME/.vim/snippets/main.py<CR>o
+autocmd FileType tex,plaintex nnoremap <Leader>m :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
+autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
 
 """" END SNIPPETS """"
 
@@ -272,7 +300,9 @@ autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 
 autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
-autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
+" autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
+autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
+autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
 
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
@@ -280,8 +310,18 @@ autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellesc
 """" END SCRIPT EXECUTION/COMPILING """"
 
 
-"""" BETTER SEARCHING """"
+"""" SURROUND """"
+nnoremap <Leader>s :<C-u>call SurroundWith()<CR>
 
+function! SurroundWith()
+	let c=nr2char(getchar())
+	exec "normal viwo\ei".c.c."\eea".c.c."\e"
+endf
+"""" End SURROUND """"
+
+
+"""" BETTER SEARCHING """"
+"
 """" Grep Operator. SOURCE:'http://learnvimscriptthehardway.stevelosh.com/chapters/34.html'
 nnoremap <Leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <Leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
@@ -319,10 +359,13 @@ inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")
 inoremap        [  []<Left>
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
+
 """ Auto Closing Single and Double Quotes """
 """ This doesn't write the closing character if it's already present. """
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap '' '
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == '"' ? '<Right>' : '""<Left>'
+inoremap "" "
 
 """ Auto Closing for Braces '{}' """
 """ Insert closing braces and check if it is the last character on the line. """
@@ -363,7 +406,7 @@ function! LastModified()
 endf
 
 """ Automatic Signature for C# files """
-autocmd FileType cs nnoremap <Leader>sig :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
+autocmd FileType cs nnoremap <Leader>h :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
             \ \| :g/File:.*/s//\=printf("File: %s", expand('%:t'))<CR>
             \ \| :g/Last Edit:.*/s//\=printf("Last Edit: %s", strftime('%d %b %Y'))<CR>
             \ \| :nohlsearch<CR>
