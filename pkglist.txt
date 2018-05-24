@@ -1,3 +1,5 @@
+alacritty-git
+alacritty-terminfo-git
 alsa-plugins
 alsa-utils
 apache
@@ -26,6 +28,8 @@ chromium
 chromium-widevine
 clang
 cmake
+compton
+conky
 coreutils
 cronie
 cryptsetup
@@ -42,6 +46,7 @@ dosbox
 dosfstools
 downgrade
 drkonqi
+dunst
 e2fsprogs
 efibootmgr
 exfat-utils
@@ -75,6 +80,7 @@ gvim
 gwenview
 gzip
 htop
+i3-gaps
 inetutils
 intel-ucode
 iproute2
@@ -197,6 +203,7 @@ plasma-sdk
 plasma-workspace
 plasma-workspace-wallpapers
 polkit-kde-agent
+polybar
 powerdevil
 print-manager
 procps-ng
@@ -205,9 +212,11 @@ pulseaudio
 pulseaudio-alsa
 python-pip
 qtcam-git
+ranger
 razer-driver-dkms
 reflector
 reiserfsprogs
+rofi
 rpmextract
 rsync
 ruby
@@ -243,6 +252,7 @@ texlive-publishers
 texlive-science
 thunderbird
 timedoctorpro
+tk
 tmux
 tor-browser-en
 traceroute
