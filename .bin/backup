@@ -10,21 +10,21 @@ cp ~/.eslintrc.js ~/.backup/
 cp ~/.powerline-shell.json ~/.backup/
 
 echo "Backing up Vim files..."
-cp -r ~/.vim/ftplugin/ ~/.backup/.vim/
-cp -r ~/.vim/snippets/ ~/.backup/.vim/
+cp -r ~/.vim/ftplugin ~/.backup/.vim/
+cp -r ~/.vim/snippets ~/.backup/.vim/
 
 echo "Backing up configs..."
-cp -r ~/.config/i3/ ~/.backup/.config/
-cp -r ~/.config/i3lock/ ~/.backup/.config/
-cp -r ~/.config/rofi/ ~/.backup/.config/
-cp -r ~/.config/compton/ ~/.backup/.config/
-cp -r ~/.config/ranger/ ~/.backup/.config/
-cp -r ~/.config/polybar/ ~/.backup/.config/
-cp -r ~/.config/dunst/ ~/.backup/.config/
-cp -r ~/.config/alacritty/ ~/.backup/.config/
+cp -r ~/.config/i3 ~/.backup/.config/
+cp -r ~/.config/i3lock ~/.backup/.config/
+cp -r ~/.config/rofi ~/.backup/.config/
+cp -r ~/.config/compton ~/.backup/.config/
+cp -r ~/.config/ranger ~/.backup/.config/
+cp -r ~/.config/polybar ~/.backup/.config/
+cp -r ~/.config/dunst ~/.backup/.config/
+cp -r ~/.config/alacritty ~/.backup/.config/
 
 echo "Backing up scripts..."
-cp -r ~/.bin/ ~/.backup/
+cp -r ~/.bin ~/.backup/
 
 echo "Updating installed packages..."
 pacman -Qqe > ~/.backup/pkglist.txt
