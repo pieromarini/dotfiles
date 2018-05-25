@@ -1,0 +1,240 @@
+#########################################################################################################################################
+#|||	MODIFIERS
+#########################################################################################################################################
+exec_always xmodmap ~/.Xmodmap
+exec_always "setxkbmap -layout latam -option caps:swapescape"
+
+set $mod mod4
+set $alt mod1
+set $esc Escape
+set $ctl Control
+set $ctr mod3
+set $alg mod5
+
+#exec xset -r 73 #F7
+#exec xset -r 118 #Insert
+#exec xset -r 225 #Search
+#exec xset -r 107 #Print
+#exec xset -r 23 #Tab
+
+
+
+
+#########################################################################################################################################
+#|||	SHOTRCUTS
+#########################################################################################################################################
+set $floater floating enable, resize set 1600 900
+set $float_center floating enable, resize set 1920 783, move position center
+set $scratch_move sticky enable, move scratchpad
+set $scratch_show scratchpad show, move position center
+
+
+
+#########################################################################################################################################
+#		SETTINGS
+#########################################################################################################################################
+gaps inner 10
+gaps outer 5
+floating_modifier $alt
+workspace_auto_back_and_forth yes
+popup_during_fullscreen smart
+focus_follows_mouse yes
+focus_on_window_activation focus
+focus_wrapping yes
+for_window [class=.*] border pixel 0
+
+
+
+
+#########################################################################################################################################
+#|||	AUTOSTART
+#########################################################################################################################################
+exec_always sysclient PalmDetect=1
+exec_always synclient PalmDetect=1
+exec_always synclient PalmMinWidth=4
+exec_always synclient PalmMinZ=50
+#exec_always syndaemon -i 0.2 -K -d
+
+exec_always xrandr --output $monitor1 --primary --mode 1920x1080 --pos 0x0 --output $monitor2 --mode 1920x1080 --pos 1920x0
+exec_always bash ~/.config/i3/element
+exec_always xrdb -load ~/.Xdefaults_init
+
+exec_always feh --bg-fill ~/Pictures/Wallpapers/luca-baggio-stars.jpg
+exec xautolock -time 10 -locker ~/.config/i3lock/blurlock
+#exec --no-startup-id udisksctl mount -b /dev/sdb1
+#exec --no-startup-id redshift -l 44.4949:11.3426 -b 1.5:0.8
+exec --no-startup-id python /home/piero/.scripts/layout
+#exec --no-startup-id greenclip daemon
+exec --no-startup-id pulseaudio
+#exec --no-startup-id playerctl
+
+
+#########################################################################################################################################
+#|||	FONTS & COLORS & FRAME
+#########################################################################################################################################
+font pango:Monaco
+
+set_from_resource $accent accent #000000
+set $black				#000000
+set $grey				#373B41
+set $white				#FFFFFF
+set $red				#F10F09
+
+#class						border		backgr.		text		split
+client.focused				$accent		$accent		$black		$accent
+client.focused_inactive		$grey		$grey		$white		$grey
+client.unfocused			$grey		$grey		$white		$grey
+client.urgent				$red		$red		$black		$red
+
+
+
+
+#########################################################################################################################################
+#|||	WINDOWS
+#########################################################################################################################################
+bindsym $mod+$esc kill
+bindsym $alt+$esc kill
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $alt+h move left
+bindsym $alt+j move down
+bindsym $alt+k move up
+bindsym $alt+l move right
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $alt+Shift+l resize shrink width 8 px or 8 ppt
+bindsym $alt+Shift+k resize grow height 8 px or 8 ppt
+bindsym $alt+Shift+j resize shrink height 8 px or 8 ppt
+bindsym $alt+Shift+h resize grow width 8 px or 8 ppt
+
+bindsym $mod+Shift+l resize shrink width 4 px or 4 ppt
+bindsym $mod+Shift+k resize grow height 4 px or 4 ppt
+bindsym $mod+Shift+j resize shrink height 4 px or 4 ppt
+bindsym $mod+Shift+h resize grow width 4 px or 4 ppt
+
+bindsym Insert workspace back_and_forth
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Insert floating toggle
+bindsym $mod+$alt+Insert sticky toggle
+
+
+
+
+#########################################################################################################################################
+#|||	WORKSPACES
+#########################################################################################################################################
+set $workspace1 "001"
+set $workspace2 "002"
+set $workspace3 "003"
+set $workspace4 "004"
+set $workspace5 "005"
+set $workspace6 "006"
+set $workspace7 "007"
+set $workspace8 "008"
+set $workspace9 "009"
+set $workspace0 "010"
+
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace0
+
+bindsym $alt+1 move container to workspace $workspace1; workspace $workspace1
+bindsym $alt+2 move container to workspace $workspace2; workspace $workspace2
+bindsym $alt+3 move container to workspace $workspace3; workspace $workspace3
+bindsym $alt+4 move container to workspace $workspace4; workspace $workspace4
+bindsym $alt+5 move container to workspace $workspace5; workspace $workspace5
+bindsym $alt+6 move container to workspace $workspace6; workspace $workspace6
+bindsym $alt+7 move container to workspace $workspace7; workspace $workspace7
+bindsym $alt+8 move container to workspace $workspace8; workspace $workspace8
+bindsym $alt+9 move container to workspace $workspace9; workspace $workspace9
+bindsym $alt+0 move container to workspace $workspace0; workspace $workspace0
+
+bindsym $mod+$alt+Left workspace prev_on_output
+bindsym $mod+$alt+Right workspace next_on_output
+
+bindsym $alt+Tab workspace back_and_forth
+bindsym F7 workspace back_and_forth
+bindsym F7 --release workspace back_and_forth
+
+
+
+
+#########################################################################################################################################
+#|||	MONITORS
+#########################################################################################################################################
+set $monitor1 eDP-1-1
+set $monitor2 DP-1-1
+
+workspace $workspace1 output $monitor1
+workspace $workspace2 output $monitor1
+workspace $workspace3 output $monitor1
+workspace $workspace4 output $monitor1
+workspace $workspace5 output $monitor1
+workspace $workspace6 output $monitor1
+workspace $workspace7 output $monitor1
+workspace $workspace8 output $monitor1
+workspace $workspace9 output $monitor1
+workspace $workspace0 output $monitor1
+
+
+
+#########################################################################################################################################
+#|||	ASSIGNMENTS
+#########################################################################################################################################
+assign [class="Chromium"] $workspace2
+assign [class="Spotify"] $workspace3
+
+for_window [class="Nautilus"] $floater
+
+
+
+#########################################################################################################################################
+#|||	SCRATCHPAD					-- MOD + ALT + nonfunc
+#########################################################################################################################################
+#for_window [class="Spotify"] mark "scratch", $float_center, $scratch_move
+
+#########################################################################################################################################
+#|||	APPS KEYBINDINGS				-- MOD + CTRL 
+#########################################################################################################################################
+bindsym $mod+Return exec "alacritty"
+bindsym $mod+t exec "dolphin"
+
+
+#########################################################################################################################################
+#|||	MEDIA KEYBINDINGS				-- funckeys
+#########################################################################################################################################
+
+bindsym XF86AudioRaiseVolume exec "amixer -q set Master 5%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q set Master 5%- unmute"
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+
+
+
+
+#########################################################################################################################################
+#|||	LAUNCHER KEYBINDINGS				-- MOD + ALT + funckeys
+#########################################################################################################################################
+bindsym $mod+$alt+Escape exec "bash ~/.config/rofi/menu/SYSTEM"
+bindsym $mod+$alt+Delete exec "bash ~/.config/rofi/menu/CONFIG"
+bindsym $mod+Tab exec "bash ~/.config/rofi/menu/SEARCH"

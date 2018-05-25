@@ -1,0 +1,48 @@
+#!/bin/bash
+ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m 0 -fullscreen)
+
+another=$(echo "CONFIGS
+SCRIPTS
+FUNCTIS
+SHELL" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "SYSTEM: ")
+
+
+
+browse(){
+	selected=$(ls "$1/" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "$1: ")
+	[[ -z $selected ]] && exit
+	if [[ -f $1/$selected ]]; then
+		gedit $1/$selected
+	elif [[ -d $1/$selected ]]; then
+		browse $1/$selected
+	else
+		touch $1/$selected
+		chmod +x $1/$selected
+		gedit $1/$selected
+	fi
+}
+
+
+
+if [ "$another" == "SHELL" ] ; then
+	selected=$(echo "$HOME/.zshrc
+$HOME/.bashrc
+$HOME/.tmux.conf
+$HOME/.vimrc
+$HOME/.Xmodmap
+$HOME/.Xdefaults" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
+	[[ -z $selected ]] && exit
+	gedit $selected
+
+elif [ "$another" == "CONFIGS" ] ; then
+	browse /home/piero/.config;
+
+elif [ "$another" == "SCRIPTS" ] ; then
+	browse /home/piero/.scripts;
+
+elif [ "$another" == "FUNCTIS" ] ; then
+	browse /home/piero/.func;
+
+else
+    echo $another
+fi

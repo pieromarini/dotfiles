@@ -1,0 +1,81 @@
+[global]
+    font = Monaco 12
+
+    allow_markup = yes
+
+    format = "<b>%s</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = left
+
+    bounce_freq = 0
+    show_age_threshold = 60
+    word_wrap = no
+	ellipsize = end
+    ignore_newline = no
+
+    # geometry [{width}]x{height}][+/-{x}+/-{y}]
+    geometry = "320x60-15+63"
+    shrink = yes
+
+    transparency = 20
+    idle_threshold = 120
+    monitor = 0
+
+    # Icons
+    icon_position = left
+    max_icon_size = 48
+    icon_path = /usr/share/icons/Numix-Circle-Light/16/panel
+
+    follow = none
+    sticky_history = yes
+    history_length = 20
+    show_indicators = yes
+    line_height = 0
+    separator_height = 1
+    padding = 8
+    horizontal_padding = 8
+    separator_color = frame
+
+    startup_notification = false
+
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/chromium 
+
+[frame]
+    width = 0
+	color = "#fe7a61"
+    #color = "#6C6C6C"
+
+[shortcuts]
+    close = mod4+x
+    close_all = mod4+ctrl+x
+    history = mod4+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#00afff"
+    foreground = "#FFFFFF"
+    #background = "#222222"
+    #foreground = "#888888"
+    timeout = 10
+
+[urgency_normal]
+    background = "#6092BE"
+    foreground = "#FFFFFF"
+    #background = "#222222"
+    #foreground = "#888888"
+    timeout = 20
+
+[urgency_critical]
+    background = "#801515"
+    foreground = "#D46A6A"
+    #background = "#900000"
+    #foreground = "#ffffff"
+    timeout = 0
+
+[spotify]
+	appname = Spotify
+	timeout = 5
+	background = "#1db954"
+	foreground = "#ffffff"

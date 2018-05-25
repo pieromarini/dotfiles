@@ -29,7 +29,6 @@ chromium-widevine
 clang
 cmake
 compton
-conky
 coreutils
 cronie
 cryptsetup
@@ -40,6 +39,7 @@ dhcpcd
 dialog
 diffutils
 discover
+dmenu
 dmidecode
 dolphin
 dosbox
@@ -51,6 +51,7 @@ e2fsprogs
 efibootmgr
 exfat-utils
 fakeroot
+feh
 file
 filesystem
 filezilla
@@ -150,6 +151,7 @@ libnewt
 libreoffice-fresh
 libtool
 licenses
+light-git
 linux
 linux-headers
 llvm
@@ -236,7 +238,6 @@ sysfsutils
 systemd-sysvcompat
 systemsettings
 tar
-termite
 texinfo
 texlive-bibtexextra
 texlive-core
@@ -276,9 +277,11 @@ wine-staging
 wireless_tools
 xampp
 xdg-desktop-portal-kde
+xdotool
 xfsprogs
 xorg-fonts-type1
 xorg-server
+xorg-xbacklight
 xorg-xinit
 yaourt
 zip
