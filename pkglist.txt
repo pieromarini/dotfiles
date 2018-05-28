@@ -238,6 +238,7 @@ sysfsutils
 systemd-sysvcompat
 systemsettings
 tar
+telegram-cli-git
 texinfo
 texlive-bibtexextra
 texlive-core

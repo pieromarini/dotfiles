@@ -2,6 +2,7 @@
 	accent = #fe7a61
 	bckgrd = #121212
 	select = #222222
+	green = #1db954
 
 
 	background = 			${self.bckgrd}
@@ -34,7 +35,6 @@
 [bar/top]
 	monitor = ${env:MONITOR}
 	monitor-strict = true
-	fixed-center = true
 	dpi = 96
 	bottom = false
 	width = ${settings.barwidth}
@@ -69,31 +69,8 @@
 	tray-padding = 4
 
 	modules-left = backlight volume
+	modules-center = spotify
 	modules-right = wlan cpu memory battery date
-
-
-
-[bar/center]
-	monitor = ${env:MONITOR}
-	monitor-strict = true
-	fixed-center = true
-	dpi = 96
-	bottom = false
-	width = 1500
-	height = ${settings.barheigh}
-	override-redirect = true
-	offset-x = 1170
-	offset-y = ${settings.bargapp}
-	background = ${colors.background-alt}
-	foreground = ${colors.foreground}
-	spacing = 2
-	font-0 = Monaco:size=12;3
-	font-5 = Monaco:size=12;3
-	modules-left = search
-	click-left = bash ~/.i3/rofi/menu/search
-	;wm-restack = i3
-
-
 
 [bar/workspaces]
 	monitor = ${env:MONITOR}
@@ -110,7 +87,6 @@
 	font-0 = Monaco:size=10;1
 	font-5 = Monaco:size=14;1
 	modules-center = i3
-
 
 
 [module/i3]
@@ -230,7 +206,6 @@
 	format-foreground = ${colors.primary}
 
 
-
 [module/volume]
 	type = internal/volume
 	format-volume = <ramp-volume><label-volume>
@@ -247,6 +222,17 @@
 	ramp-headphones-0 = 
 
 	
+[module/spotify]
+	type = custom/script
+	exec-if = pgrep -x spotify
+	exec = spotify-dbus
+	tail = false
+	interval = 5
+	format-prefix = " "
+	format-prefix-foreground = ${colors.primary}
+	format = <label>
+	format-foreground = ${colors.green}
+
 
 [module/backlight]
 	type = internal/backlight

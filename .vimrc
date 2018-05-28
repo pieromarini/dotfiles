@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 22 May 2018
+" Last Edit: 25 May 2018
 " Author: Piero Marini
 
 
@@ -296,13 +296,15 @@ autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp
 autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 
-"""" SCRIPT EXECUTION/COMPILING """"
+"""" RUN SCRIPTS """"
 
 autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
 autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
+
+autocmd FileType sh nnoremap <F10> :w <bar> :term bash spotify-dbus<CR>
 
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
