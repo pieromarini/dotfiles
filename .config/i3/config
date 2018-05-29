@@ -53,7 +53,6 @@ exec_always sysclient PalmDetect=1
 exec_always synclient PalmDetect=1
 exec_always synclient PalmMinWidth=4
 exec_always synclient PalmMinZ=50
-#exec_always syndaemon -i 0.2 -K -d
 
 exec_always xrandr --output $monitor1 --primary --mode 1920x1080 --pos 0x0 --output $monitor2 --mode 1920x1080 --pos 1920x0
 exec_always bash ~/.config/i3/element
@@ -61,12 +60,8 @@ exec_always xrdb -load ~/.Xdefaults_init
 
 exec_always feh --bg-fill ~/Pictures/Wallpapers/frank-mckenna-140054-unsplash.jpg
 exec xautolock -time 10 -locker ~/.config/i3lock/blurlock
-#exec --no-startup-id udisksctl mount -b /dev/sdb1
-#exec --no-startup-id redshift -l 44.4949:11.3426 -b 1.5:0.8
 exec --no-startup-id python /home/piero/.scripts/layout
-#exec --no-startup-id greenclip daemon
 exec --no-startup-id pulseaudio
-#exec --no-startup-id playerctl
 
 
 #########################################################################################################################################
@@ -93,7 +88,6 @@ client.urgent				$red		$red		$black		$red
 #|||	WINDOWS
 #########################################################################################################################################
 bindsym $mod+$esc kill
-bindsym $alt+$esc kill
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -167,8 +161,6 @@ bindsym $mod+$alt+Left workspace prev_on_output
 bindsym $mod+$alt+Right workspace next_on_output
 
 bindsym $alt+Tab workspace back_and_forth
-bindsym F7 workspace back_and_forth
-bindsym F7 --release workspace back_and_forth
 
 
 
@@ -197,8 +189,9 @@ workspace $workspace0 output $monitor1
 #########################################################################################################################################
 assign [class="Chromium"] $workspace2
 assign [class="Spotify"] $workspace3
+assign [class="Thunderbird"] $workspace4
 
-for_window [class="Nautilus"] $floater
+for_window [class="dolphin"] $floater
 
 
 
@@ -211,6 +204,7 @@ for_window [class="Nautilus"] $floater
 #|||	APPS KEYBINDINGS				-- MOD + CTRL 
 #########################################################################################################################################
 bindsym $mod+Return exec "alacritty"
+bindsym $mod+c exec "chromium"
 bindsym $mod+t exec "dolphin"
 
 

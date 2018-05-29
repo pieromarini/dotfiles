@@ -21,7 +21,7 @@
 	urgentcolor:      	#e53714;
 
 
-   font: 				"Bahnschrift 12";
+   font: 				"Monaco 12";
    border-color:        @background;
    separatorcolor:      @foreground;
    background-color: 	@background;
@@ -32,7 +32,7 @@
    background-color: 	@background;
    anchor: 				north;
    location: 			north;
-   y-offset: 			10;
+   y-offset: 			0;
 }
 
 #mainbox {

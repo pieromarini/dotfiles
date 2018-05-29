@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 25 May 2018
+" Last Edit: 29 May 2018
 " Author: Piero Marini
 
 
@@ -304,7 +304,7 @@ autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
 autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
 
-autocmd FileType sh nnoremap <F10> :w <bar> :term bash spotify-dbus<CR>
+autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
 
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
@@ -313,9 +313,9 @@ autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellesc
 
 
 """" SURROUND """"
-nnoremap <Leader>s :<C-u>call SurroundWith()<CR>
+nnoremap <Leader>s :<C-u>call SurroundWord()<CR>
 
-function! SurroundWith()
+function! SurroundWord()
 	let c=nr2char(getchar())
 	exec "normal viwo\ei".c.c."\eea".c.c."\e"
 endf

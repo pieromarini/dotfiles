@@ -37,7 +37,7 @@
     separatorcolor:              @foreground;
     background-color:            @transparent;
     spacing:                     10;
-   font: 			"Bahnschrift 64";
+   font: 			"Monaco 30";
 }
 
 #window {
