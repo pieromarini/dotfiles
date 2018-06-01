@@ -10,12 +10,12 @@
 
     bounce_freq = 0
     show_age_threshold = 60
-    word_wrap = no
+    word_wrap = yes
 	ellipsize = end
     ignore_newline = no
 
     # geometry [{width}]x{height}][+/-{x}+/-{y}]
-    geometry = "320x60-15+63"
+    geometry = "420x120-15+63"
     shrink = yes
 
     transparency = 20
@@ -39,7 +39,7 @@
 
     startup_notification = false
 
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = /usr/bin/dmenu -p dunst
     browser = /usr/bin/chromium 
 
 [frame]
@@ -51,7 +51,7 @@
     close = mod4+x
     close_all = mod4+ctrl+x
     history = mod4+grave
-    context = ctrl+shift+period
+    context = mod4+ctrl+period
 
 [urgency_low]
     background = "#00afff"

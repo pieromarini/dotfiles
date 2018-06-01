@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 29 May 2018
+" Last Edit: 31 May 2018
 " Author: Piero Marini
 
 
@@ -145,13 +145,15 @@ let g:ale_fixers = {
             \   'javascript': ['eslint'],
             \   'css': ['prettier'],
             \   'python': ['autopep8'],
-            \   'cpp': ['clang-format']
+            \   'cpp': ['clang-format'],
+            \   'c': ['clang-format']
             \}
 let g:ale_linters = {
             \   'javascript': ['eslint'],
             \   'css': ['prettier'],
             \   'python': ['flake8', 'autopep8'],
-            \   'cpp': ['clangcheck']
+            \   'cpp': ['clangcheck'],
+            \   'c': ['clangcheck']
             \}
 
 let g:ale_echo_msg_error_str = 'E'
@@ -387,6 +389,8 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:cpp_concepts_highlight = 1
+let c_no_curly_error = 1
+let g:cpp_simple_highlight = 1
 
 """ Auto Closing Brackets '[]' and Parenthesis '()' """
 """ This doesn't write the closing character if it's already present. """

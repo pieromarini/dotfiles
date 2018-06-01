@@ -21,16 +21,15 @@ function get-metadata(){
 
 # Prints info about currently playing track.
 function sp-current {
-	CURRENT=$(get-metadata \
+	get-metadata \
 		| grep --color=never -E "(title)|(album)|(artist)" \
-		| sed 's/^\(.\)/\U\1/')
-	echo "$CURRENT"
+		| sed 's/^\(.\)/\U\1/'
 }
 
 CURR=$(sp-current)
 
-ALBUM=$(echo "$CURR" | grep -m 1 Album  | cut -d '|' -f2)
+#ALBUM=$(echo "$CURR" | grep -m 1 Album  | cut -d '|' -f2)
 ARTIST=$(echo "$CURR" | grep -m 1 Artist | cut -d '|' -f2)
 SONG=$(echo "$CURR" | grep -m 1 Title  | cut -d '|' -f2)
 
-echo "$SONG - $ARTIST - $ALBUM"
+echo "$SONG - $ARTIST" # - $ALBUM"

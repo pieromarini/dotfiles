@@ -2,23 +2,20 @@
 	accent = #fe7a61
 	bckgrd = #121212
 	select = #222222
-	green = #1db954
-
+primary = 			    ${self.accent}
+	secondary =				#1db954
+	red =					#ff3111
 
 	background = 			${self.bckgrd}
 	background-alt = 		${self.select}
 	foreground = 			#A5ffffff
-	;primary = 			${xrdb:accent}
-	primary = 			${self.accent}
-	alert = 			#bd2c40
+	alert = 			    #bd2c40
 	transparent = 			#00000000
-
 
 
 [global/wm]
 	margin-top = 5
 	margin-bottom = 0
-
 
 
 [settings]
@@ -31,7 +28,6 @@
 	barheigh = 48
 
 
-
 [bar/top]
 	monitor = ${env:MONITOR}
 	monitor-strict = true
@@ -42,8 +38,8 @@
 	offset-x = 0
 	offset-y = 0
 	background = ${colors.background}
-	foreground = ${colors.foreground}
-	overline-size = 0
+	foreground = ${colors.foreground} 
+	overline-size = 0 
 	overline-color = #f00
 	underline-size = 2
 	underline-color = #00f
@@ -55,21 +51,20 @@
 	radius-top = 0
 	radius-bottom = 0
 	spacing = 2
-	padding-left = 3
-	padding-right = 0
+	padding-left = 2
+	padding-right = 2
 	module-margin-left = 1
 	module-margin-right = 1
 	font-0 = Monaco:size=12;2
 	font-1 = FontAwesome:pixelsize=12;3
-	font-2 = Font Awesome 5 Free:pixelsize=12;3
-	font-3 = Font Awesome 5 Free Solid:pixelsize=12;3
-	font-4 = Font Awesome 5 Brands:pixelsize=12;3
+	font-2 = Font Awesome 5 Free:pixelsize=12;1
+	font-3 = Font Awesome 5 Free Solid:pixelsize=12;1
+	font-4 = Font Awesome 5 Brands:pixelsize=12;1
 	font-5 = Monaco:size=12;3
 	tray-position = right
-	tray-padding = 4
+	tray-padding = 0
 
-	modules-left = backlight volume
-	modules-center = spotify
+	modules-left = backlight volume temperature gputemp spotify
 	modules-right = wlan cpu memory battery date
 
 [bar/workspaces]
@@ -116,8 +111,6 @@
 	label-visible-background = ${colors.background-alt}
 	label-visible-padding = ${self.label-focused-padding}
 	
-	
-	
 
 [module/mouseloc]
 	type = custom/script
@@ -129,51 +122,48 @@
 	
 	
 [module/cpu]
-	format-label = internal/cpu
-	format = <label>
 	type = internal/cpu
 	interval = 2
-	label = " %percentage%%"
+	label = %percentage%%
+	format-prefix = " "
+	format-prefix-foreground = ${colors.primary}
+	format = <label>
 	format-foreground = ${colors.primary}
-
 
 
 [module/memory]
 	type = internal/memory
 	interval = 2
-	label = " %percentage_used%%"
+	label = %percentage_used%%
+	format-prefix = " "
+	format-prefix-foreground = ${colors.primary}
+	format = <label>
 	format-foreground = ${colors.primary}
-
 
 
 [module/temperature]
 	type = internal/temperature
-	warn-temperature = 65
+	warn-temperature = 70
 
+	label = %temperature%
+	label-warn = %temperature%!!!
+	format-prefix = " "
+	format-prefix-foreground = ${colors.red}
 	format = <label> 
-	format-warn = <label-warn>
-
-	label = %temperature%
-	label-warn = %temperature%!!!
-
-
-	
-[module/cputemp]
-	type = custom/script
-	exec = sensors | grep --max-count=1 "CPU Temperature:" | awk '{print substr($0,22,2)}'
-	interval = 10
-	label = " %output%°C"
 	format-foreground = ${colors.primary}
-
+	format-warn = <label-warn>
+	format-warn-foreground = ${colors.red}
 
 
 [module/gputemp]
 	type = custom/script
 	exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits
 	interval = 10
-	label = "GPU %output%°C"
+	label = "%output%°C"
+	format-prefix = " "
+	format-prefix-foreground = ${colors.red}
+	format = <label>
 	format-foreground = ${colors.primary}
-
 
 
 [module/wlan]
@@ -182,6 +172,7 @@
 	interval = 3.0
 	format-connected = <label-connected>
 	format-connected-prefix = " "
+	format-connected-prefix-foreground = ${colors.primary}
 	label-connected = "%{A1:wifi-menu &:}%essid%%{A}"
 	label-disconnected = "%{A1:wifi-menu &:}%{A}"
 	label-disconnected-foreground = #5b
@@ -193,29 +184,34 @@
 	ramp-signal-foreground = ${colors.foreground}
 	format-connected-foreground = ${colors.primary}
 
+
 [module/date]
 	type = internal/date
 	interval = 1.0
-	date = %a %b %d, 
-	time = %H:%M
-	date-alt = %A, %d %B %Y
-	time-alt = %H:%M:%S
-	label = %date% %time%
-	format =  <label>
-	format-padding = 2
+	date = "%a %b %d" 
+	time = "%H:%M"
+	date-alt = "%A, %d %B %Y"
+	time-alt = "%H:%M:%S"
+	label = " %date%  %time%"
+	format = <label>
 	format-foreground = ${colors.primary}
 
 
 [module/volume]
 	type = internal/volume
+
 	format-volume = <ramp-volume><label-volume>
-	format-muted = <label-muted>
 	format-volume-foreground = ${colors.primary}
-	label-volume = %percentage%%
-	label-muted =  M
+	format-muted = <label-muted>
+
+	label-volume = "%percentage%%"
+
+	label-muted = ""
 	label-muted-foreground = #aaa
+
 	format-volume-padding = 0
 	format-muted-padding = 0
+
 	ramp-volume-0 = 
 	ramp-volume-1 = 
 	ramp-volume-2 = 
@@ -231,7 +227,7 @@
 	format-prefix = " "
 	format-prefix-foreground = ${colors.primary}
 	format = <label>
-	format-foreground = ${colors.green}
+	format-foreground = ${colors.secondary}
 
 
 [module/backlight]
@@ -246,7 +242,7 @@
 [module/battery]
 	type = internal/battery
 	battery = BAT0
-	adapter = AC
+	adapter = ADP0
 	full-at = 98
 	time-format = %H:%M
 	label-discharging = %percentage%% %time%

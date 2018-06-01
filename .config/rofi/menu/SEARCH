@@ -1,22 +1,20 @@
 #!/bin/bash
 
 ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_bar -m 0 -width 800)
+ROFI_OPTIONS_FULL=(-theme $HOME/.config/rofi/rofi_full -m 0 -fullscreen)
 
 query=$(echo "runapp
 documents
 websearch
-bookmarks
 sudorun" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "search: ")
 
 
 if [ "$query" == "documents" ] ; then
-	find ~/Documents/ -type f | rofi "${ROFI_OPTIONS[@]}" -threads 0 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
+	FILES=$(find ~/Documents -type f)
+	echo "${FILES//\home\/piero\//}" | rofi "${ROFI_OPTIONS[@]}" -threads 1 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
 
 elif [ "$query" == "websearch" ] ; then
-    xdg-open https://www.google.com/search?q=$query
-
-elif [ "$query" == "bookmarks" ] ; then
-	exec ~/.config/rofi/menu/marks;
+	rofi "${ROFI_OPTIONS_FULL[@]}" -dmenu -input /dev/null -p "Google:" | xargs -I % xdg-open "https://www.google.com/search?q=%"
 
 elif [ "$query" == "runapp" ] ; then
 	rofi "${ROFI_OPTIONS[@]}" -modi 'run,drun' -show drun

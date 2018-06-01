@@ -3,7 +3,6 @@
 ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m 0 -fullscreen)
 
 another=$(echo "RELOAD
-COLOR
 LOCK
 LOGOUT
 REBOOT
@@ -13,9 +12,6 @@ if [ "$another" == "RELOAD" ] ; then
 	xrdb -load ~/.Xdefaults; 
 	i3-msg reload; 
 	i3-msg restart;
-
-elif [ "$another" == "COLOR" ] ; then
-	exec ~/.config/rofi/menu/color;
 
 elif [ "$another" == "LOCK" ] ; then
 	exec  ~/.config/i3lock/blurlock;

@@ -18,8 +18,6 @@ set $alg mod5
 #exec xset -r 23 #Tab
 
 
-
-
 #########################################################################################################################################
 #|||	SHOTRCUTS
 #########################################################################################################################################
@@ -29,9 +27,8 @@ set $scratch_move sticky enable, move scratchpad
 set $scratch_show scratchpad show, move position center
 
 
-
 #########################################################################################################################################
-#		SETTINGS
+#|||	SETTINGS
 #########################################################################################################################################
 gaps inner 10
 gaps outer 5
@@ -42,8 +39,6 @@ focus_follows_mouse yes
 focus_on_window_activation focus
 focus_wrapping yes
 for_window [class=.*] border pixel 0
-
-
 
 
 #########################################################################################################################################
@@ -75,7 +70,7 @@ set $grey				#373B41
 set $white				#FFFFFF
 set $red				#F10F09
 
-#class						border		backgr.		text		split
+#class						border		backgr		text		split
 client.focused				$accent		$accent		$black		$accent
 client.focused_inactive		$grey		$grey		$white		$grey
 client.unfocused			$grey		$grey		$white		$grey
@@ -113,12 +108,9 @@ bindsym $mod+Shift+k resize grow height 4 px or 4 ppt
 bindsym $mod+Shift+j resize shrink height 4 px or 4 ppt
 bindsym $mod+Shift+h resize grow width 4 px or 4 ppt
 
-bindsym Insert workspace back_and_forth
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Insert floating toggle
 bindsym $mod+$alt+Insert sticky toggle
-
-
 
 
 #########################################################################################################################################
@@ -163,8 +155,6 @@ bindsym $mod+$alt+Right workspace next_on_output
 bindsym $alt+Tab workspace back_and_forth
 
 
-
-
 #########################################################################################################################################
 #|||	MONITORS
 #########################################################################################################################################
@@ -183,22 +173,17 @@ workspace $workspace9 output $monitor1
 workspace $workspace0 output $monitor1
 
 
-
 #########################################################################################################################################
-#|||	ASSIGNMENTS
+#|||	PREDEFINED WORKSPACES
 #########################################################################################################################################
 assign [class="Chromium"] $workspace2
 assign [class="Spotify"] $workspace3
 assign [class="Thunderbird"] $workspace4
+assign [class="whatsapp-desktop"] $workspace5
+assign [class="Skype"] $workspace6
 
 for_window [class="dolphin"] $floater
 
-
-
-#########################################################################################################################################
-#|||	SCRATCHPAD					-- MOD + ALT + nonfunc
-#########################################################################################################################################
-#for_window [class="Spotify"] mark "scratch", $float_center, $scratch_move
 
 #########################################################################################################################################
 #|||	APPS KEYBINDINGS				-- MOD + CTRL 
@@ -211,7 +196,6 @@ bindsym $mod+t exec "dolphin"
 #########################################################################################################################################
 #|||	MEDIA KEYBINDINGS				-- funckeys
 #########################################################################################################################################
-
 bindsym XF86AudioRaiseVolume exec "amixer -q set Master 5%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer -q set Master 5%- unmute"
 bindsym XF86AudioMute exec amixer -q set Master toggle
@@ -222,8 +206,6 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
-
-
 
 
 #########################################################################################################################################

@@ -63,6 +63,7 @@ TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
 TERM xterm-termite
+TERM alacritty
 # Below are the color init strings for the basic file types. A color init
 # string consists of one or more of the following numeric codes:
 # Attribute codes:
@@ -90,9 +91,9 @@ TERM xterm-termite
 .css 00;31
 .js 00;33
 
-.csv 01;32
-.xlsx 01;32
-.xml 01;32
+.csv 01;34
+.xlsx 01;34
+.xml 01;34
 
 DIR 01;35 # directory
 LINK 01;37;44 # symbolic link. (If you set this to 'target' instead of a

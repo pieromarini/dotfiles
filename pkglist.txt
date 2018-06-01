@@ -3,6 +3,7 @@ alacritty-terminfo-git
 alsa-plugins
 alsa-utils
 apache
+arc-gtk-theme
 ark
 artwiz-fonts
 audiocd-kio
@@ -77,11 +78,13 @@ grep
 grub
 grub-customizer
 gsfonts
+gtk-chtheme
 gvim
 gwenview
 gzip
 htop
 i3-gaps
+i3lock-color
 inetutils
 intel-ucode
 iproute2
@@ -159,6 +162,7 @@ logrotate
 lsof
 lutris
 lvm2
+lxappearance
 m4
 make
 man-db
@@ -225,6 +229,7 @@ ruby
 s-nail
 samba
 screenfetch
+scrot
 sddm-kcm
 sdl_ttf
 sed

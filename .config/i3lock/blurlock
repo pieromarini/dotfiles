@@ -1,8 +1,13 @@
-#!/bin/bash
-sleep .2
+#!/usr/bin/env bash
 
-scrot /tmp/screenshot.png
+ICON=$HOME/.config/i3lock/icons/lock.png
+TMPBG=/tmp/screen.png
 
-convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
-
-i3lock -c /home/bresilla/.config/i3lock/lock
+sleep 0.4
+scrot /tmp/screen.png
+convert $TMPBG -scale 10% -scale 1000% $TMPBG
+convert $TMPBG -filter Gaussian -blur 0x8 $TMPBG
+convert $TMPBG $ICON -gravity center -composite -matte $TMPBG
+# TODO: Stop using -u. Work on a good visual indicator.
+i3lock -u -i $TMPBG
+rm /tmp/screen.png
