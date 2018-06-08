@@ -50,6 +50,7 @@ drkonqi
 dunst
 e2fsprogs
 efibootmgr
+ephoto
 exfat-utils
 fakeroot
 feh
@@ -197,6 +198,7 @@ pciutils
 pcmciautils
 pepper-flash
 perl
+perl-file-mimeinfo
 php
 php-apache
 phpmyadmin
