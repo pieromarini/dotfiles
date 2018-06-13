@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 31 May 2018
+" Last Edit: 13 Jun 2018
 " Author: Piero Marini
 
 
@@ -94,9 +94,10 @@ nmap <Leader><Space> :nohlsearch<CR>
 nnoremap <Space> za
 
 " BOL / EOL swap. Also spanish keyboard '^' too far away.
-nnoremap $ ^
-nnoremap & $
-nnoremap ^ &
+" Normal Remap because I'll use this for other commands.
+noremap $ ^
+noremap & $
+noremap ^ &
 
 " # of matches for a pattern
 nnoremap <Leader>* *<C-O>:%s///gn<CR>

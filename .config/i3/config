@@ -11,13 +11,6 @@ set $ctl Control
 set $ctr mod3
 set $alg mod5
 
-#exec xset -r 73 #F7
-#exec xset -r 118 #Insert
-#exec xset -r 225 #Search
-#exec xset -r 107 #Print
-#exec xset -r 23 #Tab
-
-
 #########################################################################################################################################
 #|||	SHOTRCUTS
 #########################################################################################################################################
@@ -217,6 +210,8 @@ workspace $workspace_secondary0 output $monitor2
 # Output Focus
 bindsym $mod+F1 focus output $monitor1
 bindsym $mod+F2 focus output $monitor2
+
+bindsym $mod+bar focus output left
 
 
 #########################################################################################################################################

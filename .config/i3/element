@@ -8,25 +8,26 @@ monitor2=HDMI-1-1
 killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
-#MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar center &
 
-HDMI_CONNECTED=${xrandr | grep '$monitor2 connected'}
+# Create Top/Workspaces Polybars only if monitor is connected.
+HDMI_CONNECTED=$(xrandr | grep "$monitor2 connected")
 
 if [ -z "$HDMI_CONNECTED" ]
 then
-	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar top &
-else
 	MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar top &
+else
+	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar top &
+	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar workspaces &
 fi
 
 MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar workspaces &
-MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar workspaces &
 
 
 #COMPTON
 killall -q compton
 while pgrep -x compton >/dev/null; do sleep 1; done
 compton --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method exchange --config ~/.config/compton/compton &
+
 
 #DUNST
 killall -q dunst
