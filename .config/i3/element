@@ -1,14 +1,24 @@
 #!/usr/bin/env sh
 
 monitor1=eDP-1-1
-monitor2=DP-1-1
+monitor2=HDMI-1-1
 
 
 #POLYBAR
 killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
+
 #MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar center &
-MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar top &
+
+HDMI_CONNECTED=${xrandr | grep '$monitor2 connected'}
+
+if [ -z "$HDMI_CONNECTED" ]
+then
+	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar top &
+else
+	MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar top &
+fi
+
 MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar workspaces &
 MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar workspaces &
 

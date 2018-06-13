@@ -92,6 +92,7 @@ iproute2
 iputils
 jfsutils
 jpegoptim
+jq
 jre8-openjdk
 kactivitymanagerd
 kate

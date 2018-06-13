@@ -50,6 +50,7 @@ exec_always synclient PalmMinWidth=4
 exec_always synclient PalmMinZ=50
 
 exec_always xrandr --output $monitor1 --primary --mode 1920x1080 --pos 0x0 --output $monitor2 --mode 1920x1080 --pos 1920x0
+
 exec_always bash ~/.config/i3/element
 exec_always xrdb -load ~/.Xdefaults_init
 
@@ -98,6 +99,8 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+bindsym $mod+m move container to output right
+
 bindsym $alt+Shift+l resize shrink width 8 px or 8 ppt
 bindsym $alt+Shift+k resize grow height 8 px or 8 ppt
 bindsym $alt+Shift+j resize shrink height 8 px or 8 ppt
@@ -116,38 +119,66 @@ bindsym $mod+$alt+Insert sticky toggle
 #########################################################################################################################################
 #|||	WORKSPACES
 #########################################################################################################################################
-set $workspace1 "001"
-set $workspace2 "002"
-set $workspace3 "003"
-set $workspace4 "004"
-set $workspace5 "005"
-set $workspace6 "006"
-set $workspace7 "007"
-set $workspace8 "008"
-set $workspace9 "009"
-set $workspace0 "010"
 
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace0
+# Workspaces for $monitor1
+set $workspace_main1 "a01"
+set $workspace_main2 "a02"
+set $workspace_main3 "a03"
+set $workspace_main4 "a04"
+set $workspace_main5 "a05"
+set $workspace_main6 "a06"
+set $workspace_main7 "a07"
+set $workspace_main8 "a08"
+set $workspace_main9 "a09"
+set $workspace_main0 "a10"
 
-bindsym $alt+1 move container to workspace $workspace1; workspace $workspace1
-bindsym $alt+2 move container to workspace $workspace2; workspace $workspace2
-bindsym $alt+3 move container to workspace $workspace3; workspace $workspace3
-bindsym $alt+4 move container to workspace $workspace4; workspace $workspace4
-bindsym $alt+5 move container to workspace $workspace5; workspace $workspace5
-bindsym $alt+6 move container to workspace $workspace6; workspace $workspace6
-bindsym $alt+7 move container to workspace $workspace7; workspace $workspace7
-bindsym $alt+8 move container to workspace $workspace8; workspace $workspace8
-bindsym $alt+9 move container to workspace $workspace9; workspace $workspace9
-bindsym $alt+0 move container to workspace $workspace0; workspace $workspace0
+# Workspaces for $monitor2
+set $workspace_secondary1 "b01"
+set $workspace_secondary2 "b02"
+set $workspace_secondary3 "b03"
+set $workspace_secondary4 "b04"
+set $workspace_secondary5 "b05"
+set $workspace_secondary6 "b06"
+set $workspace_secondary7 "b07"
+set $workspace_secondary8 "b08"
+set $workspace_secondary9 "b09"
+set $workspace_secondary0 "b10"
+
+
+# Changes workspace
+bindsym $mod+1 exec --no-startup-id ~/.config/i3/workspace-manager.sh 01
+bindsym $mod+2 exec --no-startup-id ~/.config/i3/workspace-manager.sh 02
+bindsym $mod+3 exec --no-startup-id ~/.config/i3/workspace-manager.sh 03
+bindsym $mod+4 exec --no-startup-id ~/.config/i3/workspace-manager.sh 04
+bindsym $mod+5 exec --no-startup-id ~/.config/i3/workspace-manager.sh 05
+bindsym $mod+6 exec --no-startup-id ~/.config/i3/workspace-manager.sh 06
+bindsym $mod+7 exec --no-startup-id ~/.config/i3/workspace-manager.sh 07
+bindsym $mod+8 exec --no-startup-id ~/.config/i3/workspace-manager.sh 08
+bindsym $mod+9 exec --no-startup-id ~/.config/i3/workspace-manager.sh 09
+bindsym $mod+0 exec --no-startup-id ~/.config/i3/workspace-manager.sh 10
+
+# This Moves a window to a workspace and changes to that workspace.
+bindsym $alt+1 move container to workspace $workspace_main1; workspace $workspace_main1
+bindsym $alt+2 move container to workspace $workspace_main2; workspace $workspace_main2
+bindsym $alt+3 move container to workspace $workspace_main3; workspace $workspace_main3
+bindsym $alt+4 move container to workspace $workspace_main4; workspace $workspace_main4
+bindsym $alt+5 move container to workspace $workspace_main5; workspace $workspace_main5
+bindsym $alt+6 move container to workspace $workspace_main6; workspace $workspace_main6
+bindsym $alt+7 move container to workspace $workspace_main7; workspace $workspace_main7
+bindsym $alt+8 move container to workspace $workspace_main8; workspace $workspace_main8
+bindsym $alt+9 move container to workspace $workspace_main9; workspace $workspace_main9
+bindsym $alt+0 move container to workspace $workspace_main0; workspace $workspace_main0
+
+bindsym $alt+shift+1 move container to workspace $workspace_secondary1; workspace $workspace_secondary1
+bindsym $alt+shift+2 move container to workspace $workspace_secondary2; workspace $workspace_secondary2
+bindsym $alt+shift+3 move container to workspace $workspace_secondary3; workspace $workspace_secondary3
+bindsym $alt+shift+4 move container to workspace $workspace_secondary4; workspace $workspace_secondary4
+bindsym $alt+shift+5 move container to workspace $workspace_secondary5; workspace $workspace_secondary5
+bindsym $alt+shift+6 move container to workspace $workspace_secondary6; workspace $workspace_secondary6
+bindsym $alt+shift+7 move container to workspace $workspace_secondary7; workspace $workspace_secondary7
+bindsym $alt+shift+8 move container to workspace $workspace_secondary8; workspace $workspace_secondary8
+bindsym $alt+shift+9 move container to workspace $workspace_secondary9; workspace $workspace_secondary9
+bindsym $alt+shift+0 move container to workspace $workspace_secondary0; workspace $workspace_secondary0
 
 bindsym $mod+$alt+Left workspace prev_on_output
 bindsym $mod+$alt+Right workspace next_on_output
@@ -159,28 +190,44 @@ bindsym $alt+Tab workspace back_and_forth
 #|||	MONITORS
 #########################################################################################################################################
 set $monitor1 eDP-1-1
-set $monitor2 DP-1-1
+set $monitor2 HDMI-1-1
 
-workspace $workspace1 output $monitor1
-workspace $workspace2 output $monitor1
-workspace $workspace3 output $monitor1
-workspace $workspace4 output $monitor1
-workspace $workspace5 output $monitor1
-workspace $workspace6 output $monitor1
-workspace $workspace7 output $monitor1
-workspace $workspace8 output $monitor1
-workspace $workspace9 output $monitor1
-workspace $workspace0 output $monitor1
+workspace $workspace_main1 output $monitor1
+workspace $workspace_main2 output $monitor1
+workspace $workspace_main3 output $monitor1
+workspace $workspace_main4 output $monitor1
+workspace $workspace_main5 output $monitor1
+workspace $workspace_main6 output $monitor1
+workspace $workspace_main7 output $monitor1
+workspace $workspace_main8 output $monitor1
+workspace $workspace_main9 output $monitor1
+workspace $workspace_main0 output $monitor1
+
+workspace $workspace_secondary1 output $monitor2
+workspace $workspace_secondary2 output $monitor2
+workspace $workspace_secondary3 output $monitor2
+workspace $workspace_secondary4 output $monitor2
+workspace $workspace_secondary5 output $monitor2
+workspace $workspace_secondary6 output $monitor2
+workspace $workspace_secondary7 output $monitor2
+workspace $workspace_secondary8 output $monitor2
+workspace $workspace_secondary9 output $monitor2
+workspace $workspace_secondary0 output $monitor2
+
+# Output Focus
+bindsym $mod+F1 focus output $monitor1
+bindsym $mod+F2 focus output $monitor2
 
 
 #########################################################################################################################################
 #|||	PREDEFINED WORKSPACES
 #########################################################################################################################################
-assign [class="Chromium"] $workspace2
-assign [class="Spotify"] $workspace3
-assign [class="Thunderbird"] $workspace4
-assign [class="whatsapp-desktop"] $workspace5
-assign [class="Skype"] $workspace6
+assign [class="Chromium"] $workspace_main2
+assign [class="Spotify"] $workspace_main3
+assign [class="Thunderbird"] $workspace_main4
+assign [class="whatsapp-desktop"] $workspace_main5
+assign [class="Skype"] $workspace_main6
+assign [class="Slack"] $workspace_main7
 
 for_window [class="dolphin"] $floater
 
