@@ -4,7 +4,7 @@ DEST="org.mpris.MediaPlayer2.spotify"
 TO="/org/mpris/MediaPlayer2"
 MEMB="org.mpris.MediaPlayer2.Player"
 
-function get-metadata(){
+function get-metadata {
 	dbus-send --print-reply --dest=$DEST $TO org.freedesktop.DBus.Properties.Get \
 		string:"$MEMB" string:'Metadata'				\
 		| grep -Ev "^method"							\
