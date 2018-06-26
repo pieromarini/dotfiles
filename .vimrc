@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 13 Jun 2018
+" Last Edit: 20 Jun 2018
 " Author: Piero Marini
 
 
@@ -54,7 +54,7 @@ set wildmenu
 set nowritebackup
 
 " Terminal Mode
-set termsize=12x191
+set termwinsize=12x191
 
 """" START Mappings """"
 

@@ -1,13 +1,17 @@
 #!/bin/bash
 
-workspace="$1"
+action="$1"
+workspace="$2"
 
-# Currently focused workspace.
 focused_workspace=$(i3-msg -t get_workspaces | jq --raw-output '.[]|select(.focused).name')
 
-# We get prefix of current workspace so we know how to move.
-prefix=$(echo $focused_workspace | awk '{print substr($0, 0, 1);}')
+active_postfix=${focused_workspace: -1}
 
-target_workspace=${prefix}${workspace}
+target_workspace=${workspace}${active_postfix}
 
-i3-msg "workspace $target_workspace"
+if [[ "$action" == "move" ]]; 
+then
+    i3-msg "move container to workspace $target_workspace"
+else
+    i3-msg "workspace $target_workspace"
+fi

@@ -7,18 +7,6 @@ exec_always "setxkbmap -layout latam -option caps:swapescape"
 set $mod mod4
 set $alt mod1
 set $esc Escape
-set $ctl Control
-set $ctr mod3
-set $alg mod5
-
-#########################################################################################################################################
-#|||	SHOTRCUTS
-#########################################################################################################################################
-set $floater floating enable, resize set 1600 900
-set $float_center floating enable, resize set 1920 783, move position center
-set $scratch_move sticky enable, move scratchpad
-set $scratch_show scratchpad show, move position center
-
 
 #########################################################################################################################################
 #|||	SETTINGS
@@ -37,7 +25,6 @@ for_window [class=.*] border pixel 0
 #########################################################################################################################################
 #|||	AUTOSTART
 #########################################################################################################################################
-exec_always sysclient PalmDetect=1
 exec_always synclient PalmDetect=1
 exec_always synclient PalmMinWidth=4
 exec_always synclient PalmMinZ=50
@@ -45,11 +32,9 @@ exec_always synclient PalmMinZ=50
 exec_always xrandr --output $monitor1 --primary --mode 1920x1080 --pos 0x0 --output $monitor2 --mode 1920x1080 --pos 1920x0
 
 exec_always bash ~/.config/i3/element
-exec_always xrdb -load ~/.Xdefaults_init
 
 exec_always feh --bg-fill ~/Pictures/Wallpapers/frank-mckenna-140054-unsplash.jpg
-exec xautolock -time 10 -locker ~/.config/i3lock/blurlock
-exec --no-startup-id python /home/piero/.scripts/layout
+exec xautolock -time 15 -locker ~/.config/i3lock/blurlock
 exec --no-startup-id pulseaudio
 
 
@@ -69,8 +54,6 @@ client.focused				$accent		$accent		$black		$accent
 client.focused_inactive		$grey		$grey		$white		$grey
 client.unfocused			$grey		$grey		$white		$grey
 client.urgent				$red		$red		$black		$red
-
-
 
 
 #########################################################################################################################################
@@ -114,41 +97,41 @@ bindsym $mod+$alt+Insert sticky toggle
 #########################################################################################################################################
 
 # Workspaces for $monitor1
-set $workspace_main1 "a01"
-set $workspace_main2 "a02"
-set $workspace_main3 "a03"
-set $workspace_main4 "a04"
-set $workspace_main5 "a05"
-set $workspace_main6 "a06"
-set $workspace_main7 "a07"
-set $workspace_main8 "a08"
-set $workspace_main9 "a09"
-set $workspace_main0 "a10"
+set $workspace_main1 "1a"
+set $workspace_main2 "2a"
+set $workspace_main3 "3a"
+set $workspace_main4 "4a"
+set $workspace_main5 "5a"
+set $workspace_main6 "6a"
+set $workspace_main7 "7a"
+set $workspace_main8 "8a"
+set $workspace_main9 "9a"
+set $workspace_main0 "10a"
 
 # Workspaces for $monitor2
-set $workspace_secondary1 "b01"
-set $workspace_secondary2 "b02"
-set $workspace_secondary3 "b03"
-set $workspace_secondary4 "b04"
-set $workspace_secondary5 "b05"
-set $workspace_secondary6 "b06"
-set $workspace_secondary7 "b07"
-set $workspace_secondary8 "b08"
-set $workspace_secondary9 "b09"
-set $workspace_secondary0 "b10"
+set $workspace_secondary1 "1b"
+set $workspace_secondary2 "2b"
+set $workspace_secondary3 "3b"
+set $workspace_secondary4 "4b"
+set $workspace_secondary5 "5b"
+set $workspace_secondary6 "6b"
+set $workspace_secondary7 "7b"
+set $workspace_secondary8 "8b"
+set $workspace_secondary9 "9b"
+set $workspace_secondary0 "10b"
 
 
 # Changes workspace
-bindsym $mod+1 exec --no-startup-id ~/.config/i3/workspace-manager.sh 01
-bindsym $mod+2 exec --no-startup-id ~/.config/i3/workspace-manager.sh 02
-bindsym $mod+3 exec --no-startup-id ~/.config/i3/workspace-manager.sh 03
-bindsym $mod+4 exec --no-startup-id ~/.config/i3/workspace-manager.sh 04
-bindsym $mod+5 exec --no-startup-id ~/.config/i3/workspace-manager.sh 05
-bindsym $mod+6 exec --no-startup-id ~/.config/i3/workspace-manager.sh 06
-bindsym $mod+7 exec --no-startup-id ~/.config/i3/workspace-manager.sh 07
-bindsym $mod+8 exec --no-startup-id ~/.config/i3/workspace-manager.sh 08
-bindsym $mod+9 exec --no-startup-id ~/.config/i3/workspace-manager.sh 09
-bindsym $mod+0 exec --no-startup-id ~/.config/i3/workspace-manager.sh 10
+bindsym $mod+1 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 1
+bindsym $mod+2 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 2
+bindsym $mod+3 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 3
+bindsym $mod+4 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 4
+bindsym $mod+5 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 5
+bindsym $mod+6 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 6
+bindsym $mod+7 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 7
+bindsym $mod+8 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 8
+bindsym $mod+9 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 9
+bindsym $mod+0 exec --no-startup-id ~/.config/i3/workspace-manager.sh goto 10
 
 # This Moves a window to a workspace and changes to that workspace.
 bindsym $alt+1 move container to workspace $workspace_main1; workspace $workspace_main1
@@ -173,8 +156,8 @@ bindsym $alt+shift+8 move container to workspace $workspace_secondary8; workspac
 bindsym $alt+shift+9 move container to workspace $workspace_secondary9; workspace $workspace_secondary9
 bindsym $alt+shift+0 move container to workspace $workspace_secondary0; workspace $workspace_secondary0
 
-bindsym $mod+$alt+Left workspace prev_on_output
-bindsym $mod+$alt+Right workspace next_on_output
+bindsym $mod+$alt+h workspace prev_on_output
+bindsym $mod+$alt+l workspace next_on_output
 
 bindsym $alt+Tab workspace back_and_forth
 
@@ -223,8 +206,7 @@ assign [class="Thunderbird"] $workspace_main4
 assign [class="whatsapp-desktop"] $workspace_main5
 assign [class="Skype"] $workspace_main6
 assign [class="Slack"] $workspace_main7
-
-for_window [class="dolphin"] $floater
+assign [class="Spotify"] $workspace_main8
 
 
 #########################################################################################################################################
@@ -232,7 +214,6 @@ for_window [class="dolphin"] $floater
 #########################################################################################################################################
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+c exec "chromium"
-bindsym $mod+t exec "dolphin"
 
 
 #########################################################################################################################################
@@ -251,8 +232,8 @@ bindsym XF86MonBrightnessDown exec light -U 10
 
 
 #########################################################################################################################################
-#|||	LAUNCHER KEYBINDINGS				-- MOD + ALT + funckeys
+#|||	LAUNCHER KEYBINDINGS			-- MOD + ALT
 #########################################################################################################################################
-bindsym $mod+$alt+Escape exec "bash ~/.config/rofi/menu/SYSTEM"
+bindsym $mod+$alt+$esc exec "bash ~/.config/rofi/menu/SYSTEM"
 bindsym $mod+$alt+Delete exec "bash ~/.config/rofi/menu/CONFIG"
 bindsym $mod+Tab exec "bash ~/.config/rofi/menu/SEARCH"

@@ -10,7 +10,7 @@ sudorun" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "searc
 
 
 if [ "$query" == "documents" ] ; then
-	FILES=$(find ~/ -type f -not -path "*/\.*" -not -path "*/Development/*" -not -path "*/Pictures/*")
+	FILES=$(find ~/Documents ~/Downloads -type f -not -path "*/\.*" -not -path "*/Development/*" -not -path "*/Pictures/*")
 	echo "${FILES}" | rofi "${ROFI_OPTIONS[@]}" -threads 1 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
 
 elif [ "$query" == "websearch" ] ; then
