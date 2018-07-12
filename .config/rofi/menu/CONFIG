@@ -8,17 +8,16 @@ Shell" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "SYSTEM:
 
 
 
-browse(){
+navigate(){
 	selected=$(ls "$1/" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "$1: ")
 	[[ -z $selected ]] && exit
 	if [[ -f $1/$selected ]]; then
-		vim $1/$selected
+		alacritty -e vim $1/$selected
 	elif [[ -d $1/$selected ]]; then
-		browse $1/$selected
+		navigate $1/$selected
 	else
 		touch $1/$selected
-		chmod +x $1/$selected
-		vim $1/$selected
+		alacritty -e vim $1/$selected
 	fi
 }
 
@@ -27,20 +26,18 @@ browse(){
 if [ "$another" == "Shell" ] ; then
 	selected=$(echo "$HOME/.bashrc
 $HOME/.tmux.conf
-$HOME/.vimrc
-$HOME/.Xmodmap
-$HOME/.Xdefaults" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
+$HOME/.vimrc" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
 	[[ -z $selected ]] && exit
-	vim $selected
+	alacritty -e vim $selected
 
 elif [ "$another" == "Configs" ] ; then
-	browse /home/piero/.config;
+	navigate /home/piero/.config;
 
 elif [ "$another" == "Scripts" ] ; then
-	browse /home/piero/.scripts;
+	navigate /home/piero/.scripts;
 
 elif [ "$another" == "Functions" ] ; then
-	browse /home/piero/.func;
+	navigate /home/piero/.func;
 
 else
     echo $another

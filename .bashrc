@@ -1,5 +1,5 @@
 #   File: .bashrc
-#   Last Edit: 25 May 2018
+#   Last Edit: 11 Jul 2018
 #   Author: Piero Marini
 
 export PATH=~/.scripts:~/.bin:$PATH
@@ -10,6 +10,10 @@ export LANG=en_US.UTF-8
 
 export VIMRC=~/.vimrc
 export BASHRC=~/.bashrc
+
+export EDITOR=vim
+export VISUAL=vim
+export TERM=alacritty
 
 
 # Python VirtualEnv

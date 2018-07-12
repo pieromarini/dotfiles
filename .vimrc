@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 20 Jun 2018
+" Last Edit: 27 Jun 2018
 " Author: Piero Marini
 
 
@@ -115,9 +115,6 @@ nnoremap <Leader>y "*y
 nnoremap <Leader>v <C-v>
 
 """" END MAPPINGS """"
-
-" Remove trailing whitespace.
-" autocmd FileType c,cpp,cs,python,css,html,javascript,python autocmd BufWritePre <buffer> %s/\s\+$//e
 
 """" YouCompleteMe """"
 

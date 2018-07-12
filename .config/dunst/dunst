@@ -25,7 +25,7 @@
     # Icons
     icon_position = left
     max_icon_size = 48
-    icon_path = /usr/share/icons/Numix-Circle-Light/16/panel
+    icon_path = /usr/share/icons/Papirus-Dark/16x16/
 
     follow = none
     sticky_history = yes

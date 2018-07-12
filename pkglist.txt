@@ -5,6 +5,7 @@ alsa-plugins
 alsa-tools
 alsa-utils
 apache
+arandr
 arc-gtk-theme
 ark
 artwiz-fonts
@@ -76,6 +77,7 @@ grub
 grub-customizer
 gsfonts
 gtk-chtheme
+gunicorn
 gvim
 gzip
 htop
@@ -93,6 +95,7 @@ kcalc
 kcharselect
 kcolorchooser
 kcron
+kdenlive
 kdialog
 kfind
 kgpg
@@ -157,7 +160,6 @@ ntp
 numix-circle-icon-theme-git
 nvidia
 nvidia-settings
-okular
 openssh
 os-prober
 p7zip
@@ -182,9 +184,11 @@ pulseaudio
 pulseaudio-alsa
 python-html5lib
 python-pip
+python2-pip
 qtcam-git
 ranger
 razer-driver-dkms
+recordmydesktop
 reflector
 reiserfsprogs
 rofi
@@ -237,6 +241,8 @@ unzip
 usbutils
 util-linux
 vi
+vlc
+vorbis-tools
 wget
 whatsapp-desktop
 which
@@ -256,4 +262,6 @@ xorg-xbacklight
 xorg-xev
 xorg-xinit
 xorg-xinput
+zathura
+zathura-pdf-mupdf
 zip
