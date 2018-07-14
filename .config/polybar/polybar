@@ -1,15 +1,19 @@
 [colors]
-	accent = #fe7a61
-	bckgrd = #121212
-	select = #222222
-primary = 			    ${self.accent}
-	secondary =				#1db954
-	red =					#ff3111
+	primary =				#50b4e6
+	secondary =				#55cca8
+	third =					#f5d544
+	fourth =				#f9c773
+	fifth =					#ed8755
 
-	background = 			${self.bckgrd}
-	background-alt = 		${self.select}
-	foreground = 			#A5ffffff
-	alert = 			    #bd2c40
+	alert =					#ff3111
+
+	; 70% Opacity
+	background =			#b314191f
+	foreground =			#ed8755
+
+	; 80% opacity
+	pressed =				#cc2b2d30
+
 	transparent = 			#00000000
 
 
@@ -25,7 +29,7 @@ primary = 			    ${self.accent}
 	screenchange-reload = true
 	bargapp= 0
 	barwidth = 100%
-	barheigh = 48
+	barheigh = 35
 
 
 [bar/top]
@@ -51,8 +55,8 @@ primary = 			    ${self.accent}
 	radius-top = 0
 	radius-bottom = 0
 	spacing = 2
-	padding-left = 2
-	padding-right = 2
+	padding-left = 1
+	padding-right = 1
 	module-margin-left = 1
 	module-margin-right = 1
 	font-0 = Monaco:size=12;2
@@ -63,29 +67,15 @@ primary = 			    ${self.accent}
 	font-5 = Monaco:size=12;3
 	tray-position = right
 	tray-padding = 0
+	tray-background = ${colors.background}
 
-	modules-left = backlight volume temperature gputemp spotify
-	modules-right = wlan cpu memory battery date
-
-[bar/workspaces]
-	monitor = ${env:MONITOR}
-	monitor-strict = true
-	dpi = 96
-	bottom = true
-	width = ${settings.barwidth}
-	height = 26
-	background = ${colors.transparent}
-	foreground = ${colors.foreground}
-	border-top-size = 0
-	border-bottom-size = 10
-	border-color = ${colors.transparent}
-	font-0 = Monaco:size=10;1
-	font-5 = Monaco:size=14;1
-	modules-center = i3
-
+	modules-left = i3 
+	modules-center = spotify
+	modules-right = wlan cpu memory volume battery date
 
 [module/i3]
 	type = internal/i3
+
 	format = <label-state> <label-mode>
 	index-sort = true
 	wrapping-scroll = false
@@ -94,43 +84,40 @@ primary = 			    ${self.accent}
 	pin-workspaces = true
 	enable-scroll = true
 
-	label-mode-padding = 8
-	label-mode-foreground = ${colors.foreground}
-	label-mode-background = ${colors.primary}
-	label-focused = %name%
-	label-focused-foreground= ${colors.background}
-	label-focused-background = ${colors.primary}
-	label-focused-underline = ${colors.primary}
-	label-focused-padding = 6
-	label-unfocused = %name%
-	label-unfocused-padding = 4
-	label-unfocused-background = ${colors.background}
-	label-urgent = %name%
-	label-urgent-foreground= ${colors.alert}
-	label-urgent-background = ${colors.background-alt}
-	label-urgent-padding = 8
-	label-visible = %name%
-	label-visible-background = ${colors.background-alt}
-	label-visible-padding = ${self.label-focused-padding}
-	
+	label-focused = %{F#50b4e6}%icon%%{F-}
+	label-focused-padding = 1
+	label-focused-underline = ${colors.primary} 
+	label-focused-background = ${colors.pressed}
+	label-unfocused = %icon%
+	label-unfocused-padding = 1
+	label-unfocused-foreground = ${colors.secondary}
 
-[module/mouseloc]
-	type = custom/script
-	exec = xdotool getmouselocation | awk '{print $1 "   " $2}'
-	interval = 0.1
-	label = %output%
-	format = <label>
-	format-foreground = ${colors.primary}
-	
+	label-urgent = %icon%
+	label-urgent-foreground = ${colors.alert}
+	label-urgent-padding = 1
+
+	label-visible = %icon%
+	label-visible-padding = 1
+
+	ws-icon-0 = 1a;
+	ws-icon-1 = 2a;
+	ws-icon-2 = 3a;
+	ws-icon-3 = 4a;
+	ws-icon-4 = 5a;
+	ws-icon-5 = 6a;
+	ws-icon-6 = 7a;
+	ws-icon-default = 
+
+
 	
 [module/cpu]
 	type = internal/cpu
 	interval = 2
 	label = %percentage%%
 	format-prefix = " "
-	format-prefix-foreground = ${colors.primary}
+	format-prefix-foreground = ${colors.third}
 	format = <label>
-	format-foreground = ${colors.primary}
+	format-foreground = ${colors.third}
 
 
 [module/memory]
@@ -138,9 +125,9 @@ primary = 			    ${self.accent}
 	interval = 2
 	label = %percentage_used%%
 	format-prefix = " "
-	format-prefix-foreground = ${colors.primary}
+	format-prefix-foreground = ${colors.third}
 	format = <label>
-	format-foreground = ${colors.primary}
+	format-foreground = ${colors.third}
 
 
 [module/temperature]
@@ -150,11 +137,11 @@ primary = 			    ${self.accent}
 	label = %temperature%
 	label-warn = %temperature%!!!
 	format-prefix = " "
-	format-prefix-foreground = ${colors.red}
+	format-prefix-foreground = ${colors.alert}
 	format = <label> 
 	format-foreground = ${colors.primary}
 	format-warn = <label-warn>
-	format-warn-foreground = ${colors.red}
+	format-warn-foreground = ${colors.alert}
 
 
 [module/gputemp]
@@ -163,7 +150,7 @@ primary = 			    ${self.accent}
 	interval = 10
 	label = "%output%°C"
 	format-prefix = " "
-	format-prefix-foreground = ${colors.red}
+	format-prefix-foreground = ${colors.alert}
 	format = <label>
 	format-foreground = ${colors.primary}
 
@@ -174,46 +161,44 @@ primary = 			    ${self.accent}
 	interval = 3.0
 	format-connected = <label-connected>
 	format-connected-prefix = " "
-	format-connected-prefix-foreground = ${colors.primary}
+	format-connected-prefix-foreground = ${colors.secondary}
 	label-connected = "%{A1:wifi-menu &:}%essid%%{A}"
 	label-disconnected = "%{A1:wifi-menu &:}%{A}"
-	label-disconnected-foreground = #5b
+	label-disconnected-foreground = ${colors.secondary}
 	ramp-signal-0 = 
 	ramp-signal-1 = 
 	ramp-signal-2 = 
 	ramp-signal-3 = 
 	ramp-signal-4 = 
-	ramp-signal-foreground = ${colors.foreground}
-	format-connected-foreground = ${colors.primary}
+	ramp-signal-foreground = ${colors.secondary}
+	format-connected-foreground = ${colors.secondary}
 
 
 [module/date]
 	type = internal/date
-	interval = 1.0
-	date = "%a %b %d" 
+	interval = 5.0
 	time = "%H:%M"
-	date-alt = "%A, %d %B %Y"
-	time-alt = "%H:%M:%S"
-	label = " %date%  %time%"
+	label = " %time%"
 	format = <label>
-	format-foreground = ${colors.primary}
+	format-foreground = ${colors.fifth}
 
 
 [module/volume]
 	type = internal/volume
 
 	format-volume = <ramp-volume><label-volume>
-	format-volume-foreground = ${colors.primary}
 	format-muted = <label-muted>
 
+	label-volume-foreground = ${colors.fourth}
 	label-volume = "%percentage%%"
 
 	label-muted = ""
-	label-muted-foreground = #aaa
+	label-muted-foreground = ${colors.fourth}
 
 	format-volume-padding = 0
 	format-muted-padding = 0
 
+	ramp-volume-foreground = ${colors.fourth}
 	ramp-volume-0 = 
 	ramp-volume-1 = 
 	ramp-volume-2 = 
@@ -237,7 +222,9 @@ primary = 			    ${self.accent}
 	card = intel_backlight
 	enable-scroll = true
 	format = <label>
-	label =  %percentage%%
+	format-prefix = " "
+	format-prefix-foreground = ${colors.foreground}
+	label = %percentage%%
 	label-foreground = ${colors.primary}
 
 
@@ -250,26 +237,26 @@ primary = 			    ${self.accent}
 	label-discharging = %percentage%% %time%
 
 	format-charging = <animation-charging><label-charging>
-	format-charging-foreground = ${colors.primary}
-	label-charging-foreground = ${colors.primary}
+	format-charging-foreground = ${colors.fourth}
+	label-charging-foreground = ${colors.fourth}
 
 	format-discharging = <ramp-capacity><label-discharging>
-	format-discharging-foreground = ${colors.primary}
-	label-discharging-foreground = ${colors.primary}
+	format-discharging-foreground = ${colors.fourth}
+	label-discharging-foreground = ${colors.fourth}
 
 	format-full-prefix = " "
-	format-full-prefix-foreground = ${colors.primary}
-	label-full-foreground = ${colors.primary}
+	format-full-prefix-foreground = ${colors.fourth}
+	label-full-foreground = ${colors.fourth}
 	ramp-capacity-0 = 
 	ramp-capacity-1 = 
 	ramp-capacity-2 = 
 	ramp-capacity-3 = 
 	ramp-capacity-4 = 
-	ramp-capacity-foreground = ${colors.primary}
+	ramp-capacity-foreground = ${colors.fourth}
 	animation-charging-0 = 
 	animation-charging-1 = 
 	animation-charging-2 = 
 	animation-charging-3 = 
 	animation-charging-4 = 
-	animation-charging-foreground = ${colors.primary}
+	animation-charging-foreground = ${colors.fourth}
 	animation-charging-framerate = 750

@@ -17,11 +17,7 @@ then
 	MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar top &
 else
 	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar top &
-	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar workspaces &
 fi
-
-MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar workspaces &
-
 
 #COMPTON
 killall -q compton
@@ -31,5 +27,7 @@ compton --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method exchange --con
 
 #DUNST
 killall -q dunst
+killall -q notify-osd
 while pgrep -x dunst >/dev/null; do sleep 1; done
+while pgrep -x notify-osd >/dev/null; do sleep 1; done
 dunst -config ~/.config/dunst/dunst

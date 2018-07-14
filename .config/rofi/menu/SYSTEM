@@ -14,7 +14,7 @@ if [ "$another" == "RELOAD" ] ; then
 	i3-msg restart;
 
 elif [ "$another" == "LOCK" ] ; then
-	exec  ~/.config/i3lock/blurlock;
+	exec betterlockscreen --lock
 		
 elif [ "$another" == "LOGOUT" ] ; then
 	prompt "i3-msg exit" LOGOUT

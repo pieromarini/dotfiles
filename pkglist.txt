@@ -19,6 +19,7 @@ bind-tools
 binutils
 bison
 blender
+blueman
 bluez-utils
 boost
 boostnote

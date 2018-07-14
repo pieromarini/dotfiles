@@ -1,7 +1,9 @@
 [global]
     font = Monaco 12
 
-    allow_markup = yes
+    markup = yes
+
+	color = "#fe7a61"
 
     format = "<b>%s</b>\n%b"
     sort = yes
@@ -15,7 +17,7 @@
     ignore_newline = no
 
     # geometry [{width}]x{height}][+/-{x}+/-{y}]
-    geometry = "420x120-15+63"
+    geometry = "420x120-15+49"
     shrink = yes
 
     transparency = 20
@@ -27,13 +29,13 @@
     max_icon_size = 48
     icon_path = /usr/share/icons/Papirus-Dark/16x16/
 
-    follow = none
+    follow = keyboard
     sticky_history = yes
     history_length = 20
     show_indicators = yes
     line_height = 0
     separator_height = 1
-    padding = 8
+    padding = 10
     horizontal_padding = 8
     separator_color = frame
 
@@ -42,15 +44,11 @@
     dmenu = /usr/bin/dmenu -p dunst
     browser = /usr/bin/chromium 
 
-[frame]
-    width = 0
-	color = "#fe7a61"
-    #color = "#6C6C6C"
 
 [shortcuts]
     close = mod4+x
     close_all = mod4+ctrl+x
-    history = mod4+grave
+    history = ctrl+bar
     context = mod4+ctrl+period
 
 [urgency_low]
@@ -58,7 +56,7 @@
     foreground = "#FFFFFF"
     #background = "#222222"
     #foreground = "#888888"
-    timeout = 10
+    timeout = 5
 
 [urgency_normal]
     background = "#6092BE"
@@ -77,5 +75,5 @@
 [spotify]
 	appname = Spotify
 	timeout = 5
-	background = "#1db954"
+	background = "#55cca8"
 	foreground = "#ffffff"

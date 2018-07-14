@@ -3,6 +3,7 @@
 #########################################################################################################################################
 exec_always xmodmap ~/.Xmodmap
 exec_always "setxkbmap -layout latam -option caps:swapescape"
+exec --no-startup-id betterlockscreen -w
 
 set $mod mod4
 set $alt mod1
@@ -33,8 +34,7 @@ exec_always xrandr --output $monitor1 --primary --mode 1920x1080 --pos 0x0 --out
 
 exec_always bash ~/.config/i3/element
 
-exec_always feh --bg-fill ~/Pictures/Wallpapers/frank-mckenna-140054-unsplash.jpg
-# exec xautolock -time 15 -locker ~/.config/i3lock/blurlock
+exec_always feh --bg-fill ~/Pictures/Wallpapers/federico-beccari-507719-unsplash.jpg
 exec --no-startup-id pulseaudio
 
 
