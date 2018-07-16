@@ -1,17 +1,13 @@
-/**
- * ROFI Color theme2
+/*
+ * ROFI Color theme
+ * rofi_bar
  * User: Piero
- copy those lines to: ~/.conf/rofi/ or ~/.Xdefaults
-	rofi.fullscreen:true
-	rofi.theme: ~/.i3/rofi.rasi
  */
 
 * {
-	accent: #fe7a61;
+	accent: #50b4e6;
 	bckgrd: #121212;
 	select: #222222;
-
-
 
 	foreground:         @accent;
 	foreground-alt:    	#ebebeb;
@@ -21,42 +17,42 @@
 	urgentcolor:      	#e53714;
 
 
-   font: 				"Monaco 12";
-   border-color:        @background;
-   separatorcolor:      @foreground;
-   background-color: 	@background;
+	font: 				"Monaco 12";
+	border-color:       @background;
+	separatorcolor:     @foreground;
+	background-color: 	@background;
    
 }
 
 #window {
-   background-color: 	@background;
-   anchor: 				north;
-   location: 			north;
-   y-offset: 			0;
+	background-color: 	@background;
+	anchor: 			north;
+	location: 			north;
+	y-offset: 			0;
 }
 
 #mainbox {
-   background-color: 	@background;
-   spacing:				0px;
-   children: 			[inputbar, message, sidebar, listview];
+	background-color: 	@background;
+	spacing:			0px;
+	children: 			[inputbar, message, sidebar, listview];
 }
 
 #message {
-   background-color:	@background;
-   padding: 			10 1% 10;
+	background-color:	@background;
+	padding: 			10px 1%;
 }
 
 #textbox {
-   text-color:			@background;
-   background-color:	@foreground;
+	text-color:			@background;
+	background-color:	@foreground;
 }
 
 #listview {
-   fixed-height: 		false;
-   dynamic: 			true;
-   scrollbar: 			false;
-   padding: 			15px;
-   background: 			@background;
+	fixed-height: 		false;
+	dynamic: 			true;
+	scrollbar: 			false;
+	padding: 			15px;
+	background: 		@background;
 }
 
 #element {
@@ -65,18 +61,18 @@
 }
 
 #element.normal.normal {
-   background-color: 	@background;
-   text-color: 			@foreground-alt;
+	background-color: 	@background;
+	text-color: 		@foreground-alt;
 }
 
 #element.normal.urgent {
-   background-color: 	@background;
-   text-color: 			@urgentcolor;
+	background-color: 	@background;
+	text-color: 		@urgentcolor;
 }
 
 #element.normal.active {
-   background-color: 	@background;
-   text-color: 			@foreground;
+	background-color: 	@background;
+	text-color: 		@foreground;
 }
 
 #element.selected.normal {
@@ -110,8 +106,8 @@
 }
 
 #button {
-   background-color: 	@background;
-   text-color:       	@background;
+	background-color: 	@background;
+	text-color:       	@background;
 }
 
 
@@ -120,20 +116,19 @@
 }
 
 #inputbar {
-   background-color: 	@foreground;
-   spacing:				0px;
+	background-color: 	@foreground;
+	spacing:			0px;
 }
 
 #prompt {
-   padding:				6px 9px;
-   background-color:	@foreground;
-   text-color:			@background-alt;
-   padding: 			14 1% 14;
+	background-color:	@foreground;
+	text-color:			@background-alt;
+	padding: 			14px 1%;
 }
 
 #entry {
-   padding:				6px 10px;
-   background-color:	@background-alt;
-   text-color:			@foreground;
-   padding: 			14px;
+	padding:			6px 10px;
+	background-color:	@background-alt;
+	text-color:			@foreground;
+	padding: 			14px;
 }

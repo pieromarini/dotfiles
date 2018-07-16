@@ -1,4 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+
+# Author: Piero Marini
+# Github: https://github.com/pieromarini
 
 DEST="org.mpris.MediaPlayer2.spotify"
 TO="/org/mpris/MediaPlayer2"

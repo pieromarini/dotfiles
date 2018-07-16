@@ -3,7 +3,9 @@
 #########################################################################################################################################
 exec_always xmodmap ~/.Xmodmap
 exec_always "setxkbmap -layout latam -option caps:swapescape"
-exec --no-startup-id betterlockscreen -w
+
+# exec --no-startup-id betterlockscreen -w
+# exec --no-startup-id nm-applet
 
 set $mod mod4
 set $alt mod1
@@ -201,12 +203,12 @@ bindsym $mod+bar focus output left
 #|||	PREDEFINED WORKSPACES
 #########################################################################################################################################
 assign [class="Chromium"] $workspace_main2
-assign [class="Spotify"] $workspace_main3
+assign [class="Zathura"] $workspace_main3
 assign [class="Thunderbird"] $workspace_main4
 assign [class="whatsapp-desktop"] $workspace_main5
-assign [class="Skype"] $workspace_main6
+assign [class="Spotify"] $workspace_main6
 assign [class="Slack"] $workspace_main7
-assign [class="Spotify"] $workspace_main8
+assign [class="Skype"] $workspace_main8
 
 
 #########################################################################################################################################

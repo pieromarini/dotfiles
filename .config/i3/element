@@ -9,7 +9,7 @@ killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 
-# Create Top/Workspaces Polybars only if monitor is connected.
+# Create bar on HDMI only if connected.
 HDMI_CONNECTED=$(xrandr | grep "$monitor2 connected")
 
 if [ -z "$HDMI_CONNECTED" ]

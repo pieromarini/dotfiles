@@ -48,7 +48,9 @@ fi
 
 
 
-CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | rofi -dmenu -p "Wi-Fi SSID: " -lines "$LINENUM" -a "$HIGHLINE" -location "$POSITION" -yoffset "$YOFF" -xoffset "$XOFF" -font "Monaco 9" -width -"$RWIDTH")
+ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_bar -m 0 -width 560)
+
+CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "Wi-Fi SSID: " -lines "$LINENUM" -a "$HIGHLINE")
 #echo "$CHENTRY"
 CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
 #echo "$CHSSID"

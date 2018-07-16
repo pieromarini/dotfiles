@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 27 Jun 2018
+" Last Edit: 16 Jul 2018
 " Author: Piero Marini
 
 
@@ -63,9 +63,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-nnoremap <A-a> <C-a>
-nnoremap <A-x> <C-x>
 
 let mapleader = ","
 
