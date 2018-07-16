@@ -5,6 +5,7 @@ ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m 0 -fullscreen)
 another=$(echo "RELOAD
 LOCK
 LOGOUT
+SUSPEND
 REBOOT
 POWEROFF" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "SYSTEM: ")
 
@@ -15,6 +16,9 @@ if [ "$another" == "RELOAD" ] ; then
 
 elif [ "$another" == "LOCK" ] ; then
 	exec betterlockscreen --lock
+
+elif [ "$another" == "SUSPEND" ] ; then
+	prompt "betterlockscreen --suspend" SUSPEND
 		
 elif [ "$another" == "LOGOUT" ] ; then
 	prompt "i3-msg exit" LOGOUT
@@ -28,5 +32,3 @@ elif [ "$another" == "POWEROFF" ] ; then
 else
     echo $another
 fi
-
-

@@ -12,12 +12,14 @@ navigate(){
 	selected=$(ls "$1/" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "$1: ")
 	[[ -z $selected ]] && exit
 	if [[ -f $1/$selected ]]; then
-		alacritty -e vim $1/$selected
+		# alacritty -e vim $1/$selected
+		tmux-sendkeys config "vim $1/$selected"
 	elif [[ -d $1/$selected ]]; then
 		navigate $1/$selected
 	else
 		touch $1/$selected
-		alacritty -e vim $1/$selected
+		# alacritty -e vim $1/$selected
+		tmux-sendkeys config "vim $1/$selected"
 	fi
 }
 
@@ -27,8 +29,9 @@ if [ "$another" == "Shell" ] ; then
 	selected=$(echo "$HOME/.bashrc
 $HOME/.tmux.conf
 $HOME/.vimrc" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
-	[[ -z $selected ]] && exit
-	alacritty -e vim $selected
+		[[ -z $selected ]] && exit
+	# alacritty -e vim $selected
+	tmux-sendkeys config "vim $selected"
 
 elif [ "$another" == "Configs" ] ; then
 	navigate /home/piero/.config;
