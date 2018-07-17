@@ -29,10 +29,25 @@ function sp-current {
 		| sed 's/^\(.\)/\U\1/'
 }
 
+function sp-art {
+	get-metadata \
+		| grep --color=never -E "(artUrl)" \
+		| sed 's/^\(.\)/\U\1/'
+}
+
 CURR=$(sp-current)
 
-#ALBUM=$(echo "$CURR" | grep -m 1 Album  | cut -d '|' -f2)
+ART=$(sp-art | grep -m 1 ArtUrl | cut -d '|' -f2)
+
+ALBUM=$(echo "$CURR" | grep -m 1 Album  | cut -d '|' -f2)
 ARTIST=$(echo "$CURR" | grep -m 1 Artist | cut -d '|' -f2)
 SONG=$(echo "$CURR" | grep -m 1 Title  | cut -d '|' -f2)
 
-echo "$SONG - $ARTIST" # - $ALBUM"
+SMALL_DESC="$SONG - $ARTIST"
+POPUP_DESC="$SONG - $ARTIST - $ALBUM"
+
+if [ "$1" = "noart" ]; then
+	echo $SMALL_DESC 
+else
+	echo $POPUP_DESC
+fi

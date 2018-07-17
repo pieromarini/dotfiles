@@ -209,9 +209,10 @@
 [module/spotify]
 	type = custom/script
 	exec-if = pgrep -x spotify
-	exec = spotify-dbus
+	exec = spotify-dbus noart
 	tail = false
-	interval = 5
+	interval = 2
+	;click-left = spotify-dbus
 	format-prefix = " "
 	format-prefix-foreground = ${colors.primary}
 	format = <label>

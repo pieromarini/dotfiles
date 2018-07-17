@@ -101,12 +101,10 @@ kdialog
 kfind
 kgpg
 kmix
-knotes
 ksystemlog
 ktorrent
 kwalletmanager
 kwrite
-latte-dock
 less
 lib32-alsa-lib
 lib32-alsa-plugins

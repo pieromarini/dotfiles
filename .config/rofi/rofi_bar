@@ -28,12 +28,13 @@
 	background-color: 	@background;
 	anchor: 			north;
 	location: 			north;
-	y-offset: 			0;
+	y-offset: 			35px;
 }
 
 #mainbox {
 	background-color: 	@background;
 	spacing:			0px;
+	padding:			10px 0 0 10px;
 	children: 			[inputbar, message, sidebar, listview];
 }
 
@@ -57,7 +58,7 @@
 
 #element {
     border:  			0;
-    padding: 			15px;
+    padding: 			10px;
 }
 
 #element.normal.normal {
@@ -127,7 +128,6 @@
 }
 
 #entry {
-	padding:			6px 10px;
 	background-color:	@background-alt;
 	text-color:			@foreground;
 	padding: 			14px;

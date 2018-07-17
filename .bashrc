@@ -1,5 +1,5 @@
 #   File: .bashrc
-#   Last Edit: 11 Jul 2018
+#   Last Edit: 17 Jul 2018
 #   Author: Piero Marini
 
 export PATH=~/.scripts:~/.bin:$PATH
@@ -13,7 +13,7 @@ export BASHRC=~/.bashrc
 
 export EDITOR=vim
 export VISUAL=vim
-export TERM=alacritty
+export TERMINAL="alacritty -e"
 
 
 # Python VirtualEnv
