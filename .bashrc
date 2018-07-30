@@ -1,5 +1,5 @@
 #   File: .bashrc
-#   Last Edit: 17 Jul 2018
+#   Last Edit: 25 Jul 2018
 #   Author: Piero Marini
 
 export PATH=~/.scripts:~/.bin:$PATH
@@ -15,6 +15,8 @@ export EDITOR=vim
 export VISUAL=vim
 export TERMINAL="alacritty -e"
 
+# SSH alias
+alias acm-ssh="ssh -p 7822 utechostingacm@utec.hosting.acm.org"
 
 # Python VirtualEnv
 export WORKON_HOME=$HOME/.virtualenvs
@@ -207,8 +209,8 @@ function wordpress-devserver(){
     sudo systemctl start mysqld httpd
     systemctl status mysqld httpd
 }
-
 # End Apache Dev
+
 
 # Powerline-Shell Functions
 function _update_ps1() {

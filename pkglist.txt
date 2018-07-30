@@ -148,6 +148,7 @@ mesa-demos
 mpg123
 msbuild-bin
 nano
+nautilus
 ncurses5-compat-libs
 network-manager-applet
 networkmanager
@@ -261,6 +262,7 @@ xorg-xbacklight
 xorg-xev
 xorg-xinit
 xorg-xinput
+yad
 zathura
 zathura-pdf-mupdf
 zip

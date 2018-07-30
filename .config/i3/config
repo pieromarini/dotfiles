@@ -6,6 +6,7 @@ exec_always "setxkbmap -layout latam -option caps:swapescape"
 
 # exec --no-startup-id betterlockscreen -w
 # exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-manager
 
 set $mod mod4
 set $alt mod1
@@ -91,7 +92,7 @@ bindsym $mod+Shift+h resize grow width 4 px or 4 ppt
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Insert floating toggle
-bindsym $mod+$alt+Insert sticky toggle
+bindsym $mod+shift+Insert sticky toggle
 
 
 #########################################################################################################################################
@@ -200,15 +201,19 @@ bindsym $mod+bar focus output left
 
 
 #########################################################################################################################################
-#|||	PREDEFINED WORKSPACES
+#|||	PREDEFINED WORKSPACES AND WINDOW BEHAVIOUR
 #########################################################################################################################################
 assign [class="Chromium"] $workspace_main2
 assign [class="Zathura"] $workspace_main3
+assign [class="libreoffice-startcenter|Soffice"] $workspace_main3
 assign [class="Thunderbird"] $workspace_main4
 assign [class="whatsapp-desktop"] $workspace_main5
-assign [class="Spotify"] $workspace_main6
 assign [class="Slack"] $workspace_main7
 assign [class="Skype"] $workspace_main8
+
+for_window [class="Nautilus"] floating enable
+for_window [class="Chromium" window_role="pop-up"] floating enable
+for_window [class="Spotify"] move to workspace $workspace_main6
 
 
 #########################################################################################################################################
@@ -216,6 +221,7 @@ assign [class="Skype"] $workspace_main8
 #########################################################################################################################################
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+c exec "chromium"
+bindsym $mod+t exec "nautilus"
 
 
 #########################################################################################################################################
