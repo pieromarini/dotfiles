@@ -85,7 +85,8 @@ TERM alacritty
 
 .c 00;33
 .cpp 00;33
-.h 00;33
+.h 00;32
+.hpp 00;32
 
 .html 00;34
 .css 00;31

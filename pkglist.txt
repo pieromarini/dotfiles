@@ -9,6 +9,7 @@ arandr
 arc-gtk-theme
 ark
 artwiz-fonts
+assimp
 audiocd-kio
 autoconf
 autofs
@@ -63,12 +64,14 @@ fuse2
 fuse3
 fuseiso
 gawk
+gdb
 gdm
 gettext
 ghostscript
 gimp
 git
 glibc
+glm
 gnome-keyring
 gnome-twitch
 go
@@ -150,6 +153,7 @@ msbuild-bin
 nano
 nautilus
 ncurses5-compat-libs
+nemiver
 network-manager-applet
 networkmanager
 networkmanager-openvpn
@@ -182,6 +186,7 @@ procps-ng
 psmisc
 pulseaudio
 pulseaudio-alsa
+python-greenlet
 python-html5lib
 python-pip
 python2-pip
@@ -266,3 +271,4 @@ yad
 zathura
 zathura-pdf-mupdf
 zip
+zsh

@@ -4,6 +4,7 @@ ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m 0 -fullscreen)
 another=$(echo "Configs
 Shell
 Scripts
+Bin
 Functions" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "SYSTEM: ")
 
 
@@ -38,6 +39,9 @@ elif [ "$another" == "Configs" ] ; then
 
 elif [ "$another" == "Scripts" ] ; then
 	navigate /home/piero/.scripts;
+
+elif [ "$another" == "Bin" ] ; then
+	navigate /home/piero/.bin;
 
 elif [ "$another" == "Functions" ] ; then
 	navigate /home/piero/.func;

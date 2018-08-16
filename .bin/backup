@@ -2,7 +2,7 @@
 
 echo "Backing up dotfiles..."
 cp ~/.vimrc ~/.backup/
-cp ~/.bashrc ~/.backup/
+cp ~/.zshrc ~/.backup/
 cp ~/.dir_colors ~/.backup/
 cp ~/.tmux.conf ~/.backup/
 cp ~/.xinitrc ~/.backup/

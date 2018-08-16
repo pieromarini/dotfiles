@@ -1,18 +1,38 @@
-#   File: .bashrc
-#   Last Edit: 25 Jul 2018
-#   Author: Piero Marini
+# PATH
+typeset -U path
+path=(~/.scripts ~/.bin $path[@])
 
-export PATH=~/.scripts:~/.bin:$PATH
+zstyle ':completion:*' menu select
 
-source /etc/profile
+export ZSH="/home/piero/.oh-my-zsh"
+
+ZSH_THEME="muse"
+
+bindkey -v
+
+# History Search. Past commands matching the current line.
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
+[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+
+plugins=(
+	git
+	zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 
-export VIMRC=~/.vimrc
-export BASHRC=~/.bashrc
-
 export EDITOR=vim
 export VISUAL=vim
+
+export VIMRC=~/.vimrc
+export BASHRC=~/.bashrc
+export ZSHRC=~/.zshrc
 export TERMINAL="alacritty -e"
 
 # SSH alias
@@ -22,6 +42,7 @@ alias acm-ssh="ssh -p 7822 utechostingacm@utec.hosting.acm.org"
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Development/Python
 source /usr/bin/virtualenvwrapper.sh
+
 
 #############################
 ########## Aliases ##########
@@ -210,14 +231,3 @@ function wordpress-devserver(){
     systemctl status mysqld httpd
 }
 # End Apache Dev
-
-
-# Powerline-Shell Functions
-function _update_ps1() {
-    PS1=$(powerline-shell $?)
-}
-
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-# End Powerline-Shell Functions

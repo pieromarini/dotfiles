@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 16 Jul 2018
+" Last Edit: 14 Aug 2018
 " Author: Piero Marini
 
 
@@ -15,12 +15,15 @@
 
 """ End Plugin List """
 
+set encoding=utf-8
+
 syntax on
 filetype on
 filetype plugin on
 filetype indent on
 
 let python_highlight_all=1
+
 
 set autoindent
 set shiftwidth=4
@@ -56,6 +59,7 @@ set nowritebackup
 " Terminal Mode
 set termwinsize=12x191
 
+
 """" START Mappings """"
 
 " NO.
@@ -86,6 +90,19 @@ nmap <Leader>n :ALENext<CR>
 nmap <Leader>b :ALEPrevious<CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
+
+" Deoplete Init
+set pyxversion=3
+let g:deoplete#enable_at_startup = 1
+
+inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 
 " Folding
 nnoremap <Space> za
@@ -150,6 +167,8 @@ let g:ale_linters = {
             \   'cpp': ['clangcheck'],
             \   'c': ['clangcheck']
             \}
+
+let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++14 -x c++'
 
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -290,12 +309,16 @@ autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp
 """" END SNIPPETS """"
 
 " Opens corresponding .h or .cpp file in current directory.
+" TODO: Match either .h or .hpp / .c or .cpp files.
 autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 
 """" RUN SCRIPTS """"
 
 autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+
+" This executes MAKE in the main directory and calls a "run" script.
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && ./run && cd src'<CR>
 
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
