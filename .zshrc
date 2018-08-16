@@ -10,6 +10,9 @@ ZSH_THEME="muse"
 
 bindkey -v
 
+# Bulk renaming utility.
+autoload -U zmv
+
 # History Search. Past commands matching the current line.
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search

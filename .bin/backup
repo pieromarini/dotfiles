@@ -7,7 +7,6 @@ cp ~/.dir_colors ~/.backup/
 cp ~/.tmux.conf ~/.backup/
 cp ~/.xinitrc ~/.backup/
 cp ~/.eslintrc.js ~/.backup/
-cp ~/.powerline-shell.json ~/.backup/
 cp ~/.Xresources ~/.backup/
 
 echo "Backing up Vim files..."
