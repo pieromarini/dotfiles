@@ -23,6 +23,7 @@ zle -N down-line-or-beginning-search
 
 plugins=(
 	git
+	vi-mode
 	zsh-syntax-highlighting
 )
 
@@ -37,6 +38,9 @@ export VIMRC=~/.vimrc
 export BASHRC=~/.bashrc
 export ZSHRC=~/.zshrc
 export TERMINAL="alacritty -e"
+
+# I clear all the time.
+alias c=clear
 
 # SSH alias
 alias acm-ssh="ssh -p 7822 utechostingacm@utec.hosting.acm.org"
@@ -77,7 +81,7 @@ alias lh='ls --ignore="*.meta"' # Special ls to hide meta files from Unity3D.
 alias open='xdg-open'
 
 # Quick Navigation
-alias utec='cd ~/Documents/Utec/2018-1/'
+alias utec='cd ~/Documents/Utec/2018-2/'
 alias toe='cd ~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/'
 
 # Use dircolors to set $LC_COLORS
@@ -147,6 +151,7 @@ function remove-suffix(){
         mv "$f" "${f/$2/}";
     done
 }
+
 # End Bulk Helpers
 
 # Swap two filenames.
