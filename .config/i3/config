@@ -4,9 +4,10 @@
 exec_always xmodmap ~/.Xmodmap
 exec_always "setxkbmap -layout latam -option caps:swapescape"
 
-# exec --no-startup-id betterlockscreen -w
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-manager
+
+exec --no-startup-id xautolock -time 10 -detectsleep -locker "betterlockscreen --lock" &
 
 set $mod mod4
 set $alt mod1
@@ -93,6 +94,9 @@ bindsym $mod+Shift+h resize grow width 4 px or 4 ppt
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Insert floating toggle
 bindsym $mod+shift+Insert sticky toggle
+
+bindsym $mod+i move scratchpad
+bindsym $mod+u scratchpad show
 
 
 #########################################################################################################################################
@@ -217,7 +221,7 @@ for_window [class="Spotify"] move to workspace $workspace_main6
 
 
 #########################################################################################################################################
-#|||	APPS KEYBINDINGS				-- MOD + CTRL 
+#|||	APPS KEYBINDINGS				-- MOD + Key 
 #########################################################################################################################################
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+c exec "chromium"
@@ -237,6 +241,10 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
+
+bindsym --release Print exec "scrot -m '/home/piero/Pictures/Screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
+bindsym --release Shift+Print exec "scrot -s '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
 
 
 #########################################################################################################################################

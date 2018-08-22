@@ -130,6 +130,7 @@ lib32-v4l-utils
 lib32-vulkan-icd-loader
 libcurl-gnutls
 libnewt
+libpam-google-authenticator
 libreoffice-fresh
 libtool
 licenses
@@ -164,6 +165,7 @@ ntp
 numix-circle-icon-theme-git
 nvidia
 nvidia-settings
+oath-toolkit
 openssh
 os-prober
 p7zip

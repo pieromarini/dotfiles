@@ -11,4 +11,4 @@ fi
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
-i3
+exec i3

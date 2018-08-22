@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 16 Aug 2018
+" Last Edit: 21 Aug 2018
 " Author: Piero Marini
 
 
@@ -77,7 +77,7 @@ nnoremap <silent> <Leader>- :exe "resize -10"<CR>
 nnoremap <silent> <Leader>< :exe "vertical resize +10"<CR>
 nnoremap <silent> <Leader>> :exe "vertical resize -10"<CR>
 
-map <C-N> :NERDTreeToggle<CR>
+nmap <C-N> :NERDTreeToggle<CR>
 
 nmap <Leader>? :YcmShowDetailedDiagnostic<CR>
 
@@ -249,7 +249,7 @@ endfunction
 
 set laststatus=2
 set statusline=
-set statusline+=%{StatuslineUpdate()}                       " Changing the statusline color
+set statusline+=%{StatuslineUpdate()}                      " Changing the statusline color
 set statusline+=%1*\ %{toupper(g:currentmode[mode()])}%9* " Current mode
 set statusline+=%4*\ %{GitInfo()}                          " Git
 set statusline+=%2*\ [%n]                                  " buffer
@@ -302,18 +302,19 @@ autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 
 """" RUN SCRIPTS """"
 
-autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-
 " This executes MAKE in the main directory and calls a "run" script.
+" TODO: Recognize main project dir to get makefile.
 autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && ./run && cd src'<CR>
 
+autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
-autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
+autocmd FileType python nnoremap <F9> :w <bar> :term python %<CR>
+autocmd FileType python nnoremap <F10> :w <bar> :term python -i %<CR>
 
-autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
+autocmd FileType sh nnoremap <F9> :w <bar> :term bash %<CR>
 
-autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex' shellescape(@%, 1)<CR>
+autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
 
 """" END SCRIPT EXECUTION/COMPILING """"

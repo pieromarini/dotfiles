@@ -1,6 +1,9 @@
 # PATH
 typeset -U path
-path=(~/.scripts ~/.bin $path[@])
+path=(~/.scripts ~/.bin /usr/msc/bin $path[@])
+
+export MVCBIN="/usr/msc/bin/"
+export MVC_LIB="/usr/msc/builtins/"
 
 zstyle ':completion:*' menu select
 
