@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 21 Aug 2018
+" Last Edit: 29 Aug 2018
 " Author: Piero Marini
 
 
@@ -292,6 +292,7 @@ autocmd FileType html nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.ht
 autocmd FileType python nnoremap <Leader>m :-1read $HOME/.vim/snippets/main.py<CR>o
 autocmd FileType tex,plaintex nnoremap <Leader>m :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
 autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
+autocmd FileType c nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.c<CR>2jo
 
 """" END SNIPPETS """"
 
@@ -306,7 +307,9 @@ autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 " TODO: Recognize main project dir to get makefile.
 autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && ./run && cd src'<CR>
 
-autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 -Wall '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+
+autocmd filetype c nnoremap <F10> :w <bar> exec '!gcc -Wall '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType python nnoremap <F9> :w <bar> :term python %<CR>

@@ -41,6 +41,7 @@ device-mapper
 dhcpcd
 dialog
 diffutils
+discord
 dmenu
 dmidecode
 dosbox
@@ -75,6 +76,7 @@ glm
 gnome-keyring
 gnome-twitch
 go
+gpick
 gptfdisk
 grep
 grub
@@ -128,6 +130,9 @@ lib32-ocl-icd
 lib32-openal
 lib32-v4l-utils
 lib32-vulkan-icd-loader
+libc++
+libc++abi
+libc++experimental
 libcurl-gnutls
 libnewt
 libpam-google-authenticator
@@ -210,7 +215,6 @@ sdl_ttf
 sed
 shadow
 shfmt
-slack-desktop
 spectacle
 spotify
 sudo

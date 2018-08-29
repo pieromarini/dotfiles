@@ -7,7 +7,7 @@ exec_always "setxkbmap -layout latam -option caps:swapescape"
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-manager
 
-exec --no-startup-id xautolock -time 10 -detectsleep -locker "betterlockscreen --lock" &
+exec --no-startup-id xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &
 
 set $mod mod4
 set $alt mod1
@@ -25,6 +25,8 @@ focus_follows_mouse yes
 focus_on_window_activation focus
 focus_wrapping yes
 for_window [class=.*] border pixel 0
+for_window [class="Yad"] floating enable
+
 
 
 #########################################################################################################################################
@@ -212,7 +214,7 @@ assign [class="Zathura"] $workspace_main3
 assign [class="libreoffice-startcenter|Soffice"] $workspace_main3
 assign [class="Thunderbird"] $workspace_main4
 assign [class="whatsapp-desktop"] $workspace_main5
-assign [class="Slack"] $workspace_main7
+assign [class="discord"] $workspace_main7
 assign [class="Skype"] $workspace_main8
 
 for_window [class="Nautilus"] floating enable
@@ -242,9 +244,9 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 
-bindsym --release Print exec "scrot -m '/home/piero/Pictures/Screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
-bindsym --release Shift+Print exec "scrot -s '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
-bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m%Y_$wx$h.png'"
+bindsym --release Print exec "scrot -m '/home/piero/Pictures/Screenshots/%s_%H%M_%d.%m._$wx$h.png'"
+bindsym --release Shift+Print exec "scrot -s '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m_$wx$h.png'"
+# bindsym --release $mod+Shift+Print exec "scrot -s '/tmp/screen.png' && xclip /tmp/screen.png && rm /tmp/screen.png"
 
 
 #########################################################################################################################################
