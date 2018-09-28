@@ -1,5 +1,5 @@
 #!/bin/bash
-ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m 0 -fullscreen)
+ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
 
 select=$(echo "Configs
 Shell

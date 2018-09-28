@@ -91,10 +91,13 @@ TERM alacritty
 .html 00;34
 .css 00;31
 .js 00;33
+.v 00;33
+.asm 00;33
+.txt 00;34
 
-.csv 01;34
-.xlsx 01;34
-.xml 01;34
+.csv 00;32
+.xlsx 00;32
+.xml 00;32
 
 DIR 01;35 # directory
 LINK 01;37;44 # symbolic link. (If you set this to 'target' instead of a

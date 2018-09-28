@@ -224,13 +224,13 @@ function ii(){
 }
 
 # Tmux Session shortcuts
-function tmuxkill(){
+function tkill(){
     tmux kill-session -t $1
 }
-function tmuxnew(){
+function tnew(){
     tmux new-session -t $1
 }
-function tmuxattach(){
+function tattach(){
     tmux attach-session -t $1
 }
 # End Tmux Session shortcuts

@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 29 Aug 2018
+" Last Edit: 25 Sep 2018
 " Author: Piero Marini
 
 
@@ -12,6 +12,7 @@
 " Vim-Fugitive (Git)
 " Vim-Vue (Syntax Highlighting for .vue files)
 " Vim-Tmux-Navigator (Integration for tmux panels with vim splits)
+" Fzf
 
 """ End Plugin List """
 
@@ -24,6 +25,8 @@ filetype indent on
 
 let python_highlight_all=1
 
+" Adding Fzf to Vim.
+set rtp+=~/.fzf
 
 set autoindent
 set shiftwidth=4
@@ -67,6 +70,8 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+nmap Q :wq<CR>
 
 let mapleader = ","
 
@@ -117,6 +122,25 @@ nnoremap <Leader>v <C-v>
 
 """" END MAPPINGS """"
 
+"""" FZF """"
+
+let g:fzf_layout = { 'down': '~40%' }
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 """" YouCompleteMe """"
 
 " Determine if inside a virtualenv for proper completion.
@@ -152,7 +176,8 @@ let g:ale_linters = {
             \   'css': ['prettier'],
             \   'python': ['flake8', 'autopep8'],
             \   'cpp': ['clangcheck'],
-            \   'c': ['clangcheck']
+            \   'c': ['clangcheck'],
+			\   'asm': []
             \}
 
 let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++14 -x c++'
@@ -288,9 +313,10 @@ let g:user_emmet_leader_key='<C-E>'
 
 """" SNIPPETS """"
 
+autocmd FileType tex,plaintex nnoremap <Leader>m :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
+autocmd FileType make nnoremap <Leader>m :-1read $HOME/.vim/snippets/Makefile<CR>
 autocmd FileType html nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
 autocmd FileType python nnoremap <Leader>m :-1read $HOME/.vim/snippets/main.py<CR>o
-autocmd FileType tex,plaintex nnoremap <Leader>m :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
 autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
 autocmd FileType c nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.c<CR>2jo
 
@@ -303,22 +329,23 @@ autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 
 """" RUN SCRIPTS """"
 
-" This executes MAKE in the main directory and calls a "run" script.
-" TODO: Recognize main project dir to get makefile.
+" MAKE command for OpenGL Engine.
+" TODO: Recognize ROOT project dir to get makefile.
 autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && ./run && cd src'<CR>
 
-autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 -Wall '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-
-autocmd filetype c nnoremap <F10> :w <bar> exec '!gcc -Wall '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType python nnoremap <F9> :w <bar> :term python %<CR>
-autocmd FileType python nnoremap <F10> :w <bar> :term python -i %<CR>
+autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
+autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
 
 autocmd FileType sh nnoremap <F9> :w <bar> :term bash %<CR>
 
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
+
+autocmd filetype verilog nnoremap <F10> :w <bar> exec '!iverilog '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 """" END SCRIPT EXECUTION/COMPILING """"
 

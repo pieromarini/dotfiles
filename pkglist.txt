@@ -64,6 +64,7 @@ font-bitstream-speedo
 fuse2
 fuse3
 fuseiso
+fzf
 gawk
 gdb
 gdm
@@ -216,11 +217,13 @@ sed
 shadow
 shfmt
 spectacle
+spim-svn
 spotify
 sudo
 sysfsutils
 systemd-sysvcompat
 tar
+task
 telegram-cli-git
 texinfo
 texlive-bibtexextra
@@ -258,7 +261,6 @@ wget
 whatsapp-desktop
 which
 whois
-wine-staging
 wireless_tools
 xampp
 xautolock
@@ -274,6 +276,7 @@ xorg-xev
 xorg-xinit
 xorg-xinput
 yad
+youtube-dl
 zathura
 zathura-pdf-mupdf
 zip

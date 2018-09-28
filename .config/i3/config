@@ -227,7 +227,8 @@ for_window [class="Spotify"] move to workspace $workspace_main6
 #########################################################################################################################################
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+c exec "chromium"
-bindsym $mod+t exec "nautilus"
+bindsym $mod+n exec "nautilus"
+bindsym $mod+t exec "todo"
 
 
 #########################################################################################################################################

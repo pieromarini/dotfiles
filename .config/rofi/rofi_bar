@@ -4,6 +4,10 @@
  * User: Piero
  */
 
+ configuration{
+	show-icons:      true;
+ }
+
 * {
 	accent: #50b4e6;
 	bckgrd: #121212;
