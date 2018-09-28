@@ -6,12 +6,12 @@ ROFI_OPTIONS_FULL=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
 select=$(echo "runapp
 documents
 websearch
-sudorun" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "search: ")
+sudorun" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -theme-str 'configuration{show-icons: false;}' -dmenu -i -p "search: ")
 
 
 if [ "$select" == "documents" ] ; then
 	FILES=$(find ~/Documents ~/Downloads -type f -not -path "*/\.*" -not -path "*/Development/*" -not -path "*/Pictures/*")
-	echo "${FILES}" | rofi "${ROFI_OPTIONS[@]}" -threads 1 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
+	echo "${FILES}" | rofi "${ROFI_OPTIONS[@]}" -theme-str 'configuration{show-icons: false;}' -threads 1 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
 
 elif [ "$select" == "websearch" ] ; then
 	rofi "${ROFI_OPTIONS_FULL[@]}" -dmenu -input /dev/null -p "Google:" | xargs -I % xdg-open "https://www.google.com/search?q=%"
