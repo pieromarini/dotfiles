@@ -12,11 +12,11 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 # Create bar on HDMI only if connected.
 HDMI_CONNECTED=$(xrandr | grep "$monitor2 connected")
 
-if [ -z "$HDMI_CONNECTED" ]
+if [ ! -z "$HDMI_CONNECTED" ]
 then
-	MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar top &
+	MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar top &
 fi
-MONITOR=$monitor2 polybar -c ~/.config/polybar/polybar top &
+MONITOR=$monitor1 polybar -c ~/.config/polybar/polybar top &
 
 #COMPTON
 killall -q compton

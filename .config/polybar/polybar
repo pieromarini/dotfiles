@@ -7,7 +7,7 @@
 
 	alert =					#ff3111
 
-	; 70% Opacity
+	; 70% Opacity 
 	background =			#b314191f
 	foreground =			#ed8755
 
@@ -107,6 +107,16 @@
 	ws-icon-5 = 6a;
 	ws-icon-6 = 7a;
 	ws-icon-7 = 8a;
+
+	ws-icon-8 =  1b;
+	ws-icon-9 =  2b;
+	ws-icon-10 = 3b;
+	ws-icon-11 = 4b;
+	ws-icon-12 = 5b;
+	ws-icon-13 = 6b;
+	ws-icon-14 = 7b;
+	ws-icon-15 = 8b;
+
 	ws-icon-default = 
 
 

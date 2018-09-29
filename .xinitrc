@@ -7,7 +7,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge -I $HOME ~/.Xresources
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
