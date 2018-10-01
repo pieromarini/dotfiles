@@ -217,6 +217,7 @@ sdl_ttf
 sed
 shadow
 shfmt
+soil
 spectacle
 spim-svn
 spotify

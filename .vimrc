@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 25 Sep 2018
+" Last Edit: 29 Sep 2018
 " Author: Piero Marini
 
 
@@ -309,7 +309,6 @@ hi User9 ctermfg=39 ctermbg=8
 let g:user_emmet_leader_key='<C-E>'
 
 """ END EMMET VIM """
-
 
 """" SNIPPETS """"
 
