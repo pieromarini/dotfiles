@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 29 Sep 2018
+" Last Edit: 11 Oct 2018
 " Author: Piero Marini
 
 
@@ -303,6 +303,9 @@ hi User8 ctermfg=246 ctermbg=8
 hi User9 ctermfg=39 ctermbg=8
 
 " END STATUS LINE
+
+""" GLSL Syntax Highlightin """
+autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 
 """ EMMET VIM """

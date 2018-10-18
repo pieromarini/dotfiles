@@ -106,7 +106,6 @@ kdenlive
 kdialog
 kfind
 kgpg
-kmix
 ksystemlog
 ktorrent
 kwalletmanager
@@ -213,6 +212,11 @@ s-nail
 samba
 screenfetch
 scrot
+sdl2_gfx
+sdl2_image
+sdl2_mixer
+sdl2_net
+sdl2_ttf
 sdl_ttf
 sed
 shadow
@@ -221,6 +225,7 @@ soil
 spectacle
 spim-svn
 spotify
+steam
 sudo
 sysfsutils
 systemd-sysvcompat
