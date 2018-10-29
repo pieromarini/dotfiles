@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 11 Oct 2018
+" Last Edit: 29 Oct 2018
 " Author: Piero Marini
 
 
@@ -119,6 +119,14 @@ nnoremap <Leader>y "*y
 
 " Visual Block Select
 nnoremap <Leader>v <C-v>
+
+" Open FZF
+nnoremap <Leader>x :FZF<CR>
+nnoremap <Leader>c :Buffers<CR>
+
+" Buffers Keybindings
+nnoremap <Leader>l :bn<CR>
+nnoremap <Leader>h :bp<CR>
 
 """" END MAPPINGS """"
 

@@ -93,6 +93,8 @@ TERM alacritty
 .js 00;33
 .v 00;33
 .asm 00;33
+.frag 00;33
+.vert 00;33
 .txt 00;34
 
 .csv 00;32

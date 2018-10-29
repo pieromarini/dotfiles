@@ -54,9 +54,10 @@ set $black				#000000
 set $grey				#373B41
 set $white				#FFFFFF
 set $red				#F10F09
+set $blue				#20546d
 
 #class						border		backgr		text		split
-client.focused				$accent		$accent		$black		$accent
+client.focused				$blue		$blue		$blue		$blue
 client.focused_inactive		$grey		$grey		$white		$grey
 client.unfocused			$grey		$grey		$white		$grey
 client.urgent				$red		$red		$black		$red
@@ -220,6 +221,7 @@ assign [class="Skype"] $workspace_main8
 for_window [class="Nautilus"] floating enable
 for_window [class="Chromium" window_role="pop-up"] floating enable
 for_window [class="Spotify"] move to workspace $workspace_main6
+for_window [class="Engine"] floating enable
 
 
 #########################################################################################################################################
@@ -245,9 +247,14 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 
-bindsym --release Print exec "scrot -m '/home/piero/Pictures/Screenshots/%s_%H%M_%d.%m._$wx$h.png'"
-bindsym --release Shift+Print exec "scrot -s '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m_$wx$h.png'"
+# bindsym --release Print exec "scrot -m '/home/piero/Pictures/Screenshots/%s_%H%M_%d.%m._$wx$h.png'"
+# bindsym --release Shift+Print exec "scrot -s '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m_$wx$h.png'"
 # bindsym --release $mod+Shift+Print exec "scrot -s '/tmp/screen.png' && xclip /tmp/screen.png && rm /tmp/screen.png"
+
+# Gui selection screenshot
+bindsym --release Print exec "flameshot gui -p /home/piero/Pictures/Screenshots"
+# Full screen screenshot and copies to clipboard
+bindsym --release Shift+Print exec "flameshot full -c"
 
 
 #########################################################################################################################################

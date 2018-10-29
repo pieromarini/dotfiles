@@ -50,7 +50,6 @@ downgrade
 dunst
 e2fsprogs
 efibootmgr
-ephoto
 exfat-utils
 fakeroot
 feh
@@ -58,6 +57,7 @@ file
 filesystem
 filezilla
 findutils
+flameshot
 flex
 font-bh-ttf
 font-bitstream-speedo
@@ -77,7 +77,6 @@ glm
 gnome-keyring
 gnome-twitch
 go
-gpick
 gptfdisk
 grep
 grub
@@ -204,6 +203,7 @@ razer-driver-dkms
 recordmydesktop
 reflector
 reiserfsprogs
+renderdoc
 rofi
 rpmextract
 rsync
@@ -222,7 +222,6 @@ sed
 shadow
 shfmt
 soil
-spectacle
 spim-svn
 spotify
 steam
@@ -262,6 +261,7 @@ unzip
 usbutils
 util-linux
 vi
+vimiv
 vlc
 vorbis-tools
 wget

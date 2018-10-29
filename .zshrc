@@ -2,8 +2,11 @@
 typeset -U path
 path=(~/.scripts ~/.bin /usr/msc/bin $path[@])
 
+# Miva Merchant Mivascript Compiler
 export MVCBIN="/usr/msc/bin/"
 export MVC_LIB="/usr/msc/builtins/"
+
+source $HOME/.workrc
 
 zstyle ':completion:*' menu select
 
