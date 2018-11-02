@@ -247,10 +247,6 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 
-# bindsym --release Print exec "scrot -m '/home/piero/Pictures/Screenshots/%s_%H%M_%d.%m._$wx$h.png'"
-# bindsym --release Shift+Print exec "scrot -s '/home/piero/Pictures/Screenshots/%s_%H%M_%d%m_$wx$h.png'"
-# bindsym --release $mod+Shift+Print exec "scrot -s '/tmp/screen.png' && xclip /tmp/screen.png && rm /tmp/screen.png"
-
 # Gui selection screenshot
 bindsym --release Print exec "flameshot gui -p /home/piero/Pictures/Screenshots"
 # Full screen screenshot and copies to clipboard
