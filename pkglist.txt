@@ -75,7 +75,6 @@ git
 glibc
 glm
 gnome-keyring
-gnome-twitch
 go
 gptfdisk
 grep
@@ -146,7 +145,6 @@ llvm
 logrotate
 lshw
 lsof
-lutris
 lvm2
 lxappearance
 m4
