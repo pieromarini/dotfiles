@@ -1,7 +1,6 @@
 # Configuration file for dircolors, a utility to help you set the
 # LS_COLORS environment variable used by GNU ls with the --color option.
-# Copyright (C) 1996-2014 Free Software Foundation, Inc.
-# Copying and distribution of this file, with or without modification,
+# Copyright (C) 1996-2014 Free Software Foundation, Inc.  # Copying and distribution of this file, with or without modification,
 # are permitted provided the copyright notice and this notice are preserved.
 # The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the
 # slackware version of dircolors) are recognized but ignored.
@@ -93,12 +92,20 @@ TERM alacritty
 .js 00;33
 .v 00;33
 .asm 00;33
-.frag 00;33
+.frag 00;35
 .vert 00;33
+.fs 00;35
+.vs 00;33
+
 .txt 00;34
 
-.csv 00;32
+.docx 00;34
 .xlsx 00;32
+.pptx 00;33
+
+.pdf 00;36
+
+.csv 00;32
 .xml 00;32
 
 DIR 01;35 # directory

@@ -93,6 +93,7 @@ inetutils
 intel-ucode
 iproute2
 iputils
+java-openjfx
 jfsutils
 jpegoptim
 jq

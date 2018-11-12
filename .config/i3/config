@@ -223,6 +223,9 @@ for_window [class="Chromium" window_role="pop-up"] floating enable
 for_window [class="Spotify"] move to workspace $workspace_main6
 for_window [class="Engine"] floating enable
 
+for_window [class="net-minecraft-bootstrap-Bootstrap"] floating enable
+for_window [class="Minecraft 1.12.2"] floating enable
+
 
 #########################################################################################################################################
 #|||	APPS KEYBINDINGS				-- MOD + Key 
