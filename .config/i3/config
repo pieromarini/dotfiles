@@ -175,8 +175,8 @@ bindsym $alt+Tab workspace back_and_forth
 #########################################################################################################################################
 #|||	MONITORS
 #########################################################################################################################################
-set $monitor1 eDP-1-1
-set $monitor2 HDMI-1-1
+set $monitor1 eDP-1
+set $monitor2 HDMI-1
 
 workspace $workspace_main1 output $monitor1
 workspace $workspace_main2 output $monitor1

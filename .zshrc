@@ -7,6 +7,7 @@ export MVCBIN="/usr/msc/bin/"
 export MVC_LIB="/usr/msc/builtins/"
 
 source $HOME/.workrc
+source $HOME/.personalrc
 
 zstyle ':completion:*' menu select
 
@@ -15,6 +16,7 @@ export ZSH="/home/piero/.oh-my-zsh"
 ZSH_THEME="muse"
 
 bindkey -v
+export KEYTIMEOUT=1
 
 # Bulk renaming utility.
 autoload -U zmv
@@ -48,8 +50,9 @@ export TERMINAL="alacritty -e"
 # I clear all the time.
 alias c=clear
 
-# SSH alias
-alias acm-ssh="ssh -p 7822 utechostingacm@utec.hosting.acm.org"
+# Open file in vime through Fzf.
+alias fv='vim $(fzf)'
+
 
 # Python VirtualEnv
 export WORKON_HOME=$HOME/.virtualenvs
@@ -86,10 +89,6 @@ alias lh='ls --ignore="*.meta"' # Special ls to hide meta files from Unity3D.
 
 alias open='xdg-open'
 
-# Quick Navigation
-alias utec='cd ~/Documents/Utec/2018-2/'
-alias toe='cd ~/Development/Unity3D/TheOriginOfEvil/Assets/Scripts/'
-
 # Use dircolors to set $LC_COLORS
 if [ -f /usr/bin/dircolors ]; then
     [ -e "$HOME/.dir_colors" ] && DIR_COLORS="$HOME/.dir_colors"
@@ -97,6 +96,7 @@ if [ -f /usr/bin/dircolors ]; then
     eval "$(dircolors -b $DIR_COLORS)"
 fi
 
+alias nvidia-settings="optirun -b none nvidia-settings -c :8"
 
 ###############################
 ######### Functions ###########

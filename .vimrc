@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 29 Oct 2018
+" Last Edit: 11 Dec 2018
 " Author: Piero Marini
 
 
@@ -12,7 +12,9 @@
 " Vim-Fugitive (Git)
 " Vim-Vue (Syntax Highlighting for .vue files)
 " Vim-Tmux-Navigator (Integration for tmux panels with vim splits)
+" Vim-GLSL
 " Fzf
+" UltiSnips
 
 """ End Plugin List """
 
@@ -25,8 +27,9 @@ filetype indent on
 
 let python_highlight_all=1
 
-" Adding Fzf to Vim.
+" Adding Fzf & UltiSnips to runtime path.
 set rtp+=~/.fzf
+set rtp+=~/.vim/pack/marini/start/ultisnips
 
 set autoindent
 set shiftwidth=4
@@ -120,17 +123,31 @@ nnoremap <Leader>y "*y
 " Visual Block Select
 nnoremap <Leader>v <C-v>
 
-" Open FZF
-nnoremap <Leader>x :FZF<CR>
-nnoremap <Leader>c :Buffers<CR>
-
 " Buffers Keybindings
 nnoremap <Leader>l :bn<CR>
 nnoremap <Leader>h :bp<CR>
 
+" Open FZF
+nnoremap <Leader>o :FZF<CR>
+nnoremap <Leader>c :Buffers<CR>
+
 """" END MAPPINGS """"
 
+"""" UltiSnips """"
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsListSnippets="<c-0>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-B>"
+let g:UltiSnipsEditSplit="vertical"
+
+let g:UltiSnipsSnippetsDir=$HOME . "/.vim/snippets/ultisnips"
+let g:UltiSnipsSnippetDirectories=[$HOME . "/.vim/snippets/ultisnips"]
+
 """" FZF """"
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 let g:fzf_layout = { 'down': '~40%' }
 
@@ -148,6 +165,7 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
 
 """" YouCompleteMe """"
 
@@ -188,7 +206,7 @@ let g:ale_linters = {
 			\   'asm': []
             \}
 
-let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++14 -x c++'
+let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++17 -x c++'
 
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -317,7 +335,7 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 
 """ EMMET VIM """
-let g:user_emmet_leader_key='<C-E>'
+let g:user_emmet_leader_key='<c-p>'
 
 """ END EMMET VIM """
 
@@ -341,7 +359,8 @@ autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 
 " MAKE command for OpenGL Engine.
 " TODO: Recognize ROOT project dir to get makefile.
-autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && ./run && cd src'<CR>
+" NOTE: Uses optirun to use the GPU because of bumblebee switchable graphics.
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && optirun ./run && cd src'<CR>
 
 autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd filetype c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>

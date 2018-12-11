@@ -26,7 +26,7 @@ function get-metadata {
 # Prints info about currently playing track.
 function sp-current {
 	get-metadata \
-		| grep --color=never -E "(title)|(album)|(artist)" \
+		| grep --color=never -E "(title)|(album)|(artist)|(artist)" \
 		| sed 's/^\(.\)/\U\1/'
 }
 

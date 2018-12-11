@@ -16,6 +16,7 @@ autofs
 automake
 bash
 bash-completion
+bbswitch
 bind-tools
 binutils
 bison
@@ -26,6 +27,7 @@ boost
 boostnote
 breeze-kde4
 btrfs-progs
+bumblebee
 bzip2
 chromium
 chromium-widevine
@@ -116,10 +118,13 @@ lib32-giflib
 lib32-glibc
 lib32-gnutls
 lib32-gst-plugins-base-libs
+lib32-gtk2
 lib32-gtk3
 lib32-libldap
 lib32-libpulse
 lib32-libva
+lib32-libva1
+lib32-libvdpau
 lib32-libxcomposite
 lib32-libxinerama
 lib32-libxslt
@@ -184,9 +189,13 @@ perl
 perl-file-mimeinfo
 php
 php-apache
+php-sodium
 phpmyadmin
 pkgconf
 polybar
+postgresql
+postman-bin
+primus
 print-manager
 procps-ng
 psmisc
