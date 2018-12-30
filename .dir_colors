@@ -90,6 +90,7 @@ TERM alacritty
 .html 00;34
 .css 00;31
 .js 00;33
+.vue 00;32
 .v 00;33
 .asm 00;33
 .frag 00;35

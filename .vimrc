@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 11 Dec 2018
+" Last Edit: 24 Dec 2018
 " Author: Piero Marini
 
 
@@ -145,11 +145,13 @@ let g:UltiSnipsSnippetDirectories=[$HOME . "/.vim/snippets/ultisnips"]
 
 """" FZF """"
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-m': 'split',
+  \ 'ctrl-t': 'tab split'}
 
 let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R'
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -335,7 +337,7 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 
 """ EMMET VIM """
-let g:user_emmet_leader_key='<c-p>'
+let g:user_emmet_leader_key= '<C-y>'
 
 """ END EMMET VIM """
 
@@ -347,6 +349,8 @@ autocmd FileType html nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.ht
 autocmd FileType python nnoremap <Leader>m :-1read $HOME/.vim/snippets/main.py<CR>o
 autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
 autocmd FileType c nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.c<CR>2jo
+
+autocmd FileType vue nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.vue<CR>7jf'a
 
 """" END SNIPPETS """"
 

@@ -187,6 +187,7 @@ pcmciautils
 pepper-flash
 perl
 perl-file-mimeinfo
+pgmodeler
 php
 php-apache
 php-sodium

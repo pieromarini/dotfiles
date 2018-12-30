@@ -42,15 +42,18 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 export VISUAL=vim
 
-export VIMRC=~/.vimrc
-export BASHRC=~/.bashrc
-export ZSHRC=~/.zshrc
+export V=~/.vimrc
+export B=~/.bashrc
+export Z=~/.zshrc
 export TERMINAL="alacritty -e"
+
+# Tmux shortcut.
+alias t=tmux
 
 # I clear all the time.
 alias c=clear
 
-# Open file in vime through Fzf.
+# Open file in vim through Fzf.
 alias fv='vim $(fzf)'
 
 
