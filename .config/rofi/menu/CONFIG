@@ -27,9 +27,9 @@ navigate(){
 
 
 if [ "$select" == "Shell" ] ; then
-	selected=$(echo "$HOME/.bashrc
-$HOME/.tmux.conf
-$HOME/.zshrc" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
+	selected=$(echo "$HOME/.vimrc
+$HOME/.zshrc
+$HOME/.tmux.conf" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
 		[[ -z $selected ]] && exit
 	# alacritty -e vim $selected
 	tmux-sendkeys config "vim $selected"

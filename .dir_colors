@@ -76,7 +76,7 @@ TERM alacritty
 
 # File Types
 .py 00;35
-.cs 00;35
+.cs 00;34
 
 .php 00;31
 
@@ -122,8 +122,8 @@ ORPHAN 40;31;01 # symlink to nonexistent file, or non-stat'able file
 SETUID 37;41 # file that is setuid (u+s)
 SETGID 30;43 # file that is setgid (g+s)
 CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
+STICKY_OTHER_WRITABLE 32;47 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 32;47 # dir that is other-writable (o+w) and not sticky
 STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 
 # This is for files with execute permission:
