@@ -27,6 +27,7 @@ cp -r ~/.config/alacritty ~/.backup/.config/
 
 echo "Backing up scripts..."
 cp -r ~/.bin ~/.backup/
+cp -r ~/.scripts ~/.backup/
 
 echo "Updating installed packages..."
 pacman -Qqe > ~/.backup/pkglist.txt

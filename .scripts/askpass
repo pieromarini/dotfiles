@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rofi -theme /home/piero/.config/rofi/rofi_full -m 0 -fullscreen \
+	-dmenu \
+	-password \
+	-p "PASSWORD: "

@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+! pgrep -x dunst >/dev/null && echo "dunst not running" && exit
+
+clipboard=$(xclip -o -selection clipboard)
+primary=$(xclip -o -selection primary)
+
+[ "$clipboard" != "" ] && notify-send "<b>Clipboard:</b>
+$clipboard"
+
+[ "$primary" != "" ] && notify-send "<b>Primary:</b>
+$primary"
