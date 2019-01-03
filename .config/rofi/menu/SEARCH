@@ -3,8 +3,7 @@
 ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_bar -m -1 -width 900)
 ROFI_OPTIONS_FULL=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
 
-select=$(echo "runapp
-documents
+select=$(echo "documents
 websearch
 sudorun" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -theme-str 'configuration{show-icons: false;}' -dmenu -i -p "search: ")
 
@@ -15,9 +14,6 @@ if [ "$select" == "documents" ] ; then
 
 elif [ "$select" == "websearch" ] ; then
 	rofi "${ROFI_OPTIONS_FULL[@]}" -dmenu -input /dev/null -p "Google:" | xargs -I % xdg-open "https://www.google.com/search?q=%"
-
-elif [ "$select" == "runapp" ] ; then
-	rofi "${ROFI_OPTIONS[@]}" -modi 'run,drun' -show drun
 
 elif [ "$select" == "sudorun" ] ; then
 	SUDO_ASKPASS=/home/piero/.scripts/askpass rofi "${ROFI_OPTIONS[@]}" -modi 'run,drun' -show drun -theme-str '*{accent: #F10F09;}' -run-command 'sudo -A {cmd}'

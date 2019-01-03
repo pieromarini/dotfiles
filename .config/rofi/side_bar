@@ -10,6 +10,7 @@ configuration {
 }
 
 * {
+	font:						 "Source Code Pro 12px";
 	background-color:            #121212;
 	text-color:                  #d3d7cf;
 	actbg:                       #222222;

@@ -37,8 +37,7 @@
     separatorcolor:              @foreground;
     background-color:            @transparent;
     spacing:                     10;
-	font:            			 "Monaco 12";
-
+	font:            			 "Source Code Pro 10";
 }
 
 #window {

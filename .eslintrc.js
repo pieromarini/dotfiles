@@ -1,7 +1,8 @@
 module.exports = {
     env: {
         browser: true,
-        jquery: true
+        jquery: true,
+		amd: true
     },
     extends: "eslint:recommended",
     rules: {

@@ -21,7 +21,7 @@
 	urgentcolor:      	#e53714;
 
 
-	font: 				"Monaco 12";
+	font: 				"Source Code Pro 12";
 	border-color:       @background;
 	separatorcolor:     @foreground;
 	background-color: 	@background;

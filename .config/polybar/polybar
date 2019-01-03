@@ -57,14 +57,14 @@
 	spacing = 2
 	padding-left = 1
 	padding-right = 1
-	module-margin-left = 1
-	module-margin-right = 1
-	font-0 = Monaco:size=12;2
+	module-margin-left = 2
+	module-margin-right = 2
+	font-0 = Source Code Pro:size=10;2
 	font-1 = FontAwesome:pixelsize=12;3
 	font-2 = Font Awesome 5 Free:pixelsize=12;1
 	font-3 = Font Awesome 5 Free Solid:pixelsize=12;1
 	font-4 = Font Awesome 5 Brands:pixelsize=12;1
-	font-5 = Monaco:size=12;3
+	font-5 = Source Code Pro:size=12;3
 	tray-position = right
 	tray-padding = 0
 	tray-background = ${colors.background}
@@ -85,19 +85,19 @@
 	enable-scroll = true
 
 	label-focused = %{F#50b4e6}%icon%%{F-}
-	label-focused-padding = 1
+	label-focused-padding = 2
 	label-focused-underline = ${colors.primary} 
 	label-focused-background = ${colors.pressed}
 	label-unfocused = %icon%
-	label-unfocused-padding = 1
+	label-unfocused-padding = 2
 	label-unfocused-foreground = ${colors.secondary}
 
 	label-urgent = %icon%
 	label-urgent-foreground = ${colors.alert}
-	label-urgent-padding = 1
+	label-urgent-padding = 2
 
 	label-visible = %icon%
-	label-visible-padding = 1
+	label-visible-padding = 2
 
 	ws-icon-0 = 1a;
 	ws-icon-1 = 2a;

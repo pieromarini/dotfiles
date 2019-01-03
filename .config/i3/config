@@ -47,7 +47,7 @@ exec --no-startup-id pulseaudio
 #########################################################################################################################################
 #|||	FONTS & COLORS & FRAME
 #########################################################################################################################################
-font pango:Monaco
+font pango: Source Code Pro 12 px
 
 set $accent				#000000
 set $black				#000000
@@ -224,7 +224,7 @@ for_window [class="Spotify"] move to workspace $workspace_main6
 for_window [class="Engine"] floating enable
 
 #########################################################################################################################################
-#|||	APPS KEYBINDINGS				-- MOD + Key 
+#|||	APPS KEYBINDINGS
 #########################################################################################################################################
 bindsym $mod+Return exec "alacritty"
 bindsym $mod+c exec "chromium"
@@ -235,7 +235,7 @@ bindsym $mod+F10 exec "showclipboard"
 
 
 #########################################################################################################################################
-#|||	MEDIA KEYBINDINGS				-- funckeys
+#|||	MEDIA KEYBINDINGS
 #########################################################################################################################################
 bindsym XF86AudioRaiseVolume exec "amixer -q set Master 5%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer -q set Master 5%- unmute"
@@ -255,8 +255,9 @@ bindsym --release Shift+Print exec "flameshot full -c"
 
 
 #########################################################################################################################################
-#|||	LAUNCHER KEYBINDINGS			-- MOD + ALT
+#|||	LAUNCHER KEYBINDINGS
 #########################################################################################################################################
 bindsym $mod+$alt+$esc exec "bash ~/.config/rofi/menu/SYSTEM"
 bindsym $mod+$alt+Delete exec "bash ~/.config/rofi/menu/CONFIG"
-bindsym $mod+Tab exec "bash ~/.config/rofi/menu/SEARCH"
+bindsym $mod+p exec "bash ~/.config/rofi/menu/SEARCH"
+bindsym $mod+Tab exec "bash ~/.config/rofi/menu/RUN"

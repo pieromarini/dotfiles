@@ -235,6 +235,7 @@ spim-svn
 spotify
 steam
 sudo
+sxiv
 sysfsutils
 systemd-sysvcompat
 tar
@@ -270,7 +271,6 @@ unzip
 usbutils
 util-linux
 vi
-vimiv
 vlc
 vorbis-tools
 wget
