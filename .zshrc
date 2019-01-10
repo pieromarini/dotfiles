@@ -87,7 +87,6 @@ alias lr='ll -R' # Recursive ls.
 alias la='ll -A' # Show hidden files.
 
 alias lh='ls --ignore="*.meta"' # Special ls to hide meta files from Unity3D.
-
 # End ls Aliases
 
 alias open='xdg-open'

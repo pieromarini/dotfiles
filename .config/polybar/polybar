@@ -219,7 +219,7 @@
 [module/spotify]
 	type = custom/script
 	exec-if = pgrep -x spotify
-	exec = spotify-dbus noart
+	exec = spotify-dbus noart 2>/dev/null
 	tail = false
 	interval = 2
 	;click-left = spotify-dbus

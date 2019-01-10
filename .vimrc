@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 24 Dec 2018
+" Last Edit: 09 Jan 2019
 " Author: Piero Marini
 
 
@@ -38,6 +38,8 @@ set tabstop=4
 set smarttab
 set smartindent
 set hidden
+
+set scrolloff=6
 
 set number
 set cursorline

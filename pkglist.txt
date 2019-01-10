@@ -95,6 +95,7 @@ intel-ucode
 iproute2
 iputils
 java-openjfx
+jdk-openjdk
 jfsutils
 jpegoptim
 jq
@@ -164,6 +165,7 @@ nano
 nautilus
 ncurses5-compat-libs
 nemiver
+neofetch
 network-manager-applet
 networkmanager
 networkmanager-openvpn
@@ -192,6 +194,7 @@ php
 php-apache
 php-sodium
 phpmyadmin
+pikaur
 pkgconf
 polybar
 postgresql
@@ -219,7 +222,7 @@ rsync
 ruby
 s-nail
 samba
-screenfetch
+scilab
 scrot
 sdl2_gfx
 sdl2_image
@@ -233,7 +236,6 @@ shfmt
 soil
 spim-svn
 spotify
-steam
 sudo
 sxiv
 sysfsutils
