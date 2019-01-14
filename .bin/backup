@@ -10,6 +10,7 @@ cp ~/.eslintrc.js ~/.backup/
 cp ~/.Xresources ~/.backup/
 cp ~/.taskrc ~/.backup/
 cp ~/.clang-format ~/.backup/
+cp ~/.ignore ~/.backup/
 
 echo "Backing up Vim files..."
 cp -r ~/.vim/ftplugin ~/.backup/.vim/

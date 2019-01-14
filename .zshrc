@@ -13,6 +13,8 @@ zstyle ':completion:*' menu select
 
 export ZSH="/home/piero/.oh-my-zsh"
 
+export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-file ~/.ignore'
+
 ZSH_THEME="muse"
 
 bindkey -v

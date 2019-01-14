@@ -209,6 +209,7 @@ python-greenlet
 python-html5lib
 python-pip
 python2-pip
+python36
 qtcam-git
 ranger
 razer-driver-dkms
@@ -216,12 +217,14 @@ recordmydesktop
 reflector
 reiserfsprogs
 renderdoc
+ripgrep
 rofi
 rpmextract
 rsync
 ruby
 s-nail
 samba
+sc-im
 scilab
 scrot
 sdl2_gfx
