@@ -177,6 +177,7 @@ network-manager-applet
 networkmanager
 networkmanager-openvpn
 nmap
+nnn
 noto-fonts-emoji
 ntfs-3g
 ntp
@@ -218,7 +219,6 @@ python-pip
 python2-pip
 python36
 qtcam-git
-ranger
 razer-driver-dkms
 recordmydesktop
 reflector

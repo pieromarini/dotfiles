@@ -21,7 +21,6 @@ cp -r ~/.config/i3 ~/.backup/.config/
 cp -r ~/.config/i3lock ~/.backup/.config/
 cp -r ~/.config/rofi ~/.backup/.config/
 cp -r ~/.config/compton ~/.backup/.config/
-cp -r ~/.config/ranger ~/.backup/.config/
 cp -r ~/.config/polybar ~/.backup/.config/
 cp -r ~/.config/dunst ~/.backup/.config/
 cp -r ~/.config/alacritty ~/.backup/.config/

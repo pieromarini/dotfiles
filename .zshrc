@@ -31,6 +31,7 @@ unset AM_INITIAL_LINE_FEED
 export AM_SHOW_FULL_DIR=1
 export PROMPT_END_TAG=' $'
 export PROMPT_END_TAG_COLOR=83
+export AM_HIDE_EXIT_CODE=1
 # export AM_ENABLE_VI_PROMPT=1
 # export AM_VERSIONS_PROMPT=(PYTHON NODE)
 ZSH_THEME="alien-minimal/alien-minimal"
@@ -59,6 +60,7 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 
+export SHELL=zsh
 export EDITOR=vim
 export VISUAL=vim
 
@@ -71,6 +73,7 @@ alias t=tmux
 alias c=clear
 alias f=fzf
 alias v=vim
+alias n=nnn
 # I dont wanna type sxiv
 alias img=sxiv
 # Open file in vim through Fzf.
