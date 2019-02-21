@@ -1,4 +1,7 @@
-# PATH
+#   File: .zshrc
+#   Last Edit: 21 Feb 2019
+#   Author: Piero Marini
+
 typeset -U path
 path=(~/.scripts ~/.bin /usr/msc/bin $path[@])
 
@@ -13,12 +16,27 @@ zstyle ':completion:*' menu select
 
 export ZSH="/home/piero/.oh-my-zsh"
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-file ~/.ignore'
+# FZF Configs
+export FZF_DEFAULT_COMMAND="rg --files --hidden --ignore-file ~/.ignore"
+export FZF_DEFAULT_OPTS='
+  --preview="cat {}" --preview-window=right:60%:wrap 
+  --color fg:-1,bg:-1,hl:33,fg+:254,bg+:235,hl+:33
+  --color info:136,prompt:136,pointer:230,marker:230,spinner:136
+'
+export FZF_TMUX=1
 
-ZSH_THEME="muse"
+# THEME CONFIG
+
+unset AM_INITIAL_LINE_FEED
+export AM_SHOW_FULL_DIR=1
+export PROMPT_END_TAG=' $'
+export PROMPT_END_TAG_COLOR=83
+# export AM_ENABLE_VI_PROMPT=1
+# export AM_VERSIONS_PROMPT=(PYTHON NODE)
+ZSH_THEME="alien-minimal/alien-minimal"
 
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=0.1
 
 # Bulk renaming utility.
 autoload -U zmv
@@ -45,16 +63,16 @@ export EDITOR=vim
 export VISUAL=vim
 
 export V=~/.vimrc
-export B=~/.bashrc
 export Z=~/.zshrc
 export TERMINAL="alacritty -e"
 
-# Tmux shortcut.
+# Shortcuts
 alias t=tmux
-
-# I clear all the time.
 alias c=clear
-
+alias f=fzf
+alias v=vim
+# I dont wanna type sxiv
+alias img=sxiv
 # Open file in vim through Fzf.
 alias fv='vim $(fzf)'
 
@@ -100,6 +118,7 @@ if [ -f /usr/bin/dircolors ]; then
     eval "$(dircolors -b $DIR_COLORS)"
 fi
 
+# Override nvidia-settings to open with bumblebee
 alias nvidia-settings="optirun -b none nvidia-settings -c :8"
 
 ###############################
@@ -241,11 +260,3 @@ function tattach(){
     tmux attach-session -t $1
 }
 # End Tmux Session shortcuts
-
-# Apache Dev
-function wordpress-devserver(){
-    echo "Starting Apache & MySQL"
-    sudo systemctl start mysqld httpd
-    systemctl status mysqld httpd
-}
-# End Apache Dev

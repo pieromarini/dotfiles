@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function netzun-dev {
+    Main="$HOME/Development/Netzun/netzun-plus-api/"
+    Apps="$HOME/Development/Netzun/netzun-plus-api/netzun/"
+
+    cd $Main
+    tmux start-server
+    tmux new-session -d -s Netzun -n server
+    cd $Apps
+    tmux new-window -t Netzun:2 -n src
+
+    tmux select-window -t Netzun:1
+	tmux send-keys -t Netzun:server "workon netzun-plus-api; clear" C-m
+	tmux send-keys -t Netzun:src "workon netzun-plus-api; clear" C-m
+    tmux attach-session -t Netzun
+}
+
+netzun-dev

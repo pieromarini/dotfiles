@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 09 Jan 2019
+" Last Edit: 15 Feb 2019
 " Author: Piero Marini
 
 
@@ -192,6 +192,7 @@ let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " Turn off YCM linter
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_goto_buffer_command = 'vertical-split'
 
 """" ALE """"
 let g:ale_fixers = {
@@ -523,7 +524,7 @@ autocmd FileType cs nnoremap <Leader>h :-1read $HOME/.vim/snippets/cs_signature.
             \ \| :nohlsearch<CR>
 
 autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
-autocmd BufWritePre .vimrc,.tmux.conf,.bashrc call LastModified()
+autocmd BufWritePre .vimrc,.tmux.conf,.zshrc call LastModified()
 
 
 packloadall

@@ -9,7 +9,7 @@ sudorun" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -theme-str 'configu
 
 
 if [ "$select" == "documents" ] ; then
-	FILES=$(find ~/Documents ~/Downloads -type f -not -path "*/\.*" -not -path "*/Development/*" -not -path "*/Pictures/*")
+	FILES=$(find ~/Documents ~/Downloads -type f -not -path "*/\.*"  -not -path "*/node_modules/*")
 	echo "${FILES}" | rofi "${ROFI_OPTIONS[@]}" -theme-str 'configuration{show-icons: false;}' -threads 1 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
 
 elif [ "$select" == "websearch" ] ; then

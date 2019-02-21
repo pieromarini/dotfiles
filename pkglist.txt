@@ -20,6 +20,7 @@ bbswitch
 bind-tools
 binutils
 bison
+bleachbit
 blender
 blueman
 bluez-utils
@@ -39,6 +40,8 @@ cronie
 cryptsetup
 cups
 cups-pdf
+dbeaver
+dbeaver-plugin-office
 device-mapper
 dhcpcd
 dialog
@@ -96,6 +99,8 @@ iproute2
 iputils
 java-openjfx
 jdk-openjdk
+jdk7-openjdk
+jdk8-openjdk
 jfsutils
 jpegoptim
 jq
@@ -139,6 +144,7 @@ libc++
 libc++abi
 libc++experimental
 libcurl-gnutls
+libmysqlclient55
 libnewt
 libpam-google-authenticator
 libreoffice-fresh
@@ -161,6 +167,7 @@ mdadm
 mesa-demos
 mpg123
 msbuild-bin
+mysql55
 nano
 nautilus
 ncurses5-compat-libs
@@ -249,7 +256,6 @@ telegram-cli-git
 texinfo
 texlive-bibtexextra
 texlive-core
-texlive-fontsextra
 texlive-formatsextra
 texlive-games
 texlive-humanities
@@ -279,11 +285,9 @@ vi
 vlc
 vorbis-tools
 wget
-whatsapp-desktop
 which
 whois
 wireless_tools
-xampp
 xautolock
 xcursor-premium
 xcursor-themes
