@@ -430,8 +430,8 @@ function! PrettyJSON()
 	:%!python -c "import json, sys, ast; print( json.dumps(ast.literal_eval(''.join([x for x in sys.stdin])), indent=4) )"
 endfunction
 
-command! xmlFormat call PrettyXML()
-command! jsonFormat call PrettyJSON() 
+command! XmlFormat call PrettyXML()
+command! JsonFormat call PrettyJSON() 
 """" END PRETTY OUTPUTS """"
 
 
