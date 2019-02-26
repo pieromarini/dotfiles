@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 21 Feb 2019
+#   Last Edit: 25 Feb 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -26,7 +26,8 @@ export FZF_DEFAULT_OPTS='
 export FZF_TMUX=1
 
 # THEME CONFIG
-
+export AM_THEME=soft
+export USE_NERD_FONT=1
 unset AM_INITIAL_LINE_FEED
 export AM_SHOW_FULL_DIR=1
 export PROMPT_END_TAG=' $'
@@ -34,6 +35,7 @@ export PROMPT_END_TAG_COLOR=83
 export AM_HIDE_EXIT_CODE=1
 # export AM_ENABLE_VI_PROMPT=1
 # export AM_VERSIONS_PROMPT=(PYTHON NODE)
+
 ZSH_THEME="alien-minimal/alien-minimal"
 
 bindkey -v

@@ -49,7 +49,6 @@ diffutils
 discord
 dmenu
 dmidecode
-dosbox
 dosfstools
 downgrade
 dunst

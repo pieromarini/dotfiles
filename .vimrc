@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 15 Feb 2019
+" Last Edit: 26 Feb 2019
 " Author: Piero Marini
 
 
@@ -281,26 +281,26 @@ endfunction
 
 " Automatically change the statusline color depending on mode
 function! StatuslineUpdate()
-    let m = mode()
-    if (m =~# '\v(n|no)')
-        exe 'hi! User1 ctermbg=39 ctermfg=231'
-        exe 'hi! User7 ctermbg=246 ctermfg=39'
-        exe 'hi! User9 ctermbg=8 ctermfg=39'
-    elseif (m =~# '\v(v|V)' || g:currentmode[m] ==# 'V·Block ' || get(g:currentmode, m, '') ==# 't')
-        exe 'hi! User1 ctermbg=125 ctermfg=231'
-        exe 'hi! User7 ctermbg=246 ctermfg=125'
-        exe 'hi! User9 ctermbg=8 ctermfg=125'
-    elseif (m ==# 'i')
-        exe 'hi! User1 ctermbg=136 ctermfg=231'
-        exe 'hi! User7 ctermbg=246 ctermfg=136'
-        exe 'hi! User9 ctermbg=8 ctermfg=136'
-    else
-        exe 'hi! User1 ctermbg=160 ctermfg=231'
-        exe 'hi! User7 ctermbg=246 ctermfg=160'
-        exe 'hi! User9 ctermbg=8 ctermfg=160'
-    endif
+	let m = mode()
+	if (m =~# '\v(n|no)')
+		exe 'hi! User1 ctermbg=39 ctermfg=231'
+		exe 'hi! User7 ctermbg=246 ctermfg=39'
+		exe 'hi! User9 ctermbg=8 ctermfg=39'
+	elseif (m =~# '\v(v|V)' || g:currentmode[m] ==# 'V·Block ' || get(g:currentmode, m, '') ==# 't')
+		exe 'hi! User1 ctermbg=125 ctermfg=231'
+		exe 'hi! User7 ctermbg=246 ctermfg=125'
+		exe 'hi! User9 ctermbg=8 ctermfg=125'
+	elseif (m ==# 'i')
+		exe 'hi! User1 ctermbg=136 ctermfg=231'
+		exe 'hi! User7 ctermbg=246 ctermfg=136'
+		exe 'hi! User9 ctermbg=8 ctermfg=136'
+	else
+		exe 'hi! User1 ctermbg=160 ctermfg=231'
+		exe 'hi! User7 ctermbg=246 ctermfg=160'
+		exe 'hi! User9 ctermbg=8 ctermfg=160'
+	endif
 
-    return ''
+	return ''
 endfunction
 
 set laststatus=2
@@ -395,39 +395,45 @@ function! SurroundWord()
 endf
 """" End SURROUND """"
 
-"""" PRETTY XML """"
-function! DoPrettyXML()
-  " save the filetype so we can restore it later
-  let l:origft = &ft
-  set ft=
-  " delete the xml header if it exists. This will
-  " permit us to surround the document with fake tags
-  " without creating invalid xml.
-  1s/<?xml .*?>//e
-  " insert fake tags around the entire document.
-  " This will permit us to pretty-format excerpts of
-  " XML that may contain multiple top-level elements.
-  0put ='<PrettyXML>'
-  $put ='</PrettyXML>'
-  silent %!xmllint --format -
-  " xmllint will insert an <?xml?> header. it's easy enough to delete
-  " if you don't want it.
-  " delete the fake tags
-  2d
-  $d
-  " restore the 'normal' indentation, which is one extra level
-  " too deep due to the extra tags we wrapped around the document.
-  silent %<
-  " back to home
-  1
-  " restore the filetype
-  exe "set ft=" . l:origft
-  " Indent properly.
-  normal gg=G
+"""" PRETTY OUTPUTS """"
+function! PrettyXML()
+	" save the filetype so we can restore it later
+	let l:origft = &ft
+	set ft=
+	" delete the xml header if it exists. This will
+	" permit us to surround the document with fake tags
+	" without creating invalid xml.
+	1s/<?xml .*?>//e
+	" insert fake tags around the entire document.
+	" This will permit us to pretty-format excerpts of
+	" XML that may contain multiple top-level elements.
+	0put ='<PrettyXML>'
+	$put ='</PrettyXML>'
+	silent %!xmllint --format -
+	" xmllint will insert an <?xml?> header. it's easy enough to delete
+	" if you don't want it.
+	" delete the fake tags
+	2d
+	$d
+	" restore the 'normal' indentation, which is one extra level
+	" too deep due to the extra tags we wrapped around the document.
+	silent %<
+	" back to home
+	1
+	" restore the filetype
+	exe "set ft=" . l:origft
+	" Indent properly.
+	normal gg=G
 endfunction
 
-command! PrettyXML call DoPrettyXML()
-"""" End PRETTY XML """"
+function! PrettyJSON()
+	:%!python -c "import json, sys, ast; print( json.dumps(ast.literal_eval(''.join([x for x in sys.stdin])), indent=4) )"
+endfunction
+
+command! xmlFormat call PrettyXML()
+command! jsonFormat call PrettyJSON() 
+"""" END PRETTY OUTPUTS """"
+
 
 
 """" BETTER SEARCHING """"
@@ -437,20 +443,20 @@ nnoremap <Leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <Leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 
 function! s:GrepOperator(type)
-    let saved_unnamed_register = @@
+	let saved_unnamed_register = @@
 
-    if a:type ==# 'v'
-        normal! `<v`>y
-    elseif a:type ==# 'char'
-        normal! `[v`]y
-    else
-        return
-    endif
+	if a:type ==# 'v'
+		normal! `<v`>y
+	elseif a:type ==# 'char'
+		normal! `[v`]y
+	else
+		return
+	endif
 
-    silent execute "grep! -R " . shellescape(@@) . " ."
-    copen
+	silent execute "grep! -R " . shellescape(@@) . " ."
+	copen
 
-    let @@ = saved_unnamed_register
+	let @@ = saved_unnamed_register
 endfunction
 
 """" END BETTER SEARCHING """"
@@ -485,13 +491,13 @@ inoremap "" "
 """ If FALSE it inserts the closing brace 2 lines below and positions you inside the code block. """
 """ Doesn't insert brace if next character is a brace. """
 function! ConditionalPairMap(open, close)
-    let line = getline('.')
-    let column = col('.')
-    if column < col('$') || stridx(line, a:close, column + 1) != -1
-        return a:open . a:close . "\<Left>"
-    else
-        return a:open ."\<CR>" . a:close . "\<Esc>\O"
-    endif
+	let line = getline('.')
+	let column = col('.')
+	if column < col('$') || stridx(line, a:close, column + 1) != -1
+		return a:open . a:close . "\<Left>"
+	else
+		return a:open ."\<CR>" . a:close . "\<Esc>\O"
+	endif
 endf
 
 inoremap <expr> {<CR> ConditionalPairMap('{', '}')
@@ -507,21 +513,21 @@ autocmd FileType vue inoremap {{<CR> {{ }}<Left><Left><Left>
 """ 'Last Edit:' can have up to 10 characters before (they are retained). """
 """ Restores cursor and window position """
 function! LastModified()
-    if &modified
-        let save_cursor = getpos(".")
-        let n = min([10, line("$")])
-        keepjumps exe '1,' . n . 's#^\(.\{,10}Last Edit: \).*#\1' .
-                    \ strftime('%d %b %Y') . '#e'
-        call histdel('search', -1)
-        call setpos('.', save_cursor)
-    endif
+	if &modified
+		let save_cursor = getpos(".")
+		let n = min([10, line("$")])
+		keepjumps exe '1,' . n . 's#^\(.\{,10}Last Edit: \).*#\1' .
+					\ strftime('%d %b %Y') . '#e'
+		call histdel('search', -1)
+		call setpos('.', save_cursor)
+	endif
 endf
 
 """ Automatic Signature for C# files """
 autocmd FileType cs nnoremap <Leader>h :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
-            \ \| :g/File:.*/s//\=printf("File: %s", expand('%:t'))<CR>
-            \ \| :g/Last Edit:.*/s//\=printf("Last Edit: %s", strftime('%d %b %Y'))<CR>
-            \ \| :nohlsearch<CR>
+			\ \| :g/File:.*/s//\=printf("File: %s", expand('%:t'))<CR>
+			\ \| :g/Last Edit:.*/s//\=printf("Last Edit: %s", strftime('%d %b %Y'))<CR>
+			\ \| :nohlsearch<CR>
 
 autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
 autocmd BufWritePre .vimrc,.tmux.conf,.zshrc call LastModified()
