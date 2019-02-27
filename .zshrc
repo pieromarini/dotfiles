@@ -5,6 +5,9 @@
 typeset -U path
 path=(~/.scripts ~/.bin /usr/msc/bin $path[@])
 
+# Alias for dotfiles managing
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
 # Miva Merchant Mivascript Compiler
 export MVCBIN="/usr/msc/bin/"
 export MVC_LIB="/usr/msc/builtins/"
