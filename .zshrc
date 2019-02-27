@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 25 Feb 2019
+#   Last Edit: 27 Feb 2019
 #   Author: Piero Marini
 
 typeset -U path
