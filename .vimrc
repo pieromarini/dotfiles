@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 26 Feb 2019
+" Last Edit: 05 Mar 2019
 " Author: Piero Marini
 
 
@@ -318,6 +318,7 @@ set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileform
 set statusline+=%6*\ %{LinterStatus()}\                    " ALE errors
 set statusline+=%7*%1*%3p%%(%L)\ ☰\ %l:\ %2c\             " %(Total) Line: Col
 
+let g:solarized_diffmode="high"
 colorscheme solarized8_dark_high
 
 hi Normal ctermbg=NONE
