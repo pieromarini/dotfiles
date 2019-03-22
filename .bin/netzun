@@ -1,19 +1,22 @@
 #!/bin/bash
 
-function netzun-dev {
+PYTHON_VENV="netzun-plus-backend"
+SESSION_NAME="Netzun"
+
+function netzun-backend {
     Main="$HOME/Development/Netzun/netzun-plus-api/"
     Apps="$HOME/Development/Netzun/netzun-plus-api/netzun/"
 
     cd $Main
     tmux start-server
-    tmux new-session -d -s Netzun -n server
+    tmux new-session -d -s $SESSION_NAME -n server
     cd $Apps
-    tmux new-window -t Netzun:2 -n src
+    tmux new-window -t $SESSION_NAME:2 -n src
 
-    tmux select-window -t Netzun:1
-	tmux send-keys -t Netzun:server "workon netzun-plus-api; clear" C-m
-	tmux send-keys -t Netzun:src "workon netzun-plus-api; clear" C-m
-    tmux attach-session -t Netzun
+    tmux select-window -t $SESSION_NAME:1
+	tmux send-keys -t $SESSION_NAME:server "workon $PYTHON_VENV; clear" C-m
+	tmux send-keys -t $SESSION_NAME:src "workon $PYTHON_VENV; clear" C-m
+    tmux attach-session -t $SESSION_NAME
 }
 
-netzun-dev
+netzun-backend
