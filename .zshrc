@@ -1,9 +1,11 @@
 #   File: .zshrc
-#   Last Edit: 12 Mar 2019
+#   Last Edit: 23 Mar 2019
 #   Author: Piero Marini
 
 typeset -U path
 path=(~/.scripts ~/.bin /usr/msc/bin $path[@])
+
+export WINIT_HIDPI_FACTOR=1.083
 
 # Alias for dotfiles managing
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -105,17 +107,11 @@ alias .....='cd ../../../..'
 # End Directory Aliases
 
 # ls Aliases
-alias ls='ls -h --color=auto' # Colored output, human readable.
-alias lx='ls -lXB' # Sort by extension.
-alias lk='ls -lS' # Sort by size.
+alias ls=lsd
 alias lt='ls -lt' # Sort by date.
 
-alias ll='ls -lvF --group-directories-first' # Directories first, alphanumeric sorting.
-alias lm='ll |more' # Pipe to more.
-alias lr='ll -R' # Recursive ls.
-alias la='ll -A' # Show hidden files.
-
-alias lh='ls --ignore="*.meta"' # Special ls to hide meta files from Unity3D.
+alias ll='ls -lF --group-dirs' # Directories first.
+alias la='ll -a' # Show hidden files.
 # End ls Aliases
 
 alias open='xdg-open'
