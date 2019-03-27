@@ -5,6 +5,7 @@
 	fourth =				#f9c773
 	fifth =					#ed8755
 
+	updates =				#9c58fc
 	alert =					#ff3111
 
 	; 70% Opacity 
@@ -71,7 +72,7 @@
 
 	modules-left = i3 
 	modules-center = spotify
-	modules-right = wlan cpu memory volume battery date
+	modules-right = wlan arch-updates cpu memory volume battery date
 
 [module/i3]
 	type = internal/i3
@@ -215,6 +216,15 @@
 	ramp-volume-2 = 
 	ramp-headphones-0 = 
 
+[module/arch-updates]
+	type = custom/script
+	exec = ~/.bin/arch-updates
+	format-prefix = " "
+	format-prefix-foreground = ${colors.updates}
+	format = <label>
+	format-foreground = ${colors.updates}
+	interval = 2000
+
 	
 [module/spotify]
 	type = custom/script
@@ -222,7 +232,6 @@
 	exec = spotify-dbus noart 2>/dev/null
 	tail = false
 	interval = 2
-	;click-left = spotify-dbus
 	format-prefix = " "
 	format-prefix-foreground = ${colors.primary}
 	format = <label>

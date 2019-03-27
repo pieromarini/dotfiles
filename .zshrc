@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 23 Mar 2019
+#   Last Edit: 24 Mar 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -110,7 +110,7 @@ alias .....='cd ../../../..'
 alias ls=lsd
 alias lt='ls -lt' # Sort by date.
 
-alias ll='ls -lF --group-dirs' # Directories first.
+alias ll='ls -lF --group-dirs first' # Directories first.
 alias la='ll -a' # Show hidden files.
 # End ls Aliases
 
