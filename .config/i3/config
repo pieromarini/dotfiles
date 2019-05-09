@@ -216,7 +216,7 @@ assign [class="libreoffice-startcenter|Soffice"] $workspace_main3
 assign [class="Thunderbird"] $workspace_main4
 assign [class="whatsapp-desktop"] $workspace_main5
 assign [class="discord"] $workspace_main7
-assign [class="Skype"] $workspace_main8
+assign [class="DBeaver"] $workspace_main8
 
 for_window [class="Nautilus"] floating enable
 for_window [class="Chromium" window_role="pop-up"] floating enable
@@ -228,8 +228,8 @@ for_window [class="Engine"] floating enable
 #########################################################################################################################################
 bindsym $mod+Return exec "WINIT_HIDPI_FACTOR=1.083 alacritty"
 bindsym $mod+c exec "chromium"
-bindsym $mod+t exec "nautilus"
-bindsym $mod+n exec "todo"
+bindsym $mod+n exec "nautilus"
+bindsym $mod+t exec "todo"
 
 bindsym $mod+F10 exec "showclipboard"
 

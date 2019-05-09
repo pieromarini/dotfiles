@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 05 Mar 2019
+" Last Edit: 09 May 2019
 " Author: Piero Marini
 
 
@@ -30,6 +30,8 @@ let python_highlight_all=1
 " Adding Fzf & UltiSnips to runtime path.
 set rtp+=~/.fzf
 set rtp+=~/.vim/pack/marini/start/ultisnips
+
+set pyxversion=3
 
 set autoindent
 set shiftwidth=4
@@ -138,8 +140,8 @@ nnoremap <Leader>c :Buffers<CR>
 """" UltiSnips """"
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsListSnippets="<c-0>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-B>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 let g:UltiSnipsSnippetsDir=$HOME . "/.vim/snippets/ultisnips"
@@ -194,6 +196,11 @@ let g:ycm_server_python_interpreter = '/usr/bin/python'
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_goto_buffer_command = 'vertical-split'
 
+" Clangd
+let g:ycm_use_clangd = 1
+let g:ycm_clangd_uses_ycmd_caching = 0
+let g:ycm_clangd_binary_path = exepath("clangd")
+
 """" ALE """"
 let g:ale_fixers = {
             \   'javascript': ['eslint'],
@@ -211,7 +218,7 @@ let g:ale_linters = {
 			\   'asm': []
             \}
 
-let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++17 -x c++'
+let g:ale_cpp_clangcheck_options = '-- -std=c++17 -x c++ -g -Wall -Wextra -Wshadow -Wpedantic -Wold-style-cast -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wuseless-cast -Wnon-virtual-dtor -Woverloaded-virtual -Wno-variadic-macros'
 
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -351,7 +358,7 @@ autocmd FileType tex,plaintex nnoremap <Leader>m :-1read $HOME/.vim/snippets/t.t
 autocmd FileType make nnoremap <Leader>m :-1read $HOME/.vim/snippets/Makefile<CR>
 autocmd FileType html nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
 autocmd FileType python nnoremap <Leader>m :-1read $HOME/.vim/snippets/main.py<CR>o
-autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>4jo
+autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>2jo
 autocmd FileType c nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.c<CR>2jo
 
 autocmd FileType vue nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.vue<CR>7jf'a
@@ -363,21 +370,23 @@ autocmd FileType vue nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.vue
 autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 
-"""" RUN SCRIPTS """"
+"""" EXECUTE/COMPILE KeyBindings """"
 
 " MAKE command for OpenGL Engine.
 " TODO: Recognize ROOT project dir to get makefile.
 " NOTE: Uses optirun to use the GPU because of bumblebee switchable graphics.
-autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && optirun ./run && cd src'<CR>
+" autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && optirun ./run && cd src'<CR>
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd .. && make && ./run && cd src'<CR>
 
-autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++14 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+
 autocmd filetype c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
 autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
 
-autocmd FileType sh nnoremap <F9> :w <bar> :term bash %<CR>
+autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
 
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>

@@ -1,10 +1,11 @@
 OBJECTS = main.cpp
-CXXFLAGS = -std=c++14 -g
+STD = -std=c++17
+MYFLAGS = -g -Wall -grecord-gcc-switches -O2 -pipe -Werror=format-security -Werror=implicit-function-declaration -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fstack-clash-protection	
 CXX = g++
 EXEC = main
 
 all: $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(EXEC)
+	$(CXX) $(STD) $(MYFLAGS) $(OBJECTS) -o $(EXEC)
 
 clean: 
 	rm $(EXEC)
