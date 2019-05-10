@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 24 Mar 2019
+#   Last Edit: 10 May 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -252,6 +252,15 @@ function ii(){
     echo -e "\n${BRed}Machine stats :$NC " ; uptime
     echo -e "\n${BRed}Memory stats :$NC " ; free
     echo
+}
+
+# Text to PDF
+# TODO: add checks
+function txt2pdf(){
+  local arg=$1
+  enscript -p tmp.ps $arg
+  ps2pdf tmp.ps ${arg%.*}.pdf
+  rm tmp.ps
 }
 
 # Tmux Session shortcuts
