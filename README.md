@@ -14,7 +14,7 @@
 	- ripgrep
 
 * File Explorer
-	- ranger
+	- nnn
 
 * Window Manager, Compositor, Menus, etc
 	- i3-gaps
