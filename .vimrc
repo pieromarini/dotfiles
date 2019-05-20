@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 09 May 2019
+" Last Edit: 11 May 2019
 " Author: Piero Marini
 
 
@@ -389,7 +389,7 @@ autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
 autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
 
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
-autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open' shellescape(expand('%:r') . '.pdf', 1)<CR>
+autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open ' . shellescape(expand('%:r') . '.pdf', 1) . ' &'<CR>
 
 autocmd filetype verilog nnoremap <F10> :w <bar> exec '!iverilog '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
