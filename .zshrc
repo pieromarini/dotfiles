@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 10 May 2019
+#   Last Edit: 22 May 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -256,11 +256,16 @@ function ii(){
 
 # Text to PDF
 # TODO: add checks
-function txt2pdf(){
+function txt2pdf() {
   local arg=$1
   enscript -p tmp.ps $arg
   ps2pdf tmp.ps ${arg%.*}.pdf
   rm tmp.ps
+}
+
+function md2pdf() {
+  local arg=$1
+  pandoc $arg -V geometry:margin=0.5in --pdf-engine=xelatex -o ${arg%.*}.pdf
 }
 
 # Tmux Session shortcuts
