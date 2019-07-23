@@ -1,9 +1,9 @@
 " Vim 8 Config file
-" Last Edit: 25 May 2019
+" Last Edit: 18 Jul 2019
 " Author: Piero Marini
 
 
-""" Plugin List """
+""" Plugin List """ 
 
 " ALE (Async Linting) 
 " YouCompleteMe (Auto-Complete)
@@ -99,7 +99,7 @@ nmap <Leader>t :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <F5> :YcmCompleter ReloadSolution<CR>
 
 nmap <Leader>n :ALENext<CR>
-nmap <Leader>b :ALEPrevious<CR>
+nmap <Leader>m :ALEPrevious<CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
 
@@ -131,9 +131,10 @@ nnoremap <Leader>v <C-v>
 nnoremap <Leader>l :bn<CR>
 nnoremap <Leader>h :bp<CR>
 
-" Open FZF
+" FZF Keybindings
 nnoremap <Leader>o :FZF<CR>
 nnoremap <Leader>c :Buffers<CR>
+nnoremap <Leader>f :Rg<CR>
 
 """" END MAPPINGS """"
 
@@ -325,8 +326,8 @@ set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileform
 set statusline+=%6*\ %{LinterStatus()}\                    " ALE errors
 set statusline+=%7*%1*%3p%%(%L)\ ☰\ %l:\ %2c\             " %(Total) Line: Col
 
-let g:solarized_diffmode="high"
-colorscheme solarized8_dark_high
+set background=dark
+colorscheme solarized
 
 hi Normal ctermbg=NONE
 
@@ -354,14 +355,14 @@ let g:user_emmet_leader_key= '<C-y>'
 
 """" SNIPPETS """"
 
-autocmd FileType tex,plaintex nnoremap <Leader>m :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
-autocmd FileType make nnoremap <Leader>m :-1read $HOME/.vim/snippets/Makefile<CR>
-autocmd FileType html nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
-autocmd FileType python nnoremap <Leader>m :-1read $HOME/.vim/snippets/main.py<CR>o
-autocmd FileType cpp nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.cpp<CR>2jo
-autocmd FileType c nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.c<CR>2jo
+autocmd FileType tex,plaintex nnoremap <Leader>0 :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
+autocmd FileType make nnoremap <Leader>0 :-1read $HOME/.vim/snippets/Makefile<CR>
+autocmd FileType html nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.html<CR>3jf>a
+autocmd FileType python nnoremap <Leader>0 :-1read $HOME/.vim/snippets/main.py<CR>o
+autocmd FileType cpp nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.cpp<CR>2jo
+autocmd FileType c nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.c<CR>2jo
 
-autocmd FileType vue nnoremap <Leader>m :-1read $HOME/.vim/snippets/skeleton.vue<CR>7jf'a
+autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue<CR>7jf'a
 
 """" END SNIPPETS """"
 
@@ -392,6 +393,10 @@ autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-es
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open ' . shellescape(expand('%:r') . '.pdf', 1) . ' &'<CR>
 
 autocmd filetype verilog nnoremap <F10> :w <bar> exec '!iverilog '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+
+autocmd filetype markdown nnoremap <F10> :w <bar> exec '!grip '. shellescape('%').' -b --quiet &'<CR>
+
+
 
 """" END SCRIPT EXECUTION/COMPILING """"
 
@@ -445,10 +450,10 @@ command! JsonFormat call PrettyJSON()
 """" END PRETTY OUTPUTS """"
 
 
-
 """" BETTER SEARCHING """"
 
-"""" Grep Operator. SOURCE:'http://learnvimscriptthehardway.stevelosh.com/chapters/34.html'
+"""" Grep Operator. 
+"""" SOURCE: http://learnvimscriptthehardway.stevelosh.com/chapters/34.html
 nnoremap <Leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <Leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 

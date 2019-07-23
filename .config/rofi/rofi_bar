@@ -32,14 +32,14 @@
 	background-color: 	@background;
 	anchor: 			north;
 	location: 			north;
-	y-offset: 			35px;
+	y-offset: 			30px;
 }
 
 #mainbox {
 	background-color: 	@background;
 	spacing:			0px;
 	padding:			10px 0 0 10px;
-	children: 			[inputbar, message, sidebar, listview];
+	children: 			[inputbar, message, listview];
 }
 
 #message {

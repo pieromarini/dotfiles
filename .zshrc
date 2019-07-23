@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 22 May 2019
+#   Last Edit: 30 May 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -74,7 +74,7 @@ export VISUAL=vim
 export V=~/.vimrc
 export Z=~/.zshrc
 export T=~/.tmux.conf
-export TERMINAL="alacritty -e"
+export TERMINAL="st -e"
 
 # Shortcuts
 alias t=tmux

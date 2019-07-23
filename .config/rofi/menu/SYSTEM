@@ -2,27 +2,17 @@
 
 ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
 
-select=$(echo "Reload
-Lock
-Logout
+select=$(echo "Lock
 Suspend
 Reboot
 Poweroff" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "System: ")
 
-if [ "$select" == "Reload" ] ; then
-	xrdb -load ~/.Xdefaults; 
-	i3-msg reload; 
-	i3-msg restart;
-
-elif [ "$select" == "Lock" ] ; then
+if [ "$select" == "Lock" ] ; then
 	exec betterlockscreen --lock
 
 elif [ "$select" == "Suspend" ] ; then
 	prompt "betterlockscreen --suspend" Suspend
 		
-elif [ "$select" == "Logout" ] ; then
-	prompt "i3-msg exit" Logout
-	
 elif [ "$select" == "Reboot" ] ; then
 	prompt "reboot" Reboot
 	

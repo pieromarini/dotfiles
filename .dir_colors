@@ -109,7 +109,7 @@ TERM alacritty
 .csv 00;32
 .xml 00;32
 
-DIR 01;35 # directory
+DIR 01;34 # directory
 LINK 01;37;44 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
