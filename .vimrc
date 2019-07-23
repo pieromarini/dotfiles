@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 18 Jul 2019
+" Last Edit: 23 Jul 2019
 " Author: Piero Marini
 
 
@@ -132,9 +132,10 @@ nnoremap <Leader>l :bn<CR>
 nnoremap <Leader>h :bp<CR>
 
 " FZF Keybindings
-nnoremap <Leader>o :FZF<CR>
-nnoremap <Leader>c :Buffers<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>c :Commits<CR>
 nnoremap <Leader>f :Rg<CR>
+nnoremap <Leader>o :FZF<CR>
 
 """" END MAPPINGS """"
 
@@ -218,6 +219,8 @@ let g:ale_linters = {
             \   'c': ['clangcheck'],
 			\   'asm': []
             \}
+
+let g:ale_change_sign_column_color = 1
 
 let g:ale_cpp_clangcheck_options = '-- -std=c++17 -x c++ -g -Wall -Wextra -Wshadow -Wpedantic -Wold-style-cast -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wuseless-cast -Wnon-virtual-dtor -Woverloaded-virtual -Wno-variadic-macros'
 
