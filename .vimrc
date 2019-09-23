@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 23 Jul 2019
+" Last Edit: 13 Sep 2019
 " Author: Piero Marini
 
 
@@ -209,7 +209,8 @@ let g:ale_fixers = {
             \   'css': ['prettier'],
             \   'python': ['autopep8'],
             \   'cpp': ['clang-format'],
-            \   'c': ['clang-format']
+            \   'c': ['clang-format'],
+			\	'java': ['google_java_format']
             \}
 let g:ale_linters = {
             \   'javascript': ['eslint'],
@@ -217,9 +218,11 @@ let g:ale_linters = {
             \   'python': ['flake8', 'autopep8'],
             \   'cpp': ['clangcheck'],
             \   'c': ['clangcheck'],
-			\   'asm': []
+			\   'asm': [],
+			\   'java': ['javac']
             \}
 
+let g:ale_java_javac_classpath = '/home/piero/Utec/software/dev'
 let g:ale_change_sign_column_color = 1
 
 let g:ale_cpp_clangcheck_options = '-- -std=c++17 -x c++ -g -Wall -Wextra -Wshadow -Wpedantic -Wold-style-cast -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wuseless-cast -Wnon-virtual-dtor -Woverloaded-virtual -Wno-variadic-macros'
@@ -233,6 +236,8 @@ let g:ale_fix_on_save = 1
 let g:ale_cs_mcsc_source = '/home/piero/Development/Unity3D/TheOriginOfEvil/Assets/'
 " C# Assemblies for Unity
 let g:ale_cs_mcsc_assemblies = ['/opt/Unity3D/Editor/Data/Managed/UnityEditor.dll', '/opt/Unity3D/Editor/Data/Managed/UnityEngine.dll', '/opt/Unity3D/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll']
+
+" let g:ale_c_build_dir = 'bin'
 
 
 " START StatusLine
@@ -346,6 +351,7 @@ hi User8 ctermfg=246 ctermbg=8
 hi User9 ctermfg=39 ctermbg=8
 
 " END STATUS LINE
+"
 
 """ GLSL Syntax Highlightin """
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
@@ -371,7 +377,7 @@ autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue
 
 " Opens corresponding .h or .cpp file in current directory.
 " TODO: Match either .h or .hpp / .c or .cpp files.
-autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+autocmd FileType cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 
 """" EXECUTE/COMPILE KeyBindings """"
@@ -380,11 +386,11 @@ autocmd filetype cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 " TODO: Recognize ROOT project dir to get makefile.
 " NOTE: Uses optirun to use the GPU because of bumblebee switchable graphics.
 " autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && optirun ./run && cd src'<CR>
-autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd .. && make && ./run && cd src'<CR>
+autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd .. && make && cd src'<CR>
 
-autocmd filetype cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
-autocmd filetype c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd FileType c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
@@ -395,10 +401,11 @@ autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open ' . shellescape(expand('%:r') . '.pdf', 1) . ' &'<CR>
 
-autocmd filetype verilog nnoremap <F10> :w <bar> exec '!iverilog '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd FileType verilog nnoremap <F10> :w <bar> exec '!iverilog '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
-autocmd filetype markdown nnoremap <F10> :w <bar> exec '!grip '. shellescape('%').' -b --quiet &'<CR>
+autocmd FileType markdown nnoremap <F10> :w <bar> exec '!grip '. shellescape('%').' -b --quiet &'<CR>
 
+autocmd FileType java nnoremap <F10> :w <bar> :exec '!javac ' .shellescape('%'). '&& java ' shellescape(expand('%:r')) <CR>
 
 
 """" END SCRIPT EXECUTION/COMPILING """"

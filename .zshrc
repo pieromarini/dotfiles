@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 30 May 2019
+#   Last Edit: 13 Sep 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -14,7 +14,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 export MVCBIN="/usr/msc/bin/"
 export MVC_LIB="/usr/msc/builtins/"
 
-source $HOME/.workrc
 source $HOME/.personalrc
 
 zstyle ':completion:*' menu select

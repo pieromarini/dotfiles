@@ -3,7 +3,7 @@
 # Renames specified files by replacing text in the filename
 
 printHelp() {
-	echo "Usage: $0 -f find -r replace FILES_TO_RENAME*"
+	echo "Usage: bulkrename -f find -r replace FILES_TO_RENAME*"
 	echo -e "\t-f The text to find in the filename"
 	echo -e "\t-r The replacement text for the new filename"
 	exit 1
