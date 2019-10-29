@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 13 Sep 2019
+#   Last Edit: 23 Sep 2019
 #   Author: Piero Marini
 
 typeset -U path
@@ -23,7 +23,11 @@ export ZSH="/home/piero/.oh-my-zsh"
 # FZF Configs
 export FZF_DEFAULT_COMMAND="rg --files --hidden --ignore-file ~/.ignore"
 export FZF_DEFAULT_OPTS='
-  --preview="cat {}" --preview-window=right:60%:wrap 
+  --preview="[[ $(file --mime {}) =~ binary ]] &&
+                 echo {} is a binary file ||
+                 (bat --style=numbers --color=always {}) 
+				 2> /dev/null | head -500" 
+  --preview-window=right:60%:wrap 
   --color fg:-1,bg:-1,hl:33,fg+:254,bg+:235,hl+:33
   --color info:136,prompt:136,pointer:230,marker:230,spinner:136
 '
@@ -85,6 +89,7 @@ alias n=nnn
 alias img=sxiv
 # Open file in vim through Fzf.
 alias fv='vim $(fzf)'
+alias mc='tmux split -h lf; lf'
 
 
 # Python VirtualEnv
