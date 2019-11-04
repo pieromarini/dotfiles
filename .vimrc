@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 13 Sep 2019
+" Last Edit: 04 Nov 2019
 " Author: Piero Marini
 
 
@@ -137,7 +137,18 @@ nnoremap <Leader>c :Commits<CR>
 nnoremap <Leader>f :Rg<CR>
 nnoremap <Leader>o :FZF<CR>
 
+nnoremap <Leader>g :Grep 
+
 """" END MAPPINGS """"
+
+" grep uses ripgrep if available
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" custom command to populate and open the quickfix list (if results exist)
+command! -bar -nargs=1 Grep silent grep <q-args> | redraw! | cw
 
 """" UltiSnips """"
 let g:UltiSnipsExpandTrigger="<c-e>"
@@ -153,7 +164,8 @@ let g:UltiSnipsSnippetDirectories=[$HOME . "/.vim/snippets/ultisnips"]
 let g:fzf_action = {
   \ 'ctrl-v': 'vsplit',
   \ 'ctrl-m': 'split',
-  \ 'ctrl-t': 'tab split'}
+  \ 'ctrl-t': 'tab split',
+  \ 'return': 'e'}
 
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_buffers_jump = 1
@@ -455,37 +467,9 @@ function! PrettyJSON()
 	:%!python -c "import json, sys, ast; print( json.dumps(ast.literal_eval(''.join([x for x in sys.stdin])), indent=4) )"
 endfunction
 
-command! XmlFormat call PrettyXML()
-command! JsonFormat call PrettyJSON() 
+command! FormatXml call PrettyXML()
+command! FormatJson call PrettyJSON() 
 """" END PRETTY OUTPUTS """"
-
-
-"""" BETTER SEARCHING """"
-
-"""" Grep Operator. 
-"""" SOURCE: http://learnvimscriptthehardway.stevelosh.com/chapters/34.html
-nnoremap <Leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
-vnoremap <Leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
-
-function! s:GrepOperator(type)
-	let saved_unnamed_register = @@
-
-	if a:type ==# 'v'
-		normal! `<v`>y
-	elseif a:type ==# 'char'
-		normal! `[v`]y
-	else
-		return
-	endif
-
-	silent execute "grep! -R " . shellescape(@@) . " ."
-	copen
-
-	let @@ = saved_unnamed_register
-endfunction
-
-"""" END BETTER SEARCHING """"
-
 
 """" C++ Better Highlighting. """"
 let g:cpp_class_scope_highlight = 1

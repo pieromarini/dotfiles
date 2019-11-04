@@ -3,5 +3,5 @@
 ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_bar -m -1 -width 900)
 ROFI_OPTIONS_FULL=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
 
-FILES=$(find ~/Documents ~/Downloads ~/Utec -type f -not -path "*/\.*"  -not -path "*/node_modules/*")
+FILES=$(find ~/Documents ~/Downloads -type f -not -path "*/\.*"  -not -path "*/node_modules/*")
 echo "${FILES}" | rofi "${ROFI_OPTIONS[@]}" -theme-str 'configuration{show-icons: false;}' -threads 1 -dmenu -i -p 'search:' | xargs -r -0 xdg-open;
