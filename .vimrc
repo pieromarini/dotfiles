@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 04 Nov 2019
+" Last Edit: 08 Nov 2019
 " Author: Piero Marini
 
 
@@ -163,7 +163,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME . "/.vim/snippets/ultisnips"]
 """" FZF """"
 let g:fzf_action = {
   \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-m': 'split',
+  \ 'ctrl-f': 'split',
   \ 'ctrl-t': 'tab split',
   \ 'return': 'e'}
 
@@ -218,6 +218,7 @@ let g:ycm_clangd_binary_path = exepath("clangd")
 """" ALE """"
 let g:ale_fixers = {
             \   'javascript': ['eslint'],
+			\	'typescript': ['tslint'],
             \   'css': ['prettier'],
             \   'python': ['autopep8'],
             \   'cpp': ['clang-format'],
@@ -226,6 +227,7 @@ let g:ale_fixers = {
             \}
 let g:ale_linters = {
             \   'javascript': ['eslint'],
+			\	'typescript': ['tslint'],
             \   'css': ['prettier'],
             \   'python': ['flake8', 'autopep8'],
             \   'cpp': ['clangcheck'],

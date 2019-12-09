@@ -192,7 +192,7 @@ def FlagsForCompilationDatabase(root, filename):
         return None
 
 
-def FlagsForFile(filename):
+def Settings(filename):
     root = os.path.realpath(filename)
     compilation_db_flags = FlagsForCompilationDatabase(root, filename)
     if compilation_db_flags:
