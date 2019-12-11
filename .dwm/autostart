@@ -1,0 +1,48 @@
+#!/bin/bash
+# Simple Bash Script to update DWM status bar using xsetroot
+# TODO: Optimize by updating only what's changed.
+
+xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &
+
+while true
+do
+	VOL=" $(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
+	LOCALTIME=$(date "+ %d-%m-%Y  %H:%M")
+
+	ARCH_UPDATES=" $(arch-updates)"
+
+
+	BAT_N=$(cat /sys/class/power_supply/BAT0/capacity)
+	BAT=$(case "$BAT_N" in
+			  100|9[0-9])		echo " $BAT_N%" ;;
+			  8[0-9]|7[0-9])	echo " $BAT_N%" ;;
+			  6[0-9]|5[0-9])	echo " $BAT_N%" ;;
+			  4[0-9]|3[0-9])	echo " $BAT_N%" ;;
+			  *)				echo " $BAT_N%" ;;
+		  esac)
+
+	PROC=" $(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}')"
+	MEM=" $(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2}')"
+	WIFI="$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')"
+
+	SPOTIFY=" $(spotify-dbus noart 2>/dev/null)"
+
+	xsetroot -name " $SPOTIFY $WIFI $ARCH_UPDATES $PROC $MEM $VOL $BAT $LOCALTIME"
+
+	sleep 5s
+done &
+
+
+killall -q picom
+while pgrep -x picom >/dev/null; do sleep 1; done
+picom -b --config ~/.config/picom/picom.conf
+
+
+killall -q dunst
+killall -q notify-osd
+while pgrep -x dunst >/dev/null; do sleep 1; done
+while pgrep -x notify-osd >/dev/null; do sleep 1; done
+dunst -config ~/.config/dunst/dunst &
+
+
+feh --bg-fill ~/Pictures/Wallpapers/federico-beccari-507719-unsplash.jpg
