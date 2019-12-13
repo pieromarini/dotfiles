@@ -20,6 +20,6 @@ setxkbmap -layout latam -option caps:swapescape
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 
-exec ~/Development/suckless/dwm/dwm
+exec ~/Development/projects/dwm/dwm
 
 # exec i3
