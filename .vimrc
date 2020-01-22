@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 08 Nov 2019
+" Last Edit: 13 Jan 2020
 " Author: Piero Marini
 
 
@@ -20,10 +20,10 @@
 
 set encoding=utf-8
 
-syntax on
 filetype on
 filetype plugin on
 filetype indent on
+syntax on
 
 let python_highlight_all=1
 
@@ -236,7 +236,6 @@ let g:ale_linters = {
 			\   'java': ['javac']
             \}
 
-let g:ale_java_javac_classpath = '/home/piero/Utec/software/dev'
 let g:ale_change_sign_column_color = 1
 
 let g:ale_cpp_clangcheck_options = '-- -std=c++17 -x c++ -g -Wall -Wextra -Wshadow -Wpedantic -Wold-style-cast -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wuseless-cast -Wnon-virtual-dtor -Woverloaded-virtual -Wno-variadic-macros'
@@ -396,11 +395,9 @@ autocmd FileType cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 
 """" EXECUTE/COMPILE KeyBindings """"
 
-" MAKE command for OpenGL Engine.
-" TODO: Recognize ROOT project dir to get makefile.
-" NOTE: Uses optirun to use the GPU because of bumblebee switchable graphics.
-" autocmd filetype cpp nnoremap <F9> :w <bar> exec '!cd ../ && make && optirun ./run && cd src'<CR>
-autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd .. && make && cd src'<CR>
+" NOTE: MAKE command to run makefile on the previous directory.
+" TODO: Create a smart tree traversal until a Makefile is present (with a depth max)
+autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd .. && make'<CR>
 
 autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
@@ -543,6 +540,24 @@ autocmd FileType cs nnoremap <Leader>h :-1read $HOME/.vim/snippets/cs_signature.
 autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
 autocmd BufWritePre .vimrc,.tmux.conf,.zshrc call LastModified()
 
+" R Configuration
+let R_csv_app = 'tmux new-window sc-im --txtdelim=","'
+let R_in_buffer = 0
+let R_notmuxconf = 1
+let R_source = '/home/piero/.vim/pack/marini/start/Nvim-R/R/tmux_split.vim'
+
+let Rout_more_colors = 1
+let R_routnotab = 1
+
+let R_latexcmd = ['pdflatex']
+
+autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
+
+nmap <silent> <LocalLeader>rk :call RAction("levels")<CR>
+nmap <silent> <LocalLeader>t :call RAction("tail")<CR>
+nmap <silent> <LocalLeader>H :call RAction("head")<CR>
 
 packloadall
 silent! helptags ALL
