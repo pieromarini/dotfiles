@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 09 Dec 2019
+#   Last Edit: 23 Jan 2020
 #   Author: Piero Marini
 
 typeset -U path
@@ -41,8 +41,6 @@ export AM_SHOW_FULL_DIR=1
 export PROMPT_END_TAG=' $'
 export PROMPT_END_TAG_COLOR=83
 export AM_HIDE_EXIT_CODE=1
-# export AM_ENABLE_VI_PROMPT=1
-# export AM_VERSIONS_PROMPT=(PYTHON NODE)
 
 ZSH_THEME="alien-minimal/alien-minimal"
 
@@ -113,6 +111,7 @@ alias .....='cd ../../../..'
 # ls Aliases
 alias ls=lsd
 alias lt='ls -lt' # Sort by date.
+alias lk='ls -lS' # Sort by size.
 
 alias ll='ls -lF --group-dirs first' # Directories first.
 alias la='ll -a' # Show hidden files.
@@ -127,70 +126,9 @@ if [ -f /usr/bin/dircolors ]; then
   eval "$(dircolors -b $DIR_COLORS)"
 fi
 
-# Override nvidia-settings to open with bumblebee
-alias nvidia-settings="optirun -b none nvidia-settings -c :8"
-
 ###############################
 ######### Functions ###########
 ###############################
-
-# Bulk Helpers
-function remove-prefix(){
-  if [ $# -ne 2 ] 
-  then 
-	echo "Usage: remove-prefix [files_expr] [prefix_to_delete]"
-	echo "Ex: remove-prefix '*.extension' 'prefix'"
-	return 1
-  fi
-
-  for f in $1; do
-	mv "$f" "${f#$2}";
-  done
-}
-
-function add-prefix(){
-  if [ $# -ne 2 ] 
-  then 
-	echo "Usage: add-prefix [files_expr] [prefix_to_add]"
-	echo "Ex: add-prefix '*.extension' 'prefix'"
-	echo "Returns: prefix*.extension"
-	return 1
-  fi
-
-  for f in $1; do
-	mv "$f" "$2$f";
-  done
-}
-
-function add-suffix(){
-  if [ $# -ne 2 ] 
-  then 
-	echo "Usage: add-suffix [files_expr] [suffix_to_add]"
-	echo "Ex: add-suffix '*.extension' 'suffix'"
-	echo "Returns: *suffix.extension"
-	return 1
-  fi
-
-  for f in $1; do 
-	mv "$f" "${f%.*}$2.${f##*.}"
-  done
-}
-
-function remove-suffix(){
-  if [ $# -ne 2 ] 
-  then 
-	echo "Usage: remove-suffix [files_expr] [suffix_to_remove]"
-	echo "Ex: remove-suffix '*suffix.extension' 'suffix'"
-	echo "Returns: *.extension"
-	return 1
-  fi
-
-  for f in $1; do 
-	mv "$f" "${f/$2/}";
-  done
-}
-
-# End Bulk Helpers
 
 # Swap two filenames.
 function swap(){
