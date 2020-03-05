@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 13 Jan 2020
+" Last Edit: 05 Mar 2020
 " Author: Piero Marini
 
 
@@ -32,6 +32,12 @@ set rtp+=~/.fzf
 set rtp+=~/.vim/pack/marini/start/ultisnips
 
 set pyxversion=3
+
+set cmdheight=2
+
+set updatetime=300
+
+set shortmess+=c
 
 set autoindent
 set shiftwidth=4
@@ -91,29 +97,16 @@ nnoremap <silent> <Leader>> :exe "vertical resize -10"<CR>
 
 nmap <C-N> :NERDTreeToggle<CR>
 
-nmap <Leader>? :YcmShowDetailedDiagnostic<CR>
-
-nmap <Leader>t :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" YCM C#
-nmap <F5> :YcmCompleter ReloadSolution<CR>
-
 nmap <Leader>n :ALENext<CR>
 nmap <Leader>m :ALEPrevious<CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
-
-" Folding
-nnoremap <Space> za
 
 " BOL / EOL swap. Also spanish keyboard '^' too far away.
 " Normal Remap because I'll use this for other commands.
 noremap $ ^
 noremap & $
 noremap ^ &
-
-" # of matches for a pattern
-nnoremap <Leader>* *<C-O>:%s///gn<CR>
 
 " Replace under cursor
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
@@ -126,10 +119,6 @@ nnoremap <Leader>y "*y
 
 " Visual Block Select
 nnoremap <Leader>v <C-v>
-
-" Buffers Keybindings
-nnoremap <Leader>l :bn<CR>
-nnoremap <Leader>h :bp<CR>
 
 " FZF Keybindings
 nnoremap <Leader>b :Buffers<CR>
@@ -186,34 +175,48 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+"""" Coc """"
+" Use tab for trigger completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-"""" YouCompleteMe """"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" Determine if inside a virtualenv for proper completion.
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
+inoremap <silent><expr> <c-space> coc#refresh()
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-let g:ycm_server_python_interpreter = '/usr/bin/python'
+" GoTo code navigation.
+nmap <silent> <Leader>t <Plug>(coc-definition)
+nmap <silent> <Leader>d <Plug>(coc-type-definition)
+nmap <silent> <Leader>i <Plug>(coc-implementation)
+nmap <silent> <Leader>l <Plug>(coc-references)
 
-" Turn off YCM linter
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_goto_buffer_command = 'vertical-split'
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Clangd
-let g:ycm_use_clangd = 1
-let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_clangd_binary_path = exepath("clangd")
+" Symbol renaming.
+nmap <Leader>rn <Plug>(coc-rename)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
 
 """" ALE """"
 let g:ale_fixers = {
@@ -332,6 +335,19 @@ function! StatuslineUpdate()
 	return ''
 endfunction
 
+function! StatusDiagnostic() abort
+	let info = get(b:, 'coc_diagnostic_info', {})
+	if empty(info) | return '' | endif
+	let msgs = []
+	if get(info, 'error', 0)
+		call add(msgs, 'E' . info['error'])
+	endif
+	if get(info, 'warning', 0)
+		call add(msgs, 'W' . info['warning'])
+	endif
+	return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+endfunction
+
 set laststatus=2
 set statusline=
 set statusline+=%{StatuslineUpdate()}                      " Changing the statusline color
@@ -344,6 +360,7 @@ set statusline+=%2*\ %=                                    " Space
 
 set statusline+=%8*%5*\ %y                                " FileType
 set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileformat
+set statusline+=%6*\ %{StatusDiagnostic()}\ 			   " CocStatus
 set statusline+=%6*\ %{LinterStatus()}\                    " ALE errors
 set statusline+=%7*%1*%3p%%(%L)\ ☰\ %l:\ %2c\             " %(Total) Line: Col
 
@@ -397,7 +414,7 @@ autocmd FileType cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.c
 
 " NOTE: MAKE command to run makefile on the previous directory.
 " TODO: Create a smart tree traversal until a Makefile is present (with a depth max)
-autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd .. && make'<CR>
+autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd .. && prime-run make'<CR>
 
 autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
@@ -531,33 +548,7 @@ function! LastModified()
 	endif
 endf
 
-""" Automatic Signature for C# files """
-autocmd FileType cs nnoremap <Leader>h :-1read $HOME/.vim/snippets/cs_signature.txt<CR> 
-			\ \| :g/File:.*/s//\=printf("File: %s", expand('%:t'))<CR>
-			\ \| :g/Last Edit:.*/s//\=printf("Last Edit: %s", strftime('%d %b %Y'))<CR>
-			\ \| :nohlsearch<CR>
-
-autocmd FileType cs autocmd BufWritePre <buffer> call LastModified()
 autocmd BufWritePre .vimrc,.tmux.conf,.zshrc call LastModified()
-
-" R Configuration
-let R_csv_app = 'tmux new-window sc-im --txtdelim=","'
-let R_in_buffer = 0
-let R_notmuxconf = 1
-let R_source = '/home/piero/.vim/pack/marini/start/Nvim-R/R/tmux_split.vim'
-
-let Rout_more_colors = 1
-let R_routnotab = 1
-
-let R_latexcmd = ['pdflatex']
-
-autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
-autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
-autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
-
-nmap <silent> <LocalLeader>rk :call RAction("levels")<CR>
-nmap <silent> <LocalLeader>t :call RAction("tail")<CR>
-nmap <silent> <LocalLeader>H :call RAction("head")<CR>
 
 packloadall
 silent! helptags ALL

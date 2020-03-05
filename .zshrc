@@ -1,9 +1,9 @@
 #   File: .zshrc
-#   Last Edit: 23 Jan 2020
+#   Last Edit: 12 Feb 2020
 #   Author: Piero Marini
 
 typeset -U path
-path=(~/.scripts ~/.bin /usr/msc/bin $path[@])
+path=(~/.scripts ~/.bin ~/.npm-global/bin /usr/msc/bin $path[@])
 
 export WINIT_HIDPI_FACTOR=1.083
 
