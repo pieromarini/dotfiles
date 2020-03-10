@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 12 Feb 2020
+#   Last Edit: 09 Mar 2020
 #   Author: Piero Marini
 
 typeset -U path
@@ -15,8 +15,6 @@ export BAT_CONFIG_PATH="${HOME}/.config/bat/config"
 # Miva Merchant Mivascript Compiler
 export MVCBIN="/usr/msc/bin/"
 export MVC_LIB="/usr/msc/builtins/"
-
-source $HOME/.personalrc
 
 zstyle ':completion:*' menu select
 
