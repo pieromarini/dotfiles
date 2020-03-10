@@ -5,8 +5,7 @@
 
 """ Plugin List """ 
 
-" ALE (Async Linting) 
-" YouCompleteMe (Auto-Complete)
+" Coc.Nvim (Auto-Complete)
 " NerdTree (Directory Tree)
 " Emmet-Vim (Html/Css Fast Typing)
 " Vim-Fugitive (Git)
@@ -32,8 +31,6 @@ set rtp+=~/.fzf
 set rtp+=~/.vim/pack/marini/start/ultisnips
 
 set pyxversion=3
-
-set cmdheight=2
 
 set updatetime=300
 
@@ -96,9 +93,6 @@ nnoremap <silent> <Leader>< :exe "vertical resize +10"<CR>
 nnoremap <silent> <Leader>> :exe "vertical resize -10"<CR>
 
 nmap <C-N> :NERDTreeToggle<CR>
-
-nmap <Leader>n :ALENext<CR>
-nmap <Leader>m :ALEPrevious<CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
 
@@ -175,27 +169,36 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+
 """" Coc """"
 " Use tab for trigger completion
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+	" Use `complete_info` if your (Neo)Vim version supports it.
+	inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
+				\"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -217,98 +220,43 @@ nmap <Leader>rn <Plug>(coc-rename)
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
-
-"""" ALE """"
-let g:ale_fixers = {
-            \   'javascript': ['eslint'],
-			\	'typescript': ['tslint'],
-            \   'css': ['prettier'],
-            \   'python': ['autopep8'],
-            \   'cpp': ['clang-format'],
-            \   'c': ['clang-format'],
-			\	'java': ['google_java_format']
-            \}
-let g:ale_linters = {
-            \   'javascript': ['eslint'],
-			\	'typescript': ['tslint'],
-            \   'css': ['prettier'],
-            \   'python': ['flake8', 'autopep8'],
-            \   'cpp': ['clangcheck'],
-            \   'c': ['clangcheck'],
-			\   'asm': [],
-			\   'java': ['javac']
-            \}
-
-let g:ale_change_sign_column_color = 1
-
-let g:ale_cpp_clangcheck_options = '-- -std=c++17 -x c++ -g -Wall -Wextra -Wshadow -Wpedantic -Wold-style-cast -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wuseless-cast -Wnon-virtual-dtor -Woverloaded-virtual -Wno-variadic-macros'
-
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_fix_on_save = 1
-
-" Unity Project
-let g:ale_cs_mcsc_source = '/home/piero/Development/Unity3D/TheOriginOfEvil/Assets/'
-" C# Assemblies for Unity
-let g:ale_cs_mcsc_assemblies = ['/opt/Unity3D/Editor/Data/Managed/UnityEditor.dll', '/opt/Unity3D/Editor/Data/Managed/UnityEngine.dll', '/opt/Unity3D/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll']
-
-" let g:ale_c_build_dir = 'bin'
-
-
 " START StatusLine
 
-function! LinterStatus() abort
-    let l:symbol = '●'
-    let l:symbol_warning= '⚠'
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return printf(
-                \   '%s %d %s %d',
-                \   l:symbol,
-                \   l:all_errors,
-                \   l:symbol_warning,
-                \   l:all_non_errors
-                \)
-endfunction
-
 let g:currentmode={
-      \ 'n'  : 'Normal ',
-      \ 'no' : 'N·Operator Pending ',
-      \ 'v'  : 'Visual ',
-      \ 'V'  : 'V·Line ',
-      \ '' : 'V·Block ',
-      \ 's'  : 'Select ',
-      \ 'S'  : 'S·Line ',
-      \ '' : 'S·Block ',
-      \ 'i'  : 'Insert ',
-      \ 'R'  : 'Replace ',
-      \ 'Rv' : 'V·Replace ',
-      \ 'c'  : 'Command ',
-      \ 'cv' : 'Vim Ex ',
-      \ 'ce' : 'Ex ',
-      \ 'r'  : 'Prompt ',
-      \ 'rm' : 'More ',
-      \ 'r?' : 'Confirm ',
-      \ '!'  : 'Shell ',
-      \ 't'  : 'Terminal '
-      \}
+			\ 'n'  : 'Normal ',
+			\ 'no' : 'N·Operator Pending ',
+			\ 'v'  : 'Visual ',
+			\ 'V'  : 'V·Line ',
+			\ '' : 'V·Block ',
+			\ 's'  : 'Select ',
+			\ 'S'  : 'S·Line ',
+			\ '' : 'S·Block ',
+			\ 'i'  : 'Insert ',
+			\ 'R'  : 'Replace ',
+			\ 'Rv' : 'V·Replace ',
+			\ 'c'  : 'Command ',
+			\ 'cv' : 'Vim Ex ',
+			\ 'ce' : 'Ex ',
+			\ 'r'  : 'Prompt ',
+			\ 'rm' : 'More ',
+			\ 'r?' : 'Confirm ',
+			\ '!'  : 'Shell ',
+			\ 't'  : 'Terminal '
+			\}
 
 function! ReadOnly()
-    if &readonly || !&modifiable
-        return ''
-    else
-        return ''
+	if &readonly || !&modifiable
+		return ''
+	else
+		return ''
 endfunction
 
 function! GitInfo()
-    let git = fugitive#head()
-    if git != ''
-        return ' '.fugitive#head()
-    else
-        return ''
+	let git = fugitive#head()
+	if git != ''
+		return ' '.fugitive#head()
+	else
+		return ''
 endfunction
 
 " Automatically change the statusline color depending on mode
@@ -361,7 +309,6 @@ set statusline+=%2*\ %=                                    " Space
 set statusline+=%8*%5*\ %y                                " FileType
 set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileformat
 set statusline+=%6*\ %{StatusDiagnostic()}\ 			   " CocStatus
-set statusline+=%6*\ %{LinterStatus()}\                    " ALE errors
 set statusline+=%7*%1*%3p%%(%L)\ ☰\ %l:\ %2c\             " %(Total) Line: Col
 
 set background=dark
