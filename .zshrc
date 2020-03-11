@@ -1,11 +1,12 @@
 #   File: .zshrc
-#   Last Edit: 09 Mar 2020
+#   Last Edit: 11 Mar 2020
 #   Author: Piero Marini
 
 typeset -U path
 path=(~/.scripts ~/.bin ~/.npm-global/bin /usr/msc/bin $path[@])
 
 export WINIT_HIDPI_FACTOR=1.083
+export DISABLE_UPDATE_PROMT=true
 
 # Alias for dotfiles managing
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
