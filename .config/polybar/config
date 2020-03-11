@@ -1,4 +1,4 @@
-[bar/white]
+[bar/main]
 
 ;------------;
 ; DIMENSIONS ;
@@ -56,6 +56,63 @@ modules-right = spotify bluetooth-status wlan cpu memory date time
 tray-position = none
 tray-detached = true
 
+[bar/external]
+;------------;
+; DIMENSIONS ;
+;------------;
+
+width = 100%
+height = 20
+offset-y = 0
+offset-x = 0
+
+border-top-size = 10
+border-bottom-size = 0
+border-right-size = 10
+border-left-size = 10
+
+;----------;
+; LOCATION ;
+;----------;
+
+bottom = false
+monitor = HDMI-1
+wm-restack = bspwm
+override-redirect = false
+
+;-------;
+; FONTS ;
+;-------;
+
+font-0 = "SauceCodePro Nerd Font:size=11;3"
+font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
+font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
+
+;--------;
+; COLORS ;
+;--------;
+background = 0
+foreground = #a6a9b7
+border-color = 0
+third = ${xrdb:color2:#222}
+
+;---------------;
+; MISCELLANEOUS ;
+;---------------;
+
+fixed-center = true
+padding-left = 1
+padding-right = 1
+module-margin = 1.5
+
+modules-left = pulseaudio battery arch-updates
+modules-center = bspwm
+modules-right = spotify bluetooth-status wlan cpu memory date time
+
+tray-position = none
+tray-detached = true
+
 ;---------;
 ; MODULES ;
 ;---------;
@@ -73,9 +130,9 @@ ws-icon-1 = 2;
 ws-icon-2 = 3;
 ws-icon-3 = 4;
 ws-icon-4 = 5;
-ws-icon-5 = 6;
+ws-icon-5 = 6;
 ws-icon-6 = 7;
-ws-icon-7 = 8;
+ws-icon-7 = 8;
 ws-icon-8 = 9;
 ws-icon-9 = 10;
 ws-icon-default = 
