@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 05 Mar 2020
+" Last Edit: 25 Mar 2020
 " Author: Piero Marini
 
 
@@ -202,8 +202,8 @@ else
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <Leader>n <Plug>(coc-diagnostic-prev)
+nmap <silent> <Leader>m <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> <Leader>t <Plug>(coc-definition)
@@ -216,6 +216,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <Leader>rn <Plug>(coc-rename)
+autocmd FileType c,cpp nnoremap <F4> :CocCommand clangd.switchSourceHeader<CR>
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -352,11 +353,6 @@ autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue
 
 """" END SNIPPETS """"
 
-" Opens corresponding .h or .cpp file in current directory.
-" TODO: Match either .h or .hpp / .c or .cpp files.
-autocmd FileType cpp nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-
-
 """" EXECUTE/COMPILE KeyBindings """"
 
 " NOTE: MAKE command to run makefile on the previous directory.
@@ -477,6 +473,7 @@ inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}
 inoremap { {}<Left>
 inoremap {{ {
 
+let g:vue_pre_processors = 'detect_on_enter'
 """ Useful for Vue Template files. 
 autocmd FileType vue inoremap {{<CR> {{ }}<Left><Left><Left>
 

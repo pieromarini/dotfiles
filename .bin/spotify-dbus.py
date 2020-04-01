@@ -70,7 +70,7 @@ if args.play_pause is not None:
 try:
     session_bus = dbus.SessionBus()
     spotify_bus = session_bus.get_object(
-        'org.mpris.MediaPlayer2.spotify',
+        'org.mpris.MediaPlayer2.spotifyd',
         '/org/mpris/MediaPlayer2'
     )
 

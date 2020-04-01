@@ -1,9 +1,11 @@
 #   File: .zshrc
-#   Last Edit: 11 Mar 2020
+#   Last Edit: 31 Mar 2020
 #   Author: Piero Marini
 
 typeset -U path
 path=(~/.scripts ~/.bin ~/.npm-global/bin /usr/msc/bin $path[@])
+
+xrdb ~/.Xresources
 
 export WINIT_HIDPI_FACTOR=1.083
 export DISABLE_UPDATE_PROMT=true
@@ -74,7 +76,7 @@ export VISUAL=vim
 export V=~/.vimrc
 export Z=~/.zshrc
 export T=~/.tmux.conf
-export TERMINAL="st -e"
+export TERMINAL="urxvt -e"
 
 # Shortcuts
 alias t=tmux
