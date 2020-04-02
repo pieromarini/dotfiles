@@ -1,0 +1,36 @@
+# Show line numbers, Git modifications and file header (but no grid)
+--style=numbers,changes,header
+
+# Add mouse scrolling support in less (does not work with older
+# versions of "less")
+--pager="less -FR"
+
+# Use C++ syntax (instead of C) for .h header files
+--map-syntax h:cpp
+
+# Use "gitignore" highlighting for ".ignore" files
+--map-syntax .ignore:.gitignore
+
+# Use "gitconfig" highlighting for ".gitconfig" file
+--map-syntax .gitconfig.local:gitconfig
+
+# Use "zsh" highlighting for ".zshrc" file
+--map-syntax .zshrc.local:zsh
+
+# Use "vim" highlighting for ".vimrc" file
+--map-syntax .vimrc.local:vim
+
+# Always use colors.
+--color=always
+
+# Never use wrapping on code.
+--wrap=never
+
+# Never use a pager utility.
+--paging=never
+
+# Only print first 200 lines.
+--line-range :200
+
+# Use 4 length spaced tabs.
+--tabs=4
