@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 31 Mar 2020
+#   Last Edit: 01 Apr 2020
 #   Author: Piero Marini
 
 typeset -U path
@@ -64,6 +64,10 @@ plugins=(
   vi-mode
   zsh-syntax-highlighting
 )
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 source $ZSH/oh-my-zsh.sh
 
