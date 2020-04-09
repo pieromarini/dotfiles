@@ -14,7 +14,7 @@ dunst -config ~/.config/dunst/dunst &
 killall -q sxhkd
 while pgrep -x sxhkd >/dev/null; do sleep 1; done
 
-feh --bg-fill ~/Pictures/Wallpapers/chuttersnap-unsplash.jpg
+feh --bg-fill ~/Pictures/Wallpapers/chuttersnap-kuala-lumpur-unsplash.jpg
 
 xrdb ~/.xrdb/colors &
 
@@ -51,6 +51,7 @@ bspc config presel_feedback_color "$color1"
 bspc config presel_border_color "$color1"
 
 bspc config focus_follows_pointer true
+bspc config pointer_follows_focus false
 
 bspc config pointer_modifier mod4 # super
 bspc config pointer_action1 move

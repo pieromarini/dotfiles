@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 01 Apr 2020
+#   Last Edit: 08 Apr 2020
 #   Author: Piero Marini
 
 typeset -U path
@@ -11,7 +11,7 @@ export WINIT_HIDPI_FACTOR=1.083
 export DISABLE_UPDATE_PROMT=true
 
 # Alias for dotfiles managing
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export BAT_CONFIG_PATH="${HOME}/.config/bat/config"
 
@@ -65,9 +65,8 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,7 +97,7 @@ alias mc='tmux split -h lf; lf'
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Development/Python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
-source /usr/bin/virtualenvwrapper.sh
+# source /usr/bin/virtualenvwrapper.sh
 
 
 #############################

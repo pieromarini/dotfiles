@@ -1,6 +1,6 @@
 OBJECTS = main.cpp
 STD = -std=c++17
-MYFLAGS = -g -Wall -grecord-gcc-switches -O2 -pipe -Werror=format-security -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fstack-clash-protection
+MYFLAGS = -g -Wall -Wextra -Wshadow -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wnull-dereference -Wdouble-promotion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wuseless-cast
 CXX = g++
 EXEC = main
 
