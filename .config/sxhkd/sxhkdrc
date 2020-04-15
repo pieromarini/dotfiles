@@ -30,13 +30,13 @@ super + c
 
 # Playback
 XF86AudioPlay
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+	media-controller PlayPause
 
 XF86AudioNext
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+	media-controller Next
 
 XF86AudioPrev
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+	media-controller Previous
 
 # Volume
 XF86Audio{RaiseVolume,LowerVolume,Mute}

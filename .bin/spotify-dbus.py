@@ -67,59 +67,64 @@ if args.custom_format is not None:
 if args.play_pause is not None:
     play_pause = args.play_pause
 
-try:
-    session_bus = dbus.SessionBus()
-    spotify_bus = session_bus.get_object(
-        'org.mpris.MediaPlayer2.spotifyd',
-        '/org/mpris/MediaPlayer2'
-    )
+def get_bus():
+    try:
+        session_bus = dbus.SessionBus()
+        spotify_bus = session_bus.get_object(
+            'org.mpris.MediaPlayer2.spotifyd',
+            '/org/mpris/MediaPlayer2'
+        )
+    except Exception as e:
+        session_bus = dbus.SessionBus()
+        spotify_bus = session_bus.get_object(
+            'org.mpris.MediaPlayer2.spotify',
+            '/org/mpris/MediaPlayer2'
+        )
+    return spotify_bus
 
-    spotify_properties = dbus.Interface(
-        spotify_bus,
-        'org.freedesktop.DBus.Properties'
-    )
 
-    metadata = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
-    status = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
+spotify_bus = get_bus()
+spotify_properties = dbus.Interface(
+    spotify_bus,
+    'org.freedesktop.DBus.Properties'
+)
 
-    # Handle play/pause label
+metadata = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
+status = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
 
-    play_pause = play_pause.split(',')
+# Handle play/pause label
 
-    if status == 'Playing':
-        play_pause = play_pause[0]
-    elif status == 'Paused':
-        play_pause = play_pause[1]
-    else:
-        play_pause = str()
+play_pause = play_pause.split(',')
 
-    if play_pause_font:
-        play_pause = label_with_font.format(font=play_pause_font, label=play_pause)
+if status == 'Playing':
+    play_pause = play_pause[0]
+elif status == 'Paused':
+    play_pause = play_pause[1]
+else:
+    play_pause = str()
 
-    # Handle main label
+if play_pause_font:
+    play_pause = label_with_font.format(font=play_pause_font, label=play_pause)
 
-    artist = fix_string(metadata['xesam:artist'][0]) if metadata['xesam:artist'] else ''
-    song = fix_string(metadata['xesam:title']) if metadata['xesam:title'] else ''
-    album = fix_string(metadata['xesam:album']) if metadata['xesam:album'] else ''
+# Handle main label
 
-    if not artist and not song and not album:
-        print('')
-    else:
-        if len(song) > trunclen:
-            song = song[0:trunclen]
-            song += '...'
-            if ('(' in song) and (')' not in song):
-                song += ')'
+artist = fix_string(metadata['xesam:artist'][0]) if metadata['xesam:artist'] else ''
+song = fix_string(metadata['xesam:title']) if metadata['xesam:title'] else ''
+album = fix_string(metadata['xesam:album']) if metadata['xesam:album'] else ''
 
-        if font:
-            artist = label_with_font.format(font=font, label=artist)
-            song = label_with_font.format(font=font, label=song)
-            album = label_with_font.format(font=font, label=album)
+if not artist and not song and not album:
+    print('')
+else:
+    if len(song) > trunclen:
+        song = song[0:trunclen]
+        song += '...'
+        if ('(' in song) and (')' not in song):
+            song += ')'
 
-        print(output.format(artist=artist, song=song, play_pause=play_pause, album=album))
+    if font:
+        artist = label_with_font.format(font=font, label=artist)
+        song = label_with_font.format(font=font, label=song)
+        album = label_with_font.format(font=font, label=album)
 
-except Exception as e:
-    if isinstance(e, dbus.exceptions.DBusException):
-        print('')
-    else:
-        print(e)
+    print(output.format(artist=artist, song=song, play_pause=play_pause, album=album))
+

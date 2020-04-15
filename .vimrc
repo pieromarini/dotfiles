@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 25 Mar 2020
+" Last Edit: 11 Apr 2020
 " Author: Piero Marini
 
 
@@ -193,13 +193,11 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-if has('patch8.1.1068')
-	" Use `complete_info` if your (Neo)Vim version supports it.
-	inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
-				\"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-endif
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif"
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-prev)
@@ -210,6 +208,17 @@ nmap <silent> <Leader>t <Plug>(coc-definition)
 nmap <silent> <Leader>d <Plug>(coc-type-definition)
 nmap <silent> <Leader>i <Plug>(coc-implementation)
 nmap <silent> <Leader>l <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
