@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SESSION_NAME="Primal"
+
+function primal {
+	BASE="$HOME/Development/Cpp/PrimalEngine/"
+
+	cd $BASE
+	tmux start-server
+	tmux new-session -d -s $SESSION_NAME -n build
+
+	tmux new-window -t $SESSION_NAME:2 -n src
+	tmux send-keys -t $SESSION_NAME:2 'cd src; clear' Enter
+	tmux new-window -t $SESSION_NAME:3 -n sandbox
+	tmux send-keys -t $SESSION_NAME:3 'cd sandbox; clear' Enter
+	tmux new-window -t $SESSION_NAME:4 -n shaders
+	tmux send-keys -t $SESSION_NAME:4 'cd res/shaders; clear' Enter
+
+	tmux select-window -t $SESSION_NAME:1
+	tmux attach-session -t $SESSION_NAME
+}
+
+primal
