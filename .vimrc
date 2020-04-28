@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 11 Apr 2020
+" Last Edit: 27 Apr 2020
 " Author: Piero Marini
 
 
@@ -364,9 +364,9 @@ autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue
 
 """" EXECUTE/COMPILE KeyBindings """"
 
-" NOTE: MAKE command to run makefile on the previous directory.
+" NOTE: Command used to compile/run PrimalEngine project
 " TODO: Create a smart tree traversal until a Makefile is present (with a depth max)
-autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd .. && prime-run make'<CR>
+autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd ../build && make && prime-run ./sandbox'<CR>
 
 autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 

@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 08 Apr 2020
+#   Last Edit: 28 Apr 2020
 #   Author: Piero Marini
 
 typeset -U path
@@ -14,10 +14,6 @@ export DISABLE_UPDATE_PROMT=true
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export BAT_CONFIG_PATH="${HOME}/.config/bat/config"
-
-# Miva Merchant Mivascript Compiler
-export MVCBIN="/usr/msc/bin/"
-export MVC_LIB="/usr/msc/builtins/"
 
 zstyle ':completion:*' menu select
 
@@ -35,14 +31,6 @@ export FZF_DEFAULT_OPTS="
 export FZF_TMUX=1
 
 # THEME CONFIG
-export AM_THEME=soft
-export USE_NERD_FONT=1
-unset AM_INITIAL_LINE_FEED
-export AM_SHOW_FULL_DIR=1
-export PROMPT_END_TAG=' $'
-export PROMPT_END_TAG_COLOR=83
-export AM_HIDE_EXIT_CODE=1
-
 ZSH_THEME="alien-minimal/alien-minimal"
 
 bindkey -v
@@ -55,6 +43,8 @@ autoload -U zmv
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
+
+bindkey -M vicmd v edit-command-line
 
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
@@ -86,11 +76,13 @@ alias t=tmux
 alias c=clear
 alias f=fzf
 alias v=vim
-alias n=nnn
+
 # I dont wanna type sxiv
 alias img=sxiv
+
 # Open file in vim through Fzf.
 alias fv='vim $(fzf)'
+
 alias mc='tmux split -h lf; lf'
 
 # Python VirtualEnv

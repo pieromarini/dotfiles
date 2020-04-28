@@ -1,7 +1,10 @@
 #!/usr/bin/env zsh
 
 ## ===> THEME
-export AM_THEME=default
+export AM_THEME=soft
+export AM_HIDE_EXIT_CODE=1
+export AM_HIDE_EXIT_CODE=1
+
 
 ## ===> CONFIGS
 # export AM_ASYNC_L_PROMPT=1
@@ -19,25 +22,16 @@ export AM_VI_PROMPT_POS='left_end'
 
 ## ===> SYMBOLS
 #  export AM_VERSION_PROMPT_SEP='|'
-#  export AM_JAVA_SYM='JAVA:'
 #  export AM_PY_SYM='PY:'
-#  export AM_RB_SYM='RB:'
-#  export AM_GO_SYM='GO:'
-#  export AM_ELIXIR_SYM='EX:'
-#  export AM_CRYSTAL_SYM='CR:'
-#  export AM_NODE_SYM='⬡ '
-#  export AM_PHP_SYM='PHP:'
-#  export AM_HG_SYM='H'
-#  export AM_SVN_SYM='S'
 export AM_SSH_SYM='[S]'
-export AM_GIT_SYM='G'
-export AM_GIT_REBASING_SYMBOL='⇋'
+export AM_GIT_SYM=''
+export AM_GIT_REBASING_SYMBOL='rebase'
 export AM_GIT_PUSH_SYM='↑'
 export AM_GIT_PULL_SYM='↓'
 export AM_GIT_STASH_SYM='@'
-export AM_GIT_BARE_SYM='☢'
-#  export AM_PROMPT_START_TAG=''
-#  export AM_PROMPT_END_TAG=''
+export AM_GIT_BARE_SYM='bare'
+export PROMPT_END_TAG=' $'
+export PROMPT_END_TAG_COLOR=83
 
 ## ===> COLORS
 #  export AM_VCS_COLOR=248

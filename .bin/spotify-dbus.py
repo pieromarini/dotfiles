@@ -74,7 +74,7 @@ def get_bus():
             'org.mpris.MediaPlayer2.spotifyd',
             '/org/mpris/MediaPlayer2'
         )
-    except Exception as e:
+    except Exception:
         session_bus = dbus.SessionBus()
         spotify_bus = session_bus.get_object(
             'org.mpris.MediaPlayer2.spotify',
@@ -83,48 +83,50 @@ def get_bus():
     return spotify_bus
 
 
-spotify_bus = get_bus()
-spotify_properties = dbus.Interface(
-    spotify_bus,
-    'org.freedesktop.DBus.Properties'
-)
+try:
+    spotify_bus = get_bus()
+    spotify_properties = dbus.Interface(
+        spotify_bus,
+        'org.freedesktop.DBus.Properties'
+    )
 
-metadata = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
-status = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
+    metadata = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
+    status = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
 
-# Handle play/pause label
+    # Handle play/pause label
 
-play_pause = play_pause.split(',')
+    play_pause = play_pause.split(',')
 
-if status == 'Playing':
-    play_pause = play_pause[0]
-elif status == 'Paused':
-    play_pause = play_pause[1]
-else:
-    play_pause = str()
+    if status == 'Playing':
+        play_pause = play_pause[0]
+    elif status == 'Paused':
+        play_pause = play_pause[1]
+    else:
+        play_pause = str()
 
-if play_pause_font:
-    play_pause = label_with_font.format(font=play_pause_font, label=play_pause)
+    if play_pause_font:
+        play_pause = label_with_font.format(font=play_pause_font, label=play_pause)
 
-# Handle main label
+    # Handle main label
 
-artist = fix_string(metadata['xesam:artist'][0]) if metadata['xesam:artist'] else ''
-song = fix_string(metadata['xesam:title']) if metadata['xesam:title'] else ''
-album = fix_string(metadata['xesam:album']) if metadata['xesam:album'] else ''
+    artist = fix_string(metadata['xesam:artist'][0]) if metadata['xesam:artist'] else ''
+    song = fix_string(metadata['xesam:title']) if metadata['xesam:title'] else ''
+    album = fix_string(metadata['xesam:album']) if metadata['xesam:album'] else ''
 
-if not artist and not song and not album:
+    if not artist and not song and not album:
+        print('')
+    else:
+        if len(song) > trunclen:
+            song = song[0:trunclen]
+            song += '...'
+            if ('(' in song) and (')' not in song):
+                song += ')'
+
+        if font:
+            artist = label_with_font.format(font=font, label=artist)
+            song = label_with_font.format(font=font, label=song)
+            album = label_with_font.format(font=font, label=album)
+
+        print(output.format(artist=artist, song=song, play_pause=play_pause, album=album))
+except:
     print('')
-else:
-    if len(song) > trunclen:
-        song = song[0:trunclen]
-        song += '...'
-        if ('(' in song) and (')' not in song):
-            song += ')'
-
-    if font:
-        artist = label_with_font.format(font=font, label=artist)
-        song = label_with_font.format(font=font, label=song)
-        album = label_with_font.format(font=font, label=album)
-
-    print(output.format(artist=artist, song=song, play_pause=play_pause, album=album))
-
