@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Author: Piero Marini
+# Date: 15/04/20
+# Gets the currently running DBUS (between spotify and spotifyd) and sends a message
+# Usage: media-controller <action>
+# <action> -> PlayPause, Next, Previous
+
+DBUS=$(dbus-send --print-reply --dest=org.freedesktop.DBus  /org/freedesktop/DBus org.freedesktop.DBus.ListNames)
+DBUS_SPOTIFY="org.mpris.MediaPlayer2.spotify"
+DBUS_SPOTIFYD="org.mpris.MediaPlayer2.spotifyd"
+
+COMMAND=$1
+
+case $DBUS in
+	*"$DBUS_SPOTIFY"*)
+		DBUS_RUNNING="$DBUS_SPOTIFY"
+		;;
+	*"$DBUS_SPOTIFYD"*)
+		DBUS_RUNNING="$DBUS_SPOTIFYD"
+		;;
+	*)
+		echo -n "nothing is running"
+		exit
+		;;
+esac
+
+dbus-send --print-reply --dest=$DBUS_RUNNING /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.$COMMAND
