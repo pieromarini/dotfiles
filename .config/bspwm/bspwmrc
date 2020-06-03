@@ -73,3 +73,4 @@ bspc rule -a Chromium desktop='2' follow=on
 bspc rule -a Spotify desktop='4'
 bspc rule -a Zathura desktop='3' state=tiled follow=on
 bspc rule -a 'Primal Engine' state=floating
+bspc rule -a 'Routing Project' state=floating
