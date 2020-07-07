@@ -1,14 +1,16 @@
 #   File: .zshrc
-#   Last Edit: 28 Apr 2020
+#   Last Edit: 07 Jul 2020
 #   Author: Piero Marini
 
 typeset -U path
-path=(~/.scripts ~/.bin ~/.npm-global/bin /usr/msc/bin $path[@])
+path=(~/.scripts ~/.bin ~/.npm-global/bin $path[@])
 
 xrdb ~/.Xresources
 
 export WINIT_HIDPI_FACTOR=1.083
 export DISABLE_UPDATE_PROMT=true
+
+export TZ='America/Lima'
 
 # Alias for dotfiles managing
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -77,11 +79,10 @@ alias c=clear
 alias f=fzf
 alias v=vim
 
+alias open=xdg-open
+
 # I dont wanna type sxiv
 alias img=sxiv
-
-# Open file in vim through Fzf.
-alias fv='vim $(fzf)'
 
 alias mc='tmux split -h lf; lf'
 
@@ -112,8 +113,6 @@ alias lk='ls -lS' # Sort by size.
 alias ll='ls -lF --group-dirs first' # Directories first.
 alias la='ll -a' # Show hidden files.
 # End ls Aliases
-
-alias open='xdg-open'
 
 # Use dircolors to set $LC_COLORS
 if [ -f /usr/bin/dircolors ]; then
@@ -196,6 +195,20 @@ function ii(){
 function fd() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf --height=70% +m --reverse --preview="") && cd "$dir"
+}
+
+# Fuzzy file opening
+function o() {
+  local file="$(fzf)"
+  if [[ -n $file ]]; then
+	local ft="$(mimetype --output-format %m $file)"
+	local default_program="$(xdg-mime query default $ft)"
+	if [[ "$default_program" == "vim.desktop" ]]; then
+	  vim $file
+	else
+	  mimeopen $file &>/dev/null
+	fi
+  fi;
 }
 
 # Text to PDF

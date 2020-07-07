@@ -1,12 +1,11 @@
 #!/bin/bash
-ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
+ROFI_OPTIONS=(-theme $HOME/.config/rofi/config-browser)
 
 select=$(echo "Configs
 Shell
 Scripts
 Bin
 Functions" | awk '{print $(NF-1)}' | rofi "${ROFI_OPTIONS[@]}" -dmenu -i -p "Config: ")
-
 
 
 navigate(){
@@ -25,7 +24,6 @@ navigate(){
 }
 
 
-
 if [ "$select" == "Shell" ] ; then
 	selected=$(echo "$HOME/.vimrc
 $HOME/.zshrc
@@ -35,16 +33,16 @@ $HOME/.tmux.conf" | rofi "${ROFI_OPTIONS[@]}" -dmenu -p "shell: ")
 	tmux-sendkeys config "vim $selected"
 
 elif [ "$select" == "Configs" ] ; then
-	navigate /home/piero/.config;
+	navigate $HOME/.config;
 
 elif [ "$select" == "Scripts" ] ; then
-	navigate /home/piero/.scripts;
+	navigate $HOME/.scripts;
 
 elif [ "$select" == "Bin" ] ; then
-	navigate /home/piero/.bin;
+	navigate $HOME/.bin;
 
 elif [ "$select" == "Functions" ] ; then
-	navigate /home/piero/.func;
+	navigate $HOME/.func;
 
 else
     echo $select

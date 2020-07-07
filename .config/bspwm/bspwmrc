@@ -14,21 +14,23 @@ dunst -config ~/.config/dunst/dunst &
 killall -q sxhkd
 while pgrep -x sxhkd >/dev/null; do sleep 1; done
 
-feh --bg-fill ~/Pictures/Wallpapers/chuttersnap-kuala-lumpur-unsplash.jpg
-
-xrdb ~/.xrdb/colors &
-
 # Input Handler
 sxhkd &
-
-# TODO: Fix locker
-xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &
 
 # Normal cursor
 xsetroot -cursor_name left_ptr &
 
+# Xresource db update
+xrdb -merge $HOME/.Xresources &
+
+# Background
+feh --bg-fill ~/Pictures/Wallpapers/chuttersnap-kuala-lumpur-unsplash.jpg
+
+# TODO: Fix locker
+xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &
+
 # Workspaces
-# NOTE: This distributes 10 workspaces evenly amongst all the connected monitors
+# NOTE: This distributes 10 workspaces evenly amongst all connected monitors
 i=1
 n=`bspc query -M | wc -l`
 per=$(( 11 / n ))
@@ -39,9 +41,6 @@ done
 
 # Polybar
 bash /home/piero/.config/polybar/launch.sh &
-
-# Colors
-. "${HOME}/.xrdb/colors"
 
 bspc config normal_border_color "$color1"
 bspc config active_border_color "$color2"
@@ -73,4 +72,3 @@ bspc rule -a Chromium desktop='2' follow=on
 bspc rule -a Spotify desktop='4'
 bspc rule -a Zathura desktop='3' state=tiled follow=on
 bspc rule -a 'Primal Engine' state=floating
-bspc rule -a 'Routing Project' state=floating

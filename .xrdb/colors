@@ -1,7 +1,3 @@
-st.alpha: 1
-st.font: FuraMono Nerd Font Mono:pixelsize=15:style=Bold
-st.cursorcolor: #FF69B4
-st.cursorshape: 6
 ! special
 *.foreground:   #9ca1b8
 *.background:   #0f0f13

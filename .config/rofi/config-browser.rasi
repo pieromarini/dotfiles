@@ -1,0 +1,38 @@
+/*
+	Custom rofi app launcher
+*/
+
+@import "globals.rasi"
+
+* {
+	background-color:	@background;
+	background-light:	@background-light;
+
+	text-color:			@foreground;
+	font:				@font;
+}
+
+cofiguration {
+	show-icons:			false;
+	threads:			0;
+	scroll-method:		0;
+	disable-history:	false;
+	fullscreen:			false;
+	hide-scrollbar:		false;
+	sidebar-mode:		false;
+}
+
+window {
+	height:				30%;
+	width:				500;
+}
+
+#element.selected.normal {
+    text-color: @selected;
+}
+
+#element.selected.active {
+    text-color: @selected;
+}
+
+/* vim:ft=css

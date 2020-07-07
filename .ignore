@@ -1,5 +1,6 @@
 migrations/
 node_modules/
-__pycache__
+__pycache__/
 .git/
 vendor/
+lib/

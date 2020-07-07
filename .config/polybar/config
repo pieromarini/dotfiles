@@ -1,121 +1,80 @@
+[colors]
+background = #222
+foreground = #dfdfdf
+foreground-light = #555
+yellow = #ffb52a
+green = #e60053
+blue = #bd2c40
+black = #000000
+white = #FFFFFF
+trans = #00000000
+
 [bar/main]
+width = 98.7%
+height = 30
+offset-x = 0.6%
+offset-y = 1.25%
+padding = 2
+radius = 0
+fixed-center = true
 
-;------------;
-; DIMENSIONS ;
-;------------;
+separator = |
 
-width = 100%
-height = 20
-offset-y = 0
-offset-x = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
 
-border-top-size = 10
-border-bottom-size = 0
-border-right-size = 10
-border-left-size = 10
+line-size = 2
+line-color = #f00
 
-;----------;
-; LOCATION ;
-;----------;
+module-margin-left = 1
+module-margin-right = 1
 
-bottom = false
-monitor = eDP-1
-wm-restack = bspwm
-override-redirect = false
 
-;-------;
-; FONTS ;
-;-------;
+;===FONTS===
 
 font-0 = "SauceCodePro Nerd Font:size=11;3"
-font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
-font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
-font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
+font-1 = "FontAwesome5Free:style=Solid:pixelsize=12;2"
+font-3 = "FontAwesome5Brands:pixelsize=12;2"
 
-;--------;
-; COLORS ;
-;--------;
-background = 0
-foreground = #a6a9b7
-border-color = 0
-third = ${xrdb:color2:#222}
 
-;---------------;
-; MISCELLANEOUS ;
-;---------------;
+;===MODULES===
 
-fixed-center = true
-padding-left = 1
-padding-right = 1
-module-margin = 1.5
+modules-left = rofi-menu bspwm xwindow
+modules-center = spotify
+modules-right = arch-updates eth wlan bluetooth-status battery cpu memory pulseaudio date
+ 
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
 
-modules-left = pulseaudio backlight battery arch-updates
-modules-center = bspwm
-modules-right = spotify bluetooth-status wlan cpu memory date time
-
-tray-position = none
-tray-detached = true
-
-[bar/external]
-;------------;
-; DIMENSIONS ;
-;------------;
-
-width = 100%
-height = 20
-offset-y = 0
-offset-x = 0
-
-border-top-size = 10
-border-bottom-size = 0
-border-right-size = 10
-border-left-size = 10
-
-;----------;
-; LOCATION ;
-;----------;
-
-bottom = false
-monitor = HDMI-1
 wm-restack = bspwm
-override-redirect = false
 
-;-------;
-; FONTS ;
-;-------;
+;override-redirect = true
 
-font-0 = "SauceCodePro Nerd Font:size=11;3"
-font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
-font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
-font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
 
-;--------;
-; COLORS ;
-;--------;
-background = 0
-foreground = #a6a9b7
-border-color = 0
-third = ${xrdb:color2:#222}
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
 
-;---------------;
-; MISCELLANEOUS ;
-;---------------;
+cursor-click = pointer
+cursor-scroll = ns-resize
 
-fixed-center = true
-padding-left = 1
-padding-right = 1
-module-margin = 1.5
+enable-ipc = true
 
-modules-left = pulseaudio battery arch-updates
-modules-center = bspwm
-modules-right = spotify bluetooth-status wlan cpu memory date time
 
-tray-position = none
-tray-detached = true
+;===MODULES===
 
-;---------;
-; MODULES ;
-;---------;
+
+[module/rofi-menu]
+type = custom/text
+content = 
+
+content-padding = 0
+
+click-left = ~/.config/rofi/menu/launcher.sh
+click-right = ~/.config/rofi/menu/window.sh
+
 
 [module/bspwm]
 type = internal/bspwm
@@ -153,84 +112,169 @@ label-urgent-foreground = ${xrdb:color1}
 label-empty = %icon%
 label-empty-padding = 1.5
 
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
 
-[module/time]
-type = internal/date
-interval = 1.0
-date =  %H:%M
+[module/xbacklight]
+type = internal/xbacklight
 
+format = <label> <bar>
+label = BL
 
-[module/date]
-type = internal/date
-date =  %e %B
-label = %date%
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
 
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-poll-interval = 1
-full-at = 95
-label-discharging = %percentage%%
-label-charging = %percentage%%
-label-full = %percentage%%
-format-discharging = <ramp-capacity> <label-discharging>
-format-full = <ramp-capacity> <label-full>
-format-charging =  <label-charging>
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-
-
-[module/pulseaudio]
-type = internal/pulseaudio
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
-use-ui-max = true
-interval = 5
-format-volume = <ramp-volume> <label-volume>
-format-muted =  muted
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-click-right = pavucontrol &
-
-
-[module/backlight]
+[module/backlight-acpi]
+inherit = module/xbacklight
 type = internal/backlight
-; Use the following command to list available cards:
-; $ ls -1 /sys/class/backlight/
 card = intel_backlight
-format = <ramp> <label>
-label = %percentage%%
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-light}
+;format-underline = #f90000
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+enable-click = true
+click-left = urxvt -e 'htop'
+
+interval = 2
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-light}
+label = %gb_used%
 
 
 [module/wlan]
 type = internal/network
 interface = wlp3s0
 interval = 5
-label-connected =  %essid%
-label-disconnected =  Not Connected
+
+format-connected = <ramp-signal> <label-connected>
+;format-connected-underline = #9f78e1
+label-connected = %essid%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-light}
 
 
-[module/cpu]
-type = internal/cpu
-label =  %percentage%%
-
-
-[module/memory]
-type = internal/memory
-label =  %gb_used%
-
-
-[module/network]
+[module/eth]
 type = internal/network
-interface = wlp3s0
-label-connected =  %downspeed% |  %upspeed%
+interface = enp0s3
+interval = 3.0
+
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-light}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = %e %B
+time = %H:%M:%S
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-light}
+
+label = %date% %time%
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = 
+label-volume-foreground = ${root.foreground}
+
+label-muted = " sound muted"
+label-muted-foreground = #666
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = true
+bar-volume-indicator = 
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-light}
+
+click-right = pavucontrol &
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+;format-charging-underline = #ffb52a
+
+format-discharging = <animation-discharging> <label-discharging>
+;format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-light}
+;format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-foreground = ${colors.foreground-light}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-foreground = ${colors.foreground-light}
+animation-charging-framerate = 500
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-foreground = ${colors.foreground-light}
+animation-discharging-framerate = 500
 
 
 [module/spotify]
@@ -253,3 +297,12 @@ click-left = ~/.bin/bluetooth-status --toggle &
 type = custom/script
 exec = ~/.bin/arch-updates
 interval = 600
+
+
+[settings]
+screenchange-reload = true
+
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5

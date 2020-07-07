@@ -7,17 +7,20 @@ super + Return
 ### Menus
 
 # Rofi
-super + {Tab}
-	~/.config/rofi/menu/RUN
+super + r
+	~/.config/rofi/menu/launcher.sh
 
 super + p
-	~/.config/rofi/menu/SEARCH
+	~/.config/rofi/menu/search.sh
 
 super + alt + Escape
-	~/.config/rofi/menu/SYSTEM
+	~/.config/rofi/menu/system.sh
 
 super + alt + Delete
-	~/.config/rofi/menu/CONFIG
+	~/.config/rofi/menu/config.sh
+
+super + {Tab}
+	~/.config/rofi/menu/window.sh
 
 ### APPS
 

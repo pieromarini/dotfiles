@@ -1,0 +1,22 @@
+/*
+	Global settings
+*/
+
+* {
+  background:		#222222;
+  foreground-light:	#555555;
+  foreground:		#dfdfdf;
+  red:				#71504e;
+
+  selected:			#62b3e4;
+}
+
+* {
+  font:			"Source Code Pro 12";
+}
+
+* {
+  padding:		5;
+}
+
+/* vim:ft=css

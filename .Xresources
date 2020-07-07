@@ -22,15 +22,15 @@ rofi.terminal: urxvt
 *.color11:      #657b83
 
 ! blue
-*.color4:       #268bd2
-*.color12:      #839496
+*.color4:       #639ce8
+*.color12:      #a1c1eb
 
 ! magenta
 *.color5:       #d33682
 *.color13:      #6c71c4
 
 ! cyan
-*.color6:       #2aa198
+*.color6:       #62b3e4
 *.color14:      #93a1a1
 
 ! white

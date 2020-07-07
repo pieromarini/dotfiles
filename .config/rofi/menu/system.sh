@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen)
+ROFI_OPTIONS=(-theme $HOME/.config/rofi/system)
 
 select=$(echo "Lock
 Suspend

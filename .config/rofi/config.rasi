@@ -1,0 +1,10 @@
+configuration {
+	modi: "window,drun";
+	
+	location: 1;
+	yoffset: 50;
+	xoffset: 12;
+	
+	show-icons: true;
+	icon-theme: "Papirus";
+}

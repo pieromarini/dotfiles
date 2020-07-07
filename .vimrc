@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 27 Apr 2020
+" Last Edit: 01 Jul 2020
 " Author: Piero Marini
 
 
@@ -133,6 +133,9 @@ endif
 " custom command to populate and open the quickfix list (if results exist)
 command! -bar -nargs=1 Grep silent grep <q-args> | redraw! | cw
 
+nnoremap [g :cp<CR>
+nnoremap ]g :cn<CR>
+
 """" UltiSnips """"
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsListSnippets="<c-0>"
@@ -170,12 +173,12 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 
-"""" Coc """"
+"""" CoC.nvim """"
 " Use tab for trigger completion
 inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -184,11 +187,6 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -199,7 +197,7 @@ else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif"
 
-" Use `[g` and `]g` to navigate diagnostics
+" Navigate diagnostics
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>m <Plug>(coc-diagnostic-next)
 
@@ -364,15 +362,9 @@ autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue
 
 """" EXECUTE/COMPILE KeyBindings """"
 
-" NOTE: Command used to compile/run PrimalEngine project
-" TODO: Create a smart tree traversal until a Makefile is present (with a depth max)
-autocmd FileType cpp nnoremap <F9> :w <bar> exec '!cd ../build && make && prime-run ./sandbox'<CR>
-
 autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-
 autocmd FileType c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
-" autocmd FileType python nnoremap <F10> :w <bar> exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
 autocmd FileType python nnoremap <F10> :w <bar> :term python %<CR>
 
@@ -381,12 +373,7 @@ autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open ' . shellescape(expand('%:r') . '.pdf', 1) . ' &'<CR>
 
-autocmd FileType verilog nnoremap <F10> :w <bar> exec '!iverilog '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-
 autocmd FileType markdown nnoremap <F10> :w <bar> exec '!grip '. shellescape('%').' -b --quiet &'<CR>
-
-autocmd FileType java nnoremap <F10> :w <bar> :exec '!javac ' .shellescape('%'). '&& java ' shellescape(expand('%:r')) <CR>
-
 
 """" END SCRIPT EXECUTION/COMPILING """"
 
