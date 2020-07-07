@@ -100,7 +100,7 @@ format = <label-state> <label-mode>
 
 label-focused = %icon%
 label-focused-padding = 1.5
-label-focused-foreground = ${xrdb:color6}
+label-focused-foreground = ${xrdb:color14}
 
 label-occupied = %icon%
 label-occupied-padding = 1.5

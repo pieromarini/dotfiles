@@ -27,7 +27,7 @@ xrdb -merge $HOME/.Xresources &
 feh --bg-fill ~/Pictures/Wallpapers/chuttersnap-kuala-lumpur-unsplash.jpg
 
 # TODO: Fix locker
-xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &
+# xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &
 
 # Workspaces
 # NOTE: This distributes 10 workspaces evenly amongst all connected monitors
