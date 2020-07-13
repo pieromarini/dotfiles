@@ -2,7 +2,7 @@
 
 # St
 super + Return
-	urxvt
+	alacritty
 
 ### Menus
 
@@ -94,7 +94,7 @@ alt + {h,l}
 
 # focus the last node/desktop
 alt + {Tab,bar}
-	bspc {node,desktop} -f last
+	bspc {desktop,node} -f last
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}

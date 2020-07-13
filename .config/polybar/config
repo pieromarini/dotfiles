@@ -2,18 +2,19 @@
 background = #222
 foreground = #dfdfdf
 foreground-light = #555
+red = #e53935
 yellow = #ffb52a
 green = #e60053
-blue = #bd2c40
+blue = #639ce8
 black = #000000
-white = #FFFFFF
+white = #ffffff
 trans = #00000000
 
 [bar/main]
-width = 98.7%
+width = 98.8%
 height = 30
-offset-x = 0.6%
-offset-y = 1.25%
+offset-x = 0.55%
+offset-y = 10
 padding = 2
 radius = 0
 fixed-center = true
@@ -34,28 +35,19 @@ module-margin-right = 1
 
 font-0 = "SauceCodePro Nerd Font:size=11;3"
 font-1 = "FontAwesome5Free:style=Solid:pixelsize=12;2"
-font-3 = "FontAwesome5Brands:pixelsize=12;2"
+font-2 = "FontAwesome5Brands:pixelsize=12;2"
 
 
 ;===MODULES===
 
-modules-left = rofi-menu bspwm xwindow
+modules-left = bspwm unread-email arch-updates 
 modules-center = spotify
-modules-right = arch-updates eth wlan bluetooth-status battery cpu memory pulseaudio date
+modules-right = eth wlan bluetooth-status battery cpu memory pulseaudio-control date
  
 tray-position = right
 tray-padding = 2
-;tray-background = #0063ff
 
 wm-restack = bspwm
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -64,16 +56,6 @@ enable-ipc = true
 
 
 ;===MODULES===
-
-
-[module/rofi-menu]
-type = custom/text
-content = 
-
-content-padding = 0
-
-click-left = ~/.config/rofi/menu/launcher.sh
-click-right = ~/.config/rofi/menu/window.sh
 
 
 [module/bspwm]
@@ -91,30 +73,24 @@ ws-icon-3 = 4;
 ws-icon-4 = 5;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-9 = 10;
-ws-icon-default = 
+ws-icon-7 = 8;
 
 format = <label-state> <label-mode>
 
 label-focused = %icon%
 label-focused-padding = 1.5
-label-focused-foreground = ${xrdb:color14}
+label-focused-foreground = ${colors.blue}
 
 label-occupied = %icon%
 label-occupied-padding = 1.5
 
 label-urgent = %icon%
 label-urgent-padding = 1.5
-label-urgent-foreground = ${xrdb:color1}
+label-urgent-foreground = ${colors.red}
 
 label-empty = %icon%
 label-empty-padding = 1.5
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -133,10 +109,12 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
+
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
+
 
 [module/cpu]
 type = internal/cpu
@@ -145,6 +123,7 @@ format-prefix = " "
 format-prefix-foreground = ${colors.foreground-light}
 ;format-underline = #f90000
 label = %percentage:2%%
+
 
 [module/memory]
 type = internal/memory
@@ -155,7 +134,7 @@ interval = 2
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-light}
-label = %gb_used%
+label = " %gb_used%"
 
 
 [module/wlan]
@@ -164,14 +143,9 @@ interface = wlp3s0
 interval = 5
 
 format-connected = <ramp-signal> <label-connected>
-;format-connected-underline = #9f78e1
-label-connected = %essid%
+label-connected = " %essid%"
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected = ""
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -204,40 +178,25 @@ interval = 1
 date = %e %B
 time = %H:%M:%S
 
-format-prefix = 
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-light}
 
 label = %date% %time%
 
 
-[module/pulseaudio]
-type = internal/pulseaudio
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+label=%output%
 
-format-volume = <label-volume> <bar-volume>
-label-volume = 
-label-volume-foreground = ${root.foreground}
-
-label-muted = " sound muted"
-label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = true
-bar-volume-indicator = 
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-light}
-
-click-right = pavucontrol &
+exec = ~/.bin/pulseaudio-control listen
+click-right = exec pavucontrol &
+click-left = ~/.bin/pulseaudio-control togmute
+click-middle = ~/.bin/pulseaudio-control next-sink
+scroll-up = ~/.bin/pulseaudio-control up
+scroll-down = ~/.bin/pulseaudio-control down
+label-padding = 0
+label-foreground = ${colors.foreground}
 
 
 [module/battery]
@@ -252,27 +211,27 @@ format-charging = <animation-charging> <label-charging>
 format-discharging = <animation-discharging> <label-discharging>
 ;format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = 
 format-full-prefix-foreground = ${colors.foreground-light}
 ;format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
 ramp-capacity-foreground = ${colors.foreground-light}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
 animation-charging-foreground = ${colors.foreground-light}
 animation-charging-framerate = 500
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
+animation-discharging-0 = " "
+animation-discharging-1 = " "
+animation-discharging-2 = " "
+animation-discharging-3 = " "
 animation-discharging-foreground = ${colors.foreground-light}
 animation-discharging-framerate = 500
 
@@ -281,9 +240,9 @@ animation-discharging-framerate = 500
 type = custom/script
 interval = 1
 format-prefix = " "
+format-prefix-foreground = #1db954
 format = <label>
-exec = python ~/.bin/spotify-dbus.py -f '{artist}: {song}'
-format-underline = #1db954
+exec = python ~/.bin/spotify-dbus.py -f ' {artist}: {song}'
 
 
 [module/bluetooth-status]
@@ -297,6 +256,13 @@ click-left = ~/.bin/bluetooth-status --toggle &
 type = custom/script
 exec = ~/.bin/arch-updates
 interval = 600
+
+
+[module/unread-email]
+type = custom/script
+exec = ~/.bin/gmail/launch.py --label "INBOX"
+tail = true
+click-left = xdg-open https://mail.google.com
 
 
 [settings]

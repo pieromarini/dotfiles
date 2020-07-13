@@ -1,0 +1,108 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+window:
+  padding:
+    x: 10
+    y: 10
+
+  dynamic_padding: false
+
+  decorations: none
+
+  title: Alacritty
+
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+
+font:
+  normal:
+    family: SauceCodePro Nerd Font
+    style: Regular
+
+  bold:
+    family: SauceCodePro Nerd Font
+    style: Bold
+
+  italic:
+    family: SauceCodePro Nerd Font
+    style: Italic
+
+  bold_italic:
+    family: SauceCodePro Nerd Font
+    style: Bold Italic
+
+  size: 11
+
+
+visual_bell:
+  animation: EaseOutExpo
+  duration: 1
+  color: '#ffffff'
+
+background_opacity: 0.9
+
+
+# Colors
+colors:
+  primary:
+    background: '#212121'
+    foreground: '#eeffff'
+
+  normal:
+    black:   '#000000'
+    red:     '#e53935'
+    green:   '#91b859'
+    yellow:  '#ffb62c'
+    blue:    '#6182b8'
+    magenta: '#ff5370'
+    cyan:    '#39adb5'
+    white:   '#a0a0a0'
+
+  bright:
+    black:   '#4e4e4e'
+    red:     '#ff5370'
+    green:   '#c3e88d'
+    yellow:  '#ffcb6b'
+    blue:    '#82aaff'
+    magenta: '#f07178'
+    cyan:    '#89ddff'
+    white:   '#ffffff'
+
+
+selection:
+  save_to_clipboard: true
+
+
+dynamic_title: true
+
+
+cursor:
+  style: Block
+
+
+live_config_reload: true
+
+
+mouse:
+  url:
+    launcher:
+      program: xdg-open
+      args: []
+
+
+key_bindings:
+  - { key: V,        mods: Alt,           action: Paste            }
+  - { key: C,        mods: Alt,           action: Copy             }
+  - { key: Insert,   mods: Shift,         action: PasteSelection   }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }

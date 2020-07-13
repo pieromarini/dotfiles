@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROFI_OPTIONS=(-theme /home/piero/.config/rofi/rofi_full -m 0 -fullscreen)
+ROFI_OPTIONS=(-theme /home/piero/.config/rofi/system)
 
 if [ -z "$2" ] ; then
 	ask="run $1"

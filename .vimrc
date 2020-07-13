@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 01 Jul 2020
+" Last Edit: 13 Jul 2020
 " Author: Piero Marini
 
 
@@ -13,22 +13,28 @@
 " Vim-Tmux-Navigator (Integration for tmux panels with vim splits)
 " Vim-GLSL
 " Fzf
-" UltiSnips
 
 """ End Plugin List """
 
 set encoding=utf-8
 
+set fillchars+=vert:│
+
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+set termguicolors
+
 filetype on
+
 filetype plugin on
 filetype indent on
 syntax on
 
 let python_highlight_all=1
 
-" Adding Fzf & UltiSnips to runtime path.
+" Add Fzf to runtime path.
 set rtp+=~/.fzf
-set rtp+=~/.vim/pack/marini/start/ultisnips
 
 set pyxversion=3
 
@@ -135,16 +141,6 @@ command! -bar -nargs=1 Grep silent grep <q-args> | redraw! | cw
 
 nnoremap [g :cp<CR>
 nnoremap ]g :cn<CR>
-
-"""" UltiSnips """"
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsListSnippets="<c-0>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="vertical"
-
-let g:UltiSnipsSnippetsDir=$HOME . "/.vim/snippets/ultisnips"
-let g:UltiSnipsSnippetDirectories=[$HOME . "/.vim/snippets/ultisnips"]
 
 """" FZF """"
 let g:fzf_action = {
@@ -307,44 +303,36 @@ endfunction
 set laststatus=2
 set statusline=
 set statusline+=%{StatuslineUpdate()}                      " Changing the statusline color
-set statusline+=%1*\ %{toupper(g:currentmode[mode()])}%9* " Current mode
+set statusline+=%1*\ %{toupper(g:currentmode[mode()])}     " Current mode
 set statusline+=%4*\ %{GitInfo()}                          " Git
 set statusline+=%2*\ [%n]                                  " buffer
 set statusline+=%2*\ %f\ %{ReadOnly()}\ %m\ %w\            " File+path
 
 set statusline+=%2*\ %=                                    " Space
 
-set statusline+=%8*%5*\ %y                                " FileType
+set statusline+=%5*\ %y                                    " FileType
 set statusline+=%5*\ %{(&fenc!=''?&fenc:&enc)}             " Encoding & Fileformat
-set statusline+=%6*\ %{StatusDiagnostic()}\ 			   " CocStatus
-set statusline+=%7*%1*%3p%%(%L)\ ☰\ %l:\ %2c\             " %(Total) Line: Col
+set statusline+=%5*\ %{StatusDiagnostic()}\ 			   " CocStatus
+set statusline+=%5*%3p%%(%L)\                               " %(Total) 
+set statusline+=%1*\ %l:\ %2c\ 			                   " Line: Col
+
+" valid values: 'default' (default), 'darker', 'pure'
+let g:equinusocio_material_style = 'darker'
+let g:equinusocio_material_less = 100
+let g:equinusocio_material_hide_vertsplit = 1
+let g:equinusocio_material_bracket_improved = 1
 
 set background=dark
-colorscheme solarized
 
-hi Normal ctermbg=NONE
+colorscheme equinusocio_material
 
-hi User1 ctermfg=231 ctermbg=39 
-hi User2 ctermfg=231 ctermbg=8
-hi User4 ctermfg=160 ctermbg=8
-hi User5 ctermfg=231 ctermbg=246
-hi User6 ctermfg=160 ctermbg=246
-
-" Used for rendering the separators correctly.
-hi User7 ctermfg=39 ctermbg=246
-hi User8 ctermfg=246 ctermbg=8
-hi User9 ctermfg=39 ctermbg=8
-
-" END STATUS LINE
-"
+hi! Normal ctermbg=NONE guibg=NONE
 
 """ GLSL Syntax Highlightin """
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
-
 """ EMMET VIM """
 let g:user_emmet_leader_key= '<C-y>'
-
 """ END EMMET VIM """
 
 """" SNIPPETS """"
@@ -389,32 +377,17 @@ endf
 
 """" PRETTY OUTPUTS """"
 function! PrettyXML()
-	" save the filetype so we can restore it later
 	let l:origft = &ft
 	set ft=
-	" delete the xml header if it exists. This will
-	" permit us to surround the document with fake tags
-	" without creating invalid xml.
 	1s/<?xml .*?>//e
-	" insert fake tags around the entire document.
-	" This will permit us to pretty-format excerpts of
-	" XML that may contain multiple top-level elements.
 	0put ='<PrettyXML>'
 	$put ='</PrettyXML>'
 	silent %!xmllint --format -
-	" xmllint will insert an <?xml?> header. it's easy enough to delete
-	" if you don't want it.
-	" delete the fake tags
 	2d
 	$d
-	" restore the 'normal' indentation, which is one extra level
-	" too deep due to the extra tags we wrapped around the document.
 	silent %<
-	" back to home
 	1
-	" restore the filetype
 	exe "set ft=" . l:origft
-	" Indent properly.
 	normal gg=G
 endfunction
 
@@ -425,14 +398,6 @@ endfunction
 command! FormatXml call PrettyXML()
 command! FormatJson call PrettyJSON() 
 """" END PRETTY OUTPUTS """"
-
-"""" C++ Better Highlighting. """"
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_concepts_highlight = 1
-let c_no_curly_error = 1
-let g:cpp_simple_highlight = 1
 
 """ Auto Closing Brackets '[]' and Parenthesis '()' """
 """ This doesn't write the closing character if it's already present. """
