@@ -7,6 +7,8 @@ window:
 
   dynamic_padding: false
 
+  dynamic_title: true
+
   decorations: none
 
   title: Alacritty
@@ -41,7 +43,7 @@ font:
   size: 11
 
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 1
   color: '#ffffff'
@@ -78,9 +80,6 @@ colors:
 
 selection:
   save_to_clipboard: true
-
-
-dynamic_title: true
 
 
 cursor:

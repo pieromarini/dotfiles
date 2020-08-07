@@ -20,7 +20,9 @@ SINK_BLACKLIST=(
 # Maps PulseAudio sink names to human-readable names
 declare -A SINK_NICKNAMES
 SINK_NICKNAMES["alsa_output.pci-0000_00_1f.3.analog-stereo"]="Headphones"
-SINK_NICKNAMES["alsa_output.0.hdmi-stereo "]="HDMI"
+SINK_NICKNAMES["alsa_output.pci-0000_00_1f.3.hdmi-stereo"]="HDMI"
+SINK_NICKNAMES["alsa_output.usb-Razer_Razer_Nari_Ultimate-00.analog-game"]="Nari Game"
+SINK_NICKNAMES["alsa_output.usb-Razer_Razer_Nari_Ultimate-00.analog-chat"]="Nari Chat"
 
 
 # Environment & global constants for the script

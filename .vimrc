@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 13 Jul 2020
+" Last Edit: 06 Aug 2020
 " Author: Piero Marini
 
 
@@ -262,6 +262,7 @@ function! GitInfo()
 	else
 		return ''
 endfunction
+
 
 " Automatically change the statusline color depending on mode
 function! StatuslineUpdate()
