@@ -13,7 +13,6 @@ from httplib2 import ServerNotFoundError
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--label', default='INBOX')
 parser.add_argument('-p', '--prefix', default='\uf0e0')
-parser.add_argument('-ns', '--nosound', action='store_true')
 args = parser.parse_args()
 
 DIR = Path(__file__).resolve().parent
@@ -41,11 +40,6 @@ def get_unread_email(count_was, creds, label, color):
     labels = gmail.users().labels().get(userId='me', id=label).execute()
     count = labels['messagesUnread']
     formatted_output = format_count(count, color)
-
-    # NOTE: Sound notification
-    if count_was != count:
-        if not args.nosound and count > count_was:
-            subprocess.run(['canberra-gtk-play', '-i', 'message'])
 
     return count, formatted_output
 

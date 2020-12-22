@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 06 Aug 2020
+" Last Edit: 24 Nov 2020
 " Author: Piero Marini
 
 
@@ -12,16 +12,15 @@
 " Vim-Vue (Syntax Highlighting for .vue files)
 " Vim-Tmux-Navigator (Integration for tmux panels with vim splits)
 " Vim-GLSL
-" Fzf
+" Fzf (Fuzzy search)
+" VimTex
 
 """ End Plugin List """
 
-set encoding=utf-8
-
-set fillchars+=vert:│
-
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+set encoding=utf-8
 
 set termguicolors
 
@@ -124,7 +123,7 @@ nnoremap <Leader>v <C-v>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>c :Commits<CR>
 nnoremap <Leader>f :Rg<CR>
-nnoremap <Leader>o :FZF<CR>
+nnoremap <Leader>o :Files<CR>
 
 nnoremap <Leader>g :Grep 
 
@@ -151,7 +150,7 @@ let g:fzf_action = {
 
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_buffers_jump = 1
-let g:fzf_tags_command = 'ctags -R'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -168,6 +167,26 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \	  fzf#vim#with_preview(), <bang>0)
+
+
+let g:tex_flavor = 'latex'
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-pdf',
+    \   '-shell-escape',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
 
 """" CoC.nvim """"
 " Use tab for trigger completion
@@ -202,6 +221,12 @@ nmap <silent> <Leader>t <Plug>(coc-definition)
 nmap <silent> <Leader>d <Plug>(coc-type-definition)
 nmap <silent> <Leader>i <Plug>(coc-implementation)
 nmap <silent> <Leader>l <Plug>(coc-references)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -317,17 +342,19 @@ set statusline+=%5*\ %{StatusDiagnostic()}\ 			   " CocStatus
 set statusline+=%5*%3p%%(%L)\                               " %(Total) 
 set statusline+=%1*\ %l:\ %2c\ 			                   " Line: Col
 
-" valid values: 'default' (default), 'darker', 'pure'
-let g:equinusocio_material_style = 'darker'
-let g:equinusocio_material_less = 100
-let g:equinusocio_material_hide_vertsplit = 1
-let g:equinusocio_material_bracket_improved = 1
 
-set background=dark
+" Colorscheme
+let g:sonokai_style = 'andromeda'
 
-colorscheme equinusocio_material
+let g:sonokai_enable_italic = 0
+let g:sonokai_disable_italic_comment = 1
+let g:sonokai_transparent_background = 1
+let g:sonokai_current_word = 'bold'
+let g:sonokai_diagnostic_line_highlight = 0
+let g:sonokai_sign_column_background = 'none'
 
-hi! Normal ctermbg=NONE guibg=NONE
+colorscheme sonokai
+
 
 """ GLSL Syntax Highlightin """
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
@@ -351,7 +378,7 @@ autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue
 
 """" EXECUTE/COMPILE KeyBindings """"
 
-autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd FileType cpp nnoremap <F10> :w <bar> exec '!g++ -std=c++17 '.shellescape('%').' -g -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd FileType c nnoremap <F10> :w <bar> exec '!gcc -lm '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 autocmd FileType python nnoremap <F9> :w <bar> :term python -i %<CR>
@@ -362,7 +389,9 @@ autocmd FileType sh nnoremap <F10> :w <bar> :term bash %<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-escape' shellescape(@%, 1)<CR>
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open ' . shellescape(expand('%:r') . '.pdf', 1) . ' &'<CR>
 
-autocmd FileType markdown nnoremap <F10> :w <bar> exec '!grip '. shellescape('%').' -b --quiet &'<CR>
+if executable('grip')
+  autocmd FileType markdown nnoremap <silent> <F10> :exec '!grip -b %'<cr>
+endif
 
 """" END SCRIPT EXECUTION/COMPILING """"
 

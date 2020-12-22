@@ -1,9 +1,9 @@
 #   File: .zshrc
-#   Last Edit: 13 Jul 2020
+#   Last Edit: 22 Sep 2020
 #   Author: Piero Marini
 
 typeset -U path
-path=(~/.scripts ~/.bin ~/.npm-global/bin $path[@])
+path=(~/.scripts ~/.bin ~/.local/bin ~/.npm-global/bin $path[@])
 
 xrdb ~/.Xresources
 
@@ -25,7 +25,7 @@ export ZSH="/home/piero/.oh-my-zsh"
 
 export FZF_DEFAULT_COMMAND="rg --no-messages --files --hidden --ignore-file ~/.ignore"
 export FZF_DEFAULT_OPTS="
-  --preview=\"(bat --style=numbers,changes --color=always {}) 2>/dev/null | head -200\" 
+  --preview=\"(bat --style=numbers,changes --color=always {}) 2>/dev/null\" 
   --preview-window=right:60%:wrap 
   --color fg:-1,bg:-1,hl:33,fg+:254,bg+:235,hl+:33
   --color info:136,prompt:136,pointer:230,marker:230,spinner:136

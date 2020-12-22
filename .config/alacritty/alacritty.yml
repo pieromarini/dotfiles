@@ -52,31 +52,29 @@ background_opacity: 0.9
 
 
 # Colors
-colors:
-  primary:
-    background: '#212121'
-    foreground: '#eeffff'
+primary:
+  background: "0x2b2d3a"
+  foreground: "0xe1e3e4"
 
-  normal:
-    black:   '#000000'
-    red:     '#e53935'
-    green:   '#91b859'
-    yellow:  '#ffb62c'
-    blue:    '#6182b8'
-    magenta: '#ff5370'
-    cyan:    '#39adb5'
-    white:   '#a0a0a0'
+normal:
+  black: "0x181a1c"
+  red: "0xfb617e"
+  green: "0x9ed06c"
+  yellow: "0xedc763"
+  blue: "0x6dcae8"
+  magenta: "0xbb97ee"
+  cyan: "0xf89860"
+  white: "0xe1e3e4"
 
-  bright:
-    black:   '#4e4e4e'
-    red:     '#ff5370'
-    green:   '#c3e88d'
-    yellow:  '#ffcb6b'
-    blue:    '#82aaff'
-    magenta: '#f07178'
-    cyan:    '#89ddff'
-    white:   '#ffffff'
-
+bright:
+  black: "0x181a1c"
+  red: "0xfb617e"
+  green: "0x9ed06c"
+  yellow: "0xedc763"
+  blue: "0x6dcae8"
+  magenta: "0xbb97ee"
+  cyan: "0xf89860"
+  white: "0xe1e3e4"
 
 selection:
   save_to_clipboard: true
@@ -102,6 +100,5 @@ key_bindings:
   - { key: Insert,   mods: Shift,         action: PasteSelection   }
   - { key: Key0,     mods: Control,       action: ResetFontSize    }
   - { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  - { key: Add,      mods: Control,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Plus,     mods: Control,       action: IncreaseFontSize }
   - { key: Minus,    mods: Control,       action: DecreaseFontSize }

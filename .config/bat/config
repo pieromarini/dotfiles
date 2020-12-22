@@ -29,8 +29,5 @@
 # Never use a pager utility.
 --paging=never
 
-# Only print first 200 lines.
---line-range :200
-
 # Use 4 length spaced tabs.
 --tabs=4

@@ -26,7 +26,7 @@ super + {Tab}
 
 # Chromium
 super + c
-	chromium
+	brave
 
 
 ### Multimedia
