@@ -7,6 +7,6 @@ polybar main &
 
 # NOTE: Launch secondary polybar if HDMI is connected
 hdmi_monitor=$(xrandr -q | grep 'HDMI-1')
-if [[ $hdmi_monitor = *connected* ]]; then
+if [[ $hdmi_monitor != *disconnected* ]]; then
     polybar external &
 fi

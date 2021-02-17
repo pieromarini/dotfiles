@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 24 Nov 2020
+" Last Edit: 12 Feb 2021
 " Author: Piero Marini
 
 
@@ -10,9 +10,9 @@
 " Emmet-Vim (Html/Css Fast Typing)
 " Vim-Fugitive (Git)
 " Vim-Vue (Syntax Highlighting for .vue files)
-" Vim-Tmux-Navigator (Integration for tmux panels with vim splits)
+" Vim-Tmux-Navigator
 " Vim-GLSL
-" Fzf (Fuzzy search)
+" Fzf.vim (Fuzzy search)
 " VimTex
 
 """ End Plugin List """
@@ -24,10 +24,7 @@ set encoding=utf-8
 
 set termguicolors
 
-filetype on
-
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 syntax on
 
 let python_highlight_all=1
@@ -47,6 +44,7 @@ set softtabstop=4
 set tabstop=4
 set smarttab
 set smartindent
+set backspace=indent,eol,start
 set hidden
 
 set scrolloff=6
@@ -212,6 +210,8 @@ else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif"
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " Navigate diagnostics
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>m <Plug>(coc-diagnostic-next)
@@ -283,11 +283,10 @@ endfunction
 function! GitInfo()
 	let git = fugitive#head()
 	if git != ''
-		return ' '.fugitive#head()
+		return ' '.git
 	else
 		return ''
 endfunction
-
 
 " Automatically change the statusline color depending on mode
 function! StatuslineUpdate()
@@ -330,7 +329,7 @@ set laststatus=2
 set statusline=
 set statusline+=%{StatuslineUpdate()}                      " Changing the statusline color
 set statusline+=%1*\ %{toupper(g:currentmode[mode()])}     " Current mode
-set statusline+=%4*\ %{GitInfo()}                          " Git
+set statusline+=%4*\ %{GitInfo()}						   " Git
 set statusline+=%2*\ [%n]                                  " buffer
 set statusline+=%2*\ %f\ %{ReadOnly()}\ %m\ %w\            " File+path
 
@@ -353,6 +352,8 @@ let g:sonokai_current_word = 'bold'
 let g:sonokai_diagnostic_line_highlight = 0
 let g:sonokai_sign_column_background = 'none'
 
+set background=dark
+
 colorscheme sonokai
 
 
@@ -363,7 +364,7 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 let g:user_emmet_leader_key= '<C-y>'
 """ END EMMET VIM """
 
-"""" SNIPPETS """"
+"""" CODE BOILERPLATES """"
 
 autocmd FileType tex,plaintex nnoremap <Leader>0 :-1read $HOME/.vim/snippets/t.tex<CR>3jf{a
 autocmd FileType make nnoremap <Leader>0 :-1read $HOME/.vim/snippets/Makefile<CR>
@@ -374,7 +375,7 @@ autocmd FileType c nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.c<CR>
 
 autocmd FileType vue nnoremap <Leader>0 :-1read $HOME/.vim/snippets/skeleton.vue<CR>7jf'a
 
-"""" END SNIPPETS """"
+"""" END CODE BOILERPLATES """"
 
 """" EXECUTE/COMPILE KeyBindings """"
 
@@ -390,7 +391,7 @@ autocmd FileType tex,plaintex nnoremap <buffer> <F9> :exec '!pdflatex --shell-es
 autocmd FileType tex,plaintex nnoremap <buffer> <F10> :exec '!xdg-open ' . shellescape(expand('%:r') . '.pdf', 1) . ' &'<CR>
 
 if executable('grip')
-  autocmd FileType markdown nnoremap <silent> <F10> :exec '!grip -b %'<cr>
+  autocmd FileType markdown nnoremap <silent> <F10> :exec '!grip -b %'<CR>
 endif
 
 """" END SCRIPT EXECUTION/COMPILING """"
