@@ -304,7 +304,7 @@ interval = 600
 [module/unread-email]
 type = custom/script
 exec = ~/.bin/gmail/launch.py --label "INBOX"
-tail = true
+interval = 30
 click-left = xdg-open https://mail.google.com
 
 

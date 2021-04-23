@@ -22,6 +22,9 @@ super + alt + Delete
 super + {Tab}
 	~/.config/rofi/menu/window.sh
 
+super + {bar}
+	~/.config/rofi/menu/horarios.sh
+
 ### APPS
 
 # Chromium

@@ -100,3 +100,5 @@ except errors.HttpError as error:
         print('There was an Http Error')
 except (ServerNotFoundError, OSError):
     print('Server not found')
+except Exception(e):
+    print(e)
