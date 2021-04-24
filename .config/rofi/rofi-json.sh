@@ -14,16 +14,13 @@ json=$(cat ${config_file})
 
 if [ $# -eq 1 ]; then
 	echo $json | jq --arg s $(date +"%d-%m-%Y") '
-	[($s) | strptime("%d-%m-%Y")] as $r | map(select((.date[:10] | strptime("%d-%m-%Y")) as $d | $d <= $r[0]))' | jq -cr '.[] | "\(.name)|\(.command)|\(.icon)"' |
-		while IFS="|" read -r name command icon
+	[($s) | strptime("%d-%m-%Y")] as $r | map(select((.date[:10] | strptime("%d-%m-%Y")) as $d | $d == $r[0]))' | jq -cr '.[] | "\(.name)|\(.command)"' |
+		while IFS="|" read -r name command
 		do
 			if [[ $name == "null" ]]; then
 				continue
 			fi        
-			if [[ $icon == "null" ]]; then
-				icon="system-run"
-			fi      
-			echo -en "${name}\0icon\x1f${icon}\n"
+			echo -en "${name}\0icon\x1f\n"
 		done  
 		exit 1
 fi
@@ -31,7 +28,9 @@ fi
 if [ $# -eq 2 ]; then
 
 	selected=$2
-	task=$(echo $json | jq ".[] | select(.name == \"$selected\")")
+	date_today=$(date +"%d-%m-%Y")
+
+	task=$(echo $json | jq ".[] | select(.name == \"$selected\" and .date == \"$date_today\")")
 
 	if [[ $task == "" ]]; then
 		exit 1
