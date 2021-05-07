@@ -1,114 +1,89 @@
 [colors]
-background = #222
-foreground = #dfdfdf
-foreground-light = #555
-red = #e53935
-yellow = #ffb52a
-green = #e60053
-blue = #639ce8
-black = #000000
-white = #ffffff
-trans = #00000000
+background = #060813
+foreground = #E9E9E9
+alert = #711a26
+bspwm-focused-fg = #1500ff
+bluetooth-fg = #62D8EC
+date-fg = #d3b57b
+volume-bar-fg = #d3b57b
+volume-indicator-fg = #C852B7
+volume-muted-fg = #FFA0AB
+battery-full-prefix-fg = #00db21
+battery-charging-prefix-fg = #3DE1CC
+ram-prefix-fg = #4039ac
+cpu-prefix-fg = #4039ac
+wifi-prefix-fg = #d3b57b
+
+[fonts]
+font0 = Sauce Code Pro Nerd Font:size=11;3
+font1 = Font Awesome 5 Brands Regular:style=Regular:pixelsize=11;2
+font2 = Sauce Code Pro Nerd Font:size=11;3
+font3 = Font Awesome 5 Free:pixelsize=11;2
+font4 = Font Awesome 5 Free Solid:pixelsize=11;2
+font5 = Font Awesome 5 Brands:pixelsize=11;2
+font6 = Sauce Code Pro Nerd Font:size=11;3
+
+[vars]
+bar-radius = 8
+bar-height = 3.2%
+bar-width = 99%
 
 [bar/main]
-width = 98.8%
-height = 30
-offset-x = 0.55%
+modules-left = bspwm arch-updates
+modules-center = spotify
+modules-right = cpu memory pulseaudio-control bluetooth wlan eth battery date
+radius = ${vars.bar-radius}
+width = ${vars.bar-width}
+height = ${vars.bar-height}
+offset-x = 0.5%
 offset-y = 10
-padding = 2
-radius = 0
-fixed-center = true
-
-separator = |
-
+padding-right = 1
 background = ${colors.background}
 foreground = ${colors.foreground}
-
-line-size = 2
-line-color = #f00
-
+cursor-click = pointer
 module-margin-left = 1
 module-margin-right = 1
-
-
-;===FONTS===
-
-font-0 = "SauceCodePro Nerd Font:size=11;3"
-font-1 = "FontAwesome5Free:style=Solid:pixelsize=12;2"
-font-2 = "FontAwesome5Brands:pixelsize=12;2"
-
-
-;===MODULES===
-
-modules-left = bspwm unread-email arch-updates 
-modules-center = spotify
-modules-right = eth wlan bluetooth-status battery cpu memory pulseaudio-control date
- 
+font-0 = ${fonts.font0}
+font-1 = ${fonts.font1}
+font-2 = ${fonts.font2}
+font-3 = ${fonts.font3}
+font-4 = ${fonts.font4}
+font-5 = ${fonts.font5}
+font-6 = ${fonts.font6}
 tray-position = right
 tray-padding = 2
-
 wm-restack = bspwm
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-enable-ipc = true
-
 
 [bar/external]
-width = 98.8%
-height = 30
-offset-x = 0.55%
+modules-left = bspwm arch-updates
+modules-center = spotify
+modules-right = cpu memory pulseaudio-control wlan battery date
+radius = ${vars.bar-radius}
+width = ${vars.bar-width}
+height = ${vars.bar-height}
+offset-x = 0.5%
 offset-y = 10
-padding = 2
-radius = 0
-fixed-center = true
-monitor = HDMI-1
-
-separator = |
-
+padding-right = 1
 background = ${colors.background}
 foreground = ${colors.foreground}
-
-line-size = 2
-line-color = #f00
-
+cursor-click = pointer
 module-margin-left = 1
 module-margin-right = 1
-
-
-;===FONTS===
-
-font-0 = "SauceCodePro Nerd Font:size=11;3"
-font-1 = "FontAwesome5Free:style=Solid:pixelsize=12;2"
-font-2 = "FontAwesome5Brands:pixelsize=12;2"
-
-
-;===MODULES===
-
-modules-left = bspwm
-modules-center = spotify
-modules-right = eth wlan bluetooth-status battery cpu memory pulseaudio-control date
- 
+font-0 = ${fonts.font0}
+font-1 = ${fonts.font1}
+font-2 = ${fonts.font2}
+font-3 = ${fonts.font3}
+font-4 = ${fonts.font4}
+font-5 = ${fonts.font5}
+font-6 = ${fonts.font6}
 wm-restack = bspwm
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-enable-ipc = true
-
-
-;===MODULES===
-
 
 [module/bspwm]
 type = internal/bspwm
-
 enable-click = true
 enable-scroll = true
 reverse-scroll = true
 pin-workspaces = true
-
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
@@ -117,121 +92,42 @@ ws-icon-4 = 5;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
 ws-icon-7 = 8;
-
 format = <label-state> <label-mode>
 
 label-focused = %icon%
 label-focused-padding = 1.5
-label-focused-foreground = ${colors.blue}
+label-focused-foreground = ${colors.bspwm-focused-fg}
 
 label-occupied = %icon%
 label-occupied-padding = 1.5
 
 label-urgent = %icon%
 label-urgent-padding = 1.5
-label-urgent-foreground = ${colors.red}
+label-urgent-foreground = ${colors.alert}
 
 label-empty = %icon%
 label-empty-padding = 1.5
 
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-light}
-;format-underline = #f90000
-label = %percentage:2%%
-
-
-[module/memory]
-type = internal/memory
-enable-click = true
-click-left = urxvt -e 'htop'
-
-interval = 2
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-light}
-label = " %gb_used%"
-
-
-[module/wlan]
-type = internal/network
-interface = wlp3s0
-interval = 5
-
-format-connected = <ramp-signal> <label-connected>
-label-connected = " %essid%"
-
-format-disconnected = ""
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-light}
-
-
-[module/eth]
-type = internal/network
-interface = enp0s3
-interval = 3.0
-
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-light}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
+[module/bluetooth]
+type = custom/text
+content = ""
+format = <label>
+content-foreground = ${colors.bluetooth-fg}
+click-left = bspc rule -a '*' -o state=floating rectangle=400x120+750+400 && alacritty -e polybarblue.sh
+click-middle = blueman-manager
 
 [module/date]
 type = internal/date
 interval = 1
-
 date = %e %B
-time = %H:%M:%S
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-light}
-
+time = %H:%M
 label = %date% %time%
-
+label-foreground = ${colors.date-fg}
 
 [module/pulseaudio-control]
 type = custom/script
 tail = true
 label=%output%
-
 exec = ~/.bin/pulseaudio-control listen
 click-right = exec pavucontrol &
 click-left = ~/.bin/pulseaudio-control togmute
@@ -241,74 +137,84 @@ scroll-down = ~/.bin/pulseaudio-control down
 label-padding = 0
 label-foreground = ${colors.foreground}
 
-
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = AC
-full-at = 98
+adapter = ADP0
+poll-interval = 5
+full-at = 99
+label-charging = %percentage%%
+format-charging = <animation-charging>  <label-charging>
+animation-charging-foreground = ${colors.battery-charging-prefix-fg}
+label-discharging = %percentage%%
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <label-full>
+label-full =  
+label-full-foreground = ${colors.battery-full-prefix-fg}
+ramp-capacity-0 =  
+ramp-capacity-1 =  
+ramp-capacity-2 =  
+ramp-capacity-3 =  
+ramp-capacity-4 =  
+animation-charging-0 =  
+animation-charging-1 =  
+animation-charging-2 =  
+animation-charging-3 =  
+animation-charging-4 =  
+animation-charging-framerate = 750
 
-format-charging = <animation-charging> <label-charging>
-;format-charging-underline = #ffb52a
+[module/memory]
+type = internal/memory
+interval = 5
+label = %percentage_used%%
+label-padding-left = 1
+format-prefix = ""
+format-prefix-foreground = ${colors.ram-prefix-fg}
 
-format-discharging = <animation-discharging> <label-discharging>
-;format-discharging-underline = ${self.format-charging-underline}
+[module/cpu]
+type = internal/cpu
+interval = 5
+format-prefix = ""
+format-prefix-foreground = ${colors.cpu-prefix-fg}
+label = %percentage:2%%
+label-padding-right = 1
 
-format-full-prefix = 
-format-full-prefix-foreground = ${colors.foreground-light}
-;format-full-underline = ${self.format-charging-underline}
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3
+format-connected-prefix = %{A1:nm-connection-editor:}%{A}
+format-connected-prefix-foreground = ${colors.wifi-prefix-fg}
+format-connected = <label-connected>
+label-connected = %essid%
+label-maxlen = 9
+label-connected-font = 2
+label-connected-padding-left = 1
+format-disconnected =
 
-ramp-capacity-0 = " "
-ramp-capacity-1 = " "
-ramp-capacity-2 = " "
-ramp-capacity-3 = " "
-ramp-capacity-foreground = ${colors.foreground-light}
+[module/eth]
+type = internal/network
+interface = net0
+interval = 3
+format-connected-prefix = 
+label-connected = %local_ip%
 
-animation-charging-0 = " "
-animation-charging-1 = " "
-animation-charging-2 = " "
-animation-charging-3 = " "
-animation-charging-foreground = ${colors.foreground-light}
-animation-charging-framerate = 500
+[settings]
+screenchange-reload = true
 
-animation-discharging-0 = " "
-animation-discharging-1 = " "
-animation-discharging-2 = " "
-animation-discharging-3 = " "
-animation-discharging-foreground = ${colors.foreground-light}
-animation-discharging-framerate = 500
-
+[global/wm]
+margin-top = 4
+margin-bottom = 4
 
 [module/spotify]
 type = custom/script
 interval = 1
 format-prefix = " "
 format-prefix-foreground = #1db954
-format = <label>
+format = %{T7}<label>%{T-}
 exec = python ~/.bin/spotify-dbus.py -f ' {artist}: {song}'
-
-
-[module/bluetooth-status]
-type = custom/script
-exec = ~/.bin/bluetooth-status
-tail = true
-click-left = ~/.bin/bluetooth-status --toggle &
-
 
 [module/arch-updates]
 type = custom/script
 exec = ~/.bin/arch-updates
 interval = 600
-
-
-[module/unread-email]
-type = custom/script
-
-
-[settings]
-screenchange-reload = true
-
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
