@@ -1,0 +1,73 @@
+configuration {
+  modi: "window,drun";
+  location: 0;
+  yoffset: 0;
+  xoffset: 0;
+  show-icons: true;
+  icon-theme: "Papirus";
+}
+
+* {
+  background-color: #06081315;
+  text-color: #e9e9e9;
+  font: "Source Code Pro 10";
+  spacing: 0;
+  width: 712px;
+  height: 360px;
+  border-radius: 10px;
+}
+
+window {
+  border: 1px;
+  border-color: #060813;
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt, entry];
+  border-color: #060813;
+  border-radius: 0px;
+}
+
+prompt {
+  padding: 16px 16px 16px 16px;
+  border-radius: 0px;
+  border: 0 1px 0 0;
+  border-color: #060813;
+  text-color: #ffbb53;
+}
+
+textbox {
+  background-color: #2e343f;
+  border: 0 0 1px 0;
+  border-color: #282c33;
+  padding: 8px 16px;
+  border-radius: 0px;
+}
+
+entry {
+  padding: 16px;
+  border-radius: 0px;
+  border: 0;
+  text-color: #74ede2;
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+  border-radius: 0px;
+  border: 0;
+}
+
+element {
+  border: 0;
+  padding: 20px;
+  border-radius: 0px;
+}
+
+element selected {
+  background-color: #545ec020;
+  border-radius: 0px;
+  border: 0;
+}
