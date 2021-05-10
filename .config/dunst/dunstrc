@@ -1,0 +1,146 @@
+[global]
+    monitor = 0
+    follow = mouse
+
+    geometry = "420x120-10+58"
+
+    indicate_hidden = yes
+
+    shrink = no
+
+    transparency = 15
+
+    notification_height = 0
+
+    separator_height = 1
+
+    padding = 8
+
+    horizontal_padding = 10
+
+    frame_width = 0
+
+    frame_color = "#282a36"
+
+    separator_color = frame
+
+    sort = yes
+
+    idle_threshold = 120
+
+    font = SauceCodePro Nerd Font 10
+
+    line_height = 0
+
+    markup = full
+
+    # The format of the message.  Possible variables are:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    #   %n  progress value if set without any extra characters
+    #   %%  Literal %
+    # Markup is allowed
+    format = "%s %p\n%b"
+
+    alignment = left
+
+    vertical_alignment = center
+
+    show_age_threshold = 60
+
+    word_wrap = yes
+
+    ellipsize = middle
+
+    ignore_newline = no
+
+    stack_duplicates = true
+
+    hide_duplicate_count = false
+
+    show_indicators = yes
+
+    ### Icons ###
+
+    icon_position = left
+    min_icon_size = 0
+    max_icon_size = 64
+    icon_path = /usr/share/icons/Papirus-Dark/16x16/
+
+    ### History ###
+
+    sticky_history = yes
+    history_length = 20
+
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/brave
+
+    always_run_script = true
+
+    title = Dunst
+
+    class = Dunst
+
+    startup_notification = false
+
+    verbosity = mesg
+
+    corner_radius = 0
+
+    ignore_dbusclose = false
+
+    ### Legacy
+
+    force_xinerama = false
+
+    ### mouse
+
+    # Defines list of actions for each mouse event
+    # Possible values are:
+    # * none: Don't do anything.
+    # * do_action: If the notification has exactly one action, or one is marked as default,
+    #              invoke it. If there are multiple and no default, open the context menu.
+    # * close_current: Close current notification.
+    # * close_all: Close all notifications.
+    # These values can be strung together for each mouse event, and
+    # will be executed in sequence.
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[experimental]
+    per_monitor_dpi = false
+
+[shortcuts]
+    close = mod4+x
+    close_all = mod4+ctrl+x
+    history = ctrl+bar
+    context = mod4+ctrl+period
+
+[urgency_low]
+    background = "#282a36"
+    foreground = "#6272a4"
+    timeout = 10
+    #icon = /path/to/icon
+
+[urgency_normal]
+    background = "#282a36"
+    foreground = "#bd93f9"
+    timeout = 10
+    #icon = /path/to/icon
+
+[urgency_critical]
+    background = "#ff5555"
+    foreground = "#f8f8f2"
+    timeout = 0
+    #icon = /path/to/icon
+
+[spotify]
+	appname = Spotify
+	timeout = 5
+	background = "#55cca8"
+	foreground = "#ffffff"
