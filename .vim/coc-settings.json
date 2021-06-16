@@ -1,0 +1,88 @@
+{
+	"coc.preferences.useQuickfixForLocations": true,
+	"coc.preferences.snippets.enable": true,
+	"coc.preferences.extensionUpdateCheck": "weekly",
+	"coc.preferences.jumpCommand": "vsplit",
+	"coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "css", "Markdown", "cpp", "c"],
+	"suggest.disableMenu": false,
+	"suggest.disableMenuShortcut": true,
+	"suggest.snippetIndicator": "►",
+	"suggest.noselect": false,
+	"diagnostic.warningSign": "",
+	"diagnostic.infoSign": "",
+	"diagnostic.errorSign": "●",
+	"diagnostic.format": "%message\n[%severity][%source:%code]",
+	"clangd.semanticHighlighting": true,
+	"diagnostic-languageserver.filetypes": {
+		"python": "pylint"
+	},
+	"diagnostic-languageserver.linters": {
+		"pylint": {
+			"sourceName": "pylint",
+			"command": "pylint",
+			"args": [
+				"--output-format",
+				"text",
+				"--score",
+				"no",
+				"--msg-template",
+				"'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+				"-d",
+				"C0116,C0115,C0114,R0903",
+				"%file"
+			],
+			"formatPattern": [
+				"^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+				{
+					"line": 1,
+					"column": 2,
+					"security": 3,
+					"message": 4
+				}
+			],
+			"rootPatterns": [
+				".git",
+				"pyproject.toml",
+				"setup.py"
+			],
+			"securities": {
+				"informational": "hint",
+				"refactor": "info",
+				"convention": "info",
+				"warning": "warning",
+				"error": "error",
+				"fatal": "error"
+			},
+			"offsetColumn": 1,
+			"formatLines": 1
+		}
+	},
+	"diagnostic-languageserver.formatFiletypes": {
+		"python": [
+			"black"
+		]
+	},
+	"diagnostic-languageserver.formatters": {
+		"black": {
+			"sourceName": "black",
+			"command": "black",
+			"args": [
+				"black",
+				"-q",
+				"%file"
+			]
+		}
+	},
+	"jedi.enable": true,
+	"jedi.startupMessage": true,
+	"jedi.markupKindPreferred": "markdown",
+	"jedi.trace.server": "verbose",
+	"jedi.executable.command": "jedi-language-server",
+	"jedi.executable.args": [],
+	"jedi.completion.disableSnippets": false,
+	"jedi.diagnostics.enable": true,
+	"jedi.diagnostics.didOpen": true,
+	"jedi.diagnostics.didChange": true,
+	"jedi.diagnostics.didSave": true,
+	"jedi.workspace.extraPaths": []
+}
