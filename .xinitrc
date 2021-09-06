@@ -11,8 +11,8 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
-setxkbmap -layout latam -option caps:swapescape
+setxkbmap -layout us
 
-xrandr --auto
+xrandr --output HDMI-0 --mode 3440x1440 --rate 99.99
 
 exec bspwm

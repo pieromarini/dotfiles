@@ -1,5 +1,5 @@
 " Vim 8 Config file
-" Last Edit: 12 Feb 2021
+" Last Edit: 20 Jul 2021
 " Author: Piero Marini
 
 
@@ -117,14 +117,6 @@ nnoremap <Leader>y "*y
 " Visual Block Select
 nnoremap <Leader>v <C-v>
 
-" FZF Keybindings
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>c :Commits<CR>
-nnoremap <Leader>f :Rg<CR>
-nnoremap <Leader>o :Files<CR>
-
-nnoremap <Leader>g :Grep 
-
 """" END MAPPINGS """"
 
 " grep uses ripgrep if available
@@ -133,40 +125,33 @@ if executable("rg")
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-" custom command to populate and open the quickfix list (if results exist)
-command! -bar -nargs=1 Grep silent grep <q-args> | redraw! | cw
-
 nnoremap [g :cp<CR>
 nnoremap ]g :cn<CR>
 
 """" FZF """"
-let g:fzf_action = {
-  \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-f': 'split',
-  \ 'ctrl-t': 'tab split',
-  \ 'return': 'e'}
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
 
-let g:fzf_layout = { 'down': '~40%' }
-let g:fzf_buffers_jump = 1
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+nnoremap <silent> <Leader>o    :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> <Leader>b    :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> <Leader>/    :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+nnoremap          <Leader>g    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', ', 'g'), '/', '\\/', 'g')<CR>"
 
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]gb    :<C-u>CocCommand fzf-preview.GitBranches<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+
+nnoremap <silent> [fzf-p]gc    :<C-u>CocCommand fzf-preview.Changes<CR>
+
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>"
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(

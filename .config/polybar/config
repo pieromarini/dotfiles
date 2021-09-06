@@ -15,13 +15,13 @@ cpu-prefix-fg = #4039ac
 wifi-prefix-fg = #d3b57b
 
 [fonts]
-font0 = Sauce Code Pro Nerd Font:size=11;3
+font0 = SauceCodePro Nerd Font:size=11;3
 font1 = Font Awesome 5 Brands Regular:style=Regular:pixelsize=11;2
-font2 = Sauce Code Pro Nerd Font:size=11;3
+font2 = SauceCodePro Nerd Font:size=11;3
 font3 = Font Awesome 5 Free:pixelsize=11;2
 font4 = Font Awesome 5 Free Solid:pixelsize=11;2
 font5 = Font Awesome 5 Brands:pixelsize=11;2
-font6 = Sauce Code Pro Nerd Font:size=11;3
+font6 = SauceCodePro Nerd Font:size=11;3
 
 [vars]
 bar-radius = 8

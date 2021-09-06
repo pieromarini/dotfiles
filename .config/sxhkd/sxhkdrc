@@ -22,7 +22,7 @@ super + alt + Delete
 super + {Tab}
 	~/.config/rofi/menu/window.sh
 
-super + {bar}
+super + {grave}
 	~/.config/rofi/menu/horarios.sh
 
 ### APPS

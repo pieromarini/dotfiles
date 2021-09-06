@@ -16,7 +16,7 @@ while pgrep -x sxhkd >/dev/null; do sleep 1; done
 xsetroot -cursor_name left_ptr &
 
 # Background
-feh --bg-fill ~/Pictures/Wallpapers/chuttersnap-kuala-lumpur-unsplash.jpg
+feh --bg-fill ~/Pictures/Wallpapers/patrick-baum-iQjVXncVfbg-unsplash.jpg
 
 # TODO: Fix locker
 # xautolock -time 20 -detectsleep -locker "betterlockscreen --lock" &

@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 22 Sep 2020
+#   Last Edit: 25 Jun 2021
 #   Author: Piero Marini
 
 typeset -U path
@@ -57,8 +57,7 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+source /usr/share/nvm/init-nvm.sh
 
 source $ZSH/oh-my-zsh.sh
 
