@@ -15,4 +15,7 @@ setxkbmap -layout us
 
 xrandr --output HDMI-0 --mode 3440x1440 --rate 99.99
 
+systemctl --user import-environment DISPLAY
+clipmenud &
+
 exec bspwm
