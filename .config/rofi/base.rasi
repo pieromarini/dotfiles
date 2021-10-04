@@ -66,6 +66,15 @@ element {
   border-radius: 0px;
 }
 
+element-text {
+  background-color: transparent;
+}
+
+element-icon {
+  background-color: transparent;
+  padding: 0 10px 0 0;
+}
+
 element selected {
   background-color: #545ec020;
   border-radius: 0px;
