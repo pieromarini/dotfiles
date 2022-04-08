@@ -1,5 +1,0 @@
-/*
-    File:  
-    Last Edit: 
-    Author: Piero Marini
-*/

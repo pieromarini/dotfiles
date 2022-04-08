@@ -2,15 +2,16 @@
     monitor = 0
     follow = mouse
 
-    geometry = "420x120-10+58"
+	width=420
+	height=120
+	offset=-10+58
+	origin=top-right
 
     indicate_hidden = yes
 
     shrink = no
 
     transparency = 15
-
-    notification_height = 0
 
     separator_height = 1
 
@@ -85,10 +86,6 @@
 
     class = Dunst
 
-    startup_notification = false
-
-    verbosity = mesg
-
     corner_radius = 0
 
     ignore_dbusclose = false
@@ -114,12 +111,6 @@
 
 [experimental]
     per_monitor_dpi = false
-
-[shortcuts]
-    close = mod4+x
-    close_all = mod4+ctrl+x
-    history = ctrl+bar
-    context = mod4+ctrl+period
 
 [urgency_low]
     background = "#282a36"

@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 25 Jun 2021
+#   Last Edit: 16 Mar 2022
 #   Author: Piero Marini
 
 typeset -U path
@@ -64,10 +64,10 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 export SHELL=zsh
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
-export V=~/.vimrc
+export V=~/.config/nvim/init.vim
 export Z=~/.zshrc
 export T=~/.tmux.conf
 export TERMINAL="alacritty -e"
@@ -76,7 +76,7 @@ export TERMINAL="alacritty -e"
 alias t=tmux
 alias c=clear
 alias f=fzf
-alias v=vim
+alias v=nvim
 
 alias open=xdg-open
 
@@ -203,7 +203,7 @@ function o() {
 	local ft="$(mimetype --output-format %m $file)"
 	local default_program="$(xdg-mime query default $ft)"
 	if [[ "$default_program" == "vim.desktop" ]]; then
-	  vim $file
+	  nvim $file
 	else
 	  mimeopen $file &>/dev/null
 	fi

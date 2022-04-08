@@ -31,7 +31,7 @@ bar-width = 99%
 [bar/main]
 modules-left = bspwm arch-updates
 modules-center = spotify
-modules-right = cpu memory pulseaudio-control bluetooth wlan eth battery date
+modules-right = cpu memory pulseaudio-control bluetooth wlan eth date
 radius = ${vars.bar-radius}
 width = ${vars.bar-width}
 height = ${vars.bar-height}
@@ -57,7 +57,7 @@ wm-restack = bspwm
 [bar/external]
 modules-left = bspwm arch-updates
 modules-center = spotify
-modules-right = cpu memory pulseaudio-control wlan battery date
+modules-right = cpu memory pulseaudio-control wlan date
 radius = ${vars.bar-radius}
 width = ${vars.bar-width}
 height = ${vars.bar-height}
@@ -181,7 +181,7 @@ label-padding-right = 1
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlo1
 interval = 3
 format-connected-prefix = %{A1:nm-connection-editor:}%{A}
 format-connected-prefix-foreground = ${colors.wifi-prefix-fg}
@@ -194,10 +194,10 @@ format-disconnected =
 
 [module/eth]
 type = internal/network
-interface = net0
+interface = enp5s0
 interval = 3
-format-connected-prefix = 
-label-connected = %local_ip%
+format-connected =  <label-connected>
+label-connected =  %local_ip%
 
 [settings]
 screenchange-reload = true

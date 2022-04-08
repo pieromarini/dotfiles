@@ -67,6 +67,7 @@ bspc rule -a Spotify desktop='4'
 bspc rule -a Zathura desktop='3' state=tiled follow=on
 bspc rule -a zoom desktop='5' state=tiled follow=on
 bspc rule -a Steam desktop='7' state=tiled follow=off
+bspc rule -a discord desktop='8' state=tiled follow=off
 
 # Temp rules
 bspc rule -a 'Primal Engine' state=floating
@@ -74,5 +75,5 @@ bspc rule -a 'Primal Engine' state=floating
 # Init
 bash /home/piero/.config/polybar/launch.sh &
 picom -b --config ~/.config/picom/picom.conf &
-dunst -config ~/.config/dunst/dunst &
+dunst -config ~/.config/dunst/dunstrc &
 sxhkd &

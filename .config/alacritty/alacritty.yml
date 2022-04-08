@@ -11,6 +11,8 @@ window:
 
   decorations: none
 
+  opacity: 1.0
+
   title: Alacritty
 
   class:
@@ -47,8 +49,6 @@ bell:
   animation: EaseOutExpo
   duration: 1
   color: '#ffffff'
-
-background_opacity: 0.9
 
 
 # Colors

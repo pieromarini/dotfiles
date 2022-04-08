@@ -13,7 +13,8 @@ fi
 
 setxkbmap -layout us
 
-xrandr --output HDMI-0 --mode 3440x1440 --rate 99.99
+xrandr --output DP-0 --primary --mode 3440x1440 --rate 100.00
+xrandr --output HDMI-0 --off
 
 systemctl --user import-environment DISPLAY
 clipmenud &

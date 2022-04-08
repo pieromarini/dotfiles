@@ -7,7 +7,7 @@ super + Return
 ### Menus
 
 # Rofi
-super + r
+super + space
 	~/.config/rofi/menu/launcher.sh
 
 super + p
@@ -24,6 +24,21 @@ super + {Tab}
 
 super + {grave}
 	~/.config/rofi/menu/horarios.sh
+
+
+### Notifications (dunst)
+
+super + x
+	dunstctl close
+
+super + ctrl + x
+	dunstctl close_all
+
+ctrl + {grave}
+	dunstctl history
+
+super + ctrl + .
+	dunstctl context
 
 ### APPS
 
@@ -57,7 +72,7 @@ XF86MonBrightness{Up,Down}
 
 # Screenshots
 Print
-	flameshot gui -p /home/piero/Pictures/Screenshots
+	flameshot gui
 
 shift + Print
 	flameshot full -c
