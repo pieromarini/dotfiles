@@ -1,5 +1,5 @@
 #   File: .zshrc
-#   Last Edit: 16 Mar 2022
+#   Last Edit: 13 Apr 2022
 #   Author: Piero Marini
 
 typeset -U path
@@ -77,6 +77,7 @@ alias t=tmux
 alias c=clear
 alias f=fzf
 alias v=nvim
+alias vim=nvim
 
 alias open=xdg-open
 
@@ -202,7 +203,7 @@ function o() {
   if [[ -n $file ]]; then
 	local ft="$(mimetype --output-format %m $file)"
 	local default_program="$(xdg-mime query default $ft)"
-	if [[ "$default_program" == "vim.desktop" ]]; then
+	if [[ "$default_program" == "nvim.desktop" ]]; then
 	  nvim $file
 	else
 	  mimeopen $file &>/dev/null
