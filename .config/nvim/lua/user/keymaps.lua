@@ -40,6 +40,10 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Visual --
+
+-- Visual Block
+keymap("n", ",v", "<C-v>", opts)
+
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
@@ -63,3 +67,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- Copy/Paste
+keymap("v", "<C-c>", '"+y', opts)
+keymap("v", "<C-v>", '"+p', opts)
+keymap("n", "<C-v>", '"+p', opts)
