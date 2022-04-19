@@ -67,7 +67,7 @@ export SHELL=zsh
 export EDITOR=nvim
 export VISUAL=nvim
 
-export V=~/.config/nvim/init.vim
+export V=~/.config/nvim/init.lua
 export Z=~/.zshrc
 export T=~/.tmux.conf
 export TERMINAL="alacritty -e"

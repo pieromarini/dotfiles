@@ -12,11 +12,11 @@ try
 	let g:sonokai_diagnostic_line_highlight = 0
 	let g:sonokai_sign_column_background = 'none'
 
-  set background=dark
+	set background=dark
 
-  colorscheme sonokai
+	colorscheme sonokai
 catch /^Vim\%((\a\+)\)\=:E185/
-  set background=dark
-  colorscheme default
+	set background=dark
+	colorscheme default
 endtry
 ]]
