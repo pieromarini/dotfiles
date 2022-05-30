@@ -29,7 +29,7 @@ vim.cmd [[
 	augroup end
 
 	augroup _diagnostics
-		autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+		autocmd CursorHold * lua vim.diagnostic.open_float()
 		autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
 	augroup end
 ]]

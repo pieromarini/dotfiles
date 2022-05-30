@@ -1,6 +1,5 @@
 local M = {}
 
--- TODO: backfill this to template
 M.setup = function()
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
@@ -35,21 +34,49 @@ M.setup = function()
 
 	vim.diagnostic.config(config)
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	local handlers = vim.lsp.handlers
+
+	handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
 
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = "rounded",
 	})
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+	handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 		vim.lsp.diagnostic.on_publish_diagnostics, {
 			virtual_text = false,
 			underline = true,
 			signs = true,
 		}
 	)
+
+	-- Opens a new vertical split for the specified location
+	local location_callback = function(_, result, ctx, _)
+		if result == nil or vim.tbl_isempty(result) then
+			local _ = vim.lsp.log.info() and vim.lsp.log.info(ctx, 'No location found')
+			return nil
+		end
+
+		vim.api.nvim_command('vsplit')
+
+		if vim.tbl_islist(result) then
+			vim.lsp.util.jump_to_location(result[1])
+			if #result > 1 then
+				vim.lsp.util.set_qflist(vim.lsp.util.locations_to_items(result))
+				vim.api.nvim_command("copen")
+				vim.api.nvim_command("wincmd p")
+			end
+		else
+			vim.lsp.util.jump_to_location(result)
+		end
+	end
+
+	handlers['textDocument/declaration']    = location_callback
+	handlers['textDocument/definition']     = location_callback
+	handlers['textDocument/typeDefinition'] = location_callback
+	handlers['textDocument/implementation'] = location_callback
 end
 
 local function lsp_highlight_document(client)
@@ -81,7 +108,7 @@ local function lsp_keymaps(bufnr)
 		bufnr,
 		"n",
 		"gl",
-		'<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
+		'<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>',
 		opts
 	)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", ",n", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
@@ -93,6 +120,11 @@ M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end
+
+	if client.name == "clangd" then
+		client.resolved_capabilities.document_formatting = false
+	end
+
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end
