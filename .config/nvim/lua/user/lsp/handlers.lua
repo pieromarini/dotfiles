@@ -46,10 +46,10 @@ M.setup = function()
 
 	handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 		vim.lsp.diagnostic.on_publish_diagnostics, {
-			virtual_text = false,
-			underline = true,
-			signs = true,
-		}
+		virtual_text = false,
+		underline = true,
+		signs = true,
+	}
 	)
 
 	-- Opens a new vertical split for the specified location
@@ -122,6 +122,10 @@ M.on_attach = function(client, bufnr)
 	end
 
 	if client.name == "clangd" then
+		client.resolved_capabilities.document_formatting = false
+	end
+
+	if client.name == "cmake" then
 		client.resolved_capabilities.document_formatting = false
 	end
 
