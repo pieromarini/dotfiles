@@ -3,7 +3,6 @@ background = #060813
 foreground = #E9E9E9
 alert = #711a26
 bspwm-focused-fg = #1500ff
-bluetooth-fg = #62D8EC
 date-fg = #d3b57b
 volume-bar-fg = #d3b57b
 volume-indicator-fg = #C852B7
@@ -31,7 +30,7 @@ bar-width = 99%
 [bar/main]
 modules-left = bspwm arch-updates
 modules-center = spotify
-modules-right = cpu memory pulseaudio-control bluetooth wlan eth date
+modules-right = cpu memory pipewire-control wlan eth date
 radius = ${vars.bar-radius}
 width = ${vars.bar-width}
 height = ${vars.bar-height}
@@ -57,7 +56,7 @@ wm-restack = bspwm
 [bar/external]
 modules-left = bspwm arch-updates
 modules-center = spotify
-modules-right = cpu memory pulseaudio-control wlan date
+modules-right = cpu memory pipewire-control wlan date
 radius = ${vars.bar-radius}
 width = ${vars.bar-width}
 height = ${vars.bar-height}
@@ -108,14 +107,6 @@ label-urgent-foreground = ${colors.alert}
 label-empty = %icon%
 label-empty-padding = 1.5
 
-[module/bluetooth]
-type = custom/text
-content = ""
-format = <label>
-content-foreground = ${colors.bluetooth-fg}
-click-left = bspc rule -a '*' -o state=floating rectangle=400x120+750+400 && alacritty -e polybarblue.sh
-click-middle = blueman-manager
-
 [module/date]
 type = internal/date
 interval = 1
@@ -124,16 +115,16 @@ time = %H:%M
 label = %date% %time%
 label-foreground = ${colors.date-fg}
 
-[module/pulseaudio-control]
+[module/pipewire-control]
 type = custom/script
 tail = true
 label=%output%
-exec = ~/.bin/pulseaudio-control listen
+exec = ~/.bin/pipewire-control listen
 click-right = exec pavucontrol &
-click-left = ~/.bin/pulseaudio-control togmute
-click-middle = ~/.bin/pulseaudio-control next-sink
-scroll-up = ~/.bin/pulseaudio-control up
-scroll-down = ~/.bin/pulseaudio-control down
+click-left = ~/.bin/pipewire-control togmute
+click-middle = ~/.bin/pipewire-control next-sink
+scroll-up = ~/.bin/pipewire-control up
+scroll-down = ~/.bin/pipewire-control down
 label-padding = 0
 label-foreground = ${colors.foreground}
 
