@@ -27,8 +27,12 @@ export FZF_DEFAULT_COMMAND="rg --no-messages --files --hidden --ignore-file ~/.i
 export FZF_DEFAULT_OPTS="
   --preview=\"(bat --style=numbers,changes --color=always {}) 2>/dev/null\" 
   --preview-window=right:60%:wrap 
-  --color fg:-1,bg:-1,hl:33,fg+:254,bg+:235,hl+:33
-  --color info:136,prompt:136,pointer:230,marker:230,spinner:136
+  --color fg:#5d6466,bg:#1e2527
+  --color bg+:#ef7d7d,fg+:#2c2f30
+  --color hl:#dadada,hl+:#26292a,gutter:#1e2527
+  --color pointer:#373d49,info:#606672
+  --border
+  --color border:#1e2527
 "
 export FZF_TMUX=1
 
@@ -56,7 +60,6 @@ plugins=(
   vi-mode
   zsh-syntax-highlighting
 )
-
 source /usr/share/nvm/init-nvm.sh
 
 source $ZSH/oh-my-zsh.sh

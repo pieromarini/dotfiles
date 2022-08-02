@@ -8,14 +8,16 @@ local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 
 null_ls.setup({
-	debug = false,
+	debug = true,
 	sources = {
-		formatting.prettier.with({ extra_args = { "--single-quote", "--jsx-single-quote" } }),
+		formatting.eslint_d,
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.clang_format,
 		formatting.cmake_format,
-		-- diagnostics.cppcheck,
+
 		diagnostics.flake8,
+		diagnostics.eslint_d,
+
 		code_actions.eslint_d,
 		code_actions.gitsigns,
 	},

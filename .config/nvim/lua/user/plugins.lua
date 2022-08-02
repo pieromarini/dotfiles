@@ -56,7 +56,7 @@ return packer.startup(function(use)
 	use "folke/which-key.nvim"
 
 	-- Colorschemes
-	use "sainnhe/sonokai"
+	use { 'Everblush/everblush.nvim', as = 'everblush' }
 
 	-- Navigation
 	use "christoomey/vim-tmux-navigator"
