@@ -1,8 +1,6 @@
-vim.cmd [[
-try
-	colorscheme everblush
-catch /^Vim\%((\a\+)\)\=:E185/
-	set background=dark
-	colorscheme default
-endtry
-]]
+local everblush_status_ok, everblush = pcall(require, "everblush")
+if not everblush_status_ok then
+	return
+end
+
+everblush.setup({ nvim_tree = { contrast = true } })
