@@ -46,6 +46,3 @@ set recolor-darkcolor           "#dadada" # Foreground
 
 set adjust-open width
 set recolor true
-
-set smooth-scroll true
-set show-v-scrollbar true
