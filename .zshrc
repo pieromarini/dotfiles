@@ -70,7 +70,6 @@ export SHELL=zsh
 export EDITOR=nvim
 export VISUAL=nvim
 
-export V=~/.config/nvim/init.lua
 export Z=~/.zshrc
 export T=~/.tmux.conf
 export TERMINAL="alacritty -e"
@@ -88,13 +87,6 @@ alias open=xdg-open
 alias img=sxiv
 
 alias mc='tmux split -h lf; lf'
-
-# Python VirtualEnv
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Development/Python
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
-# source /usr/bin/virtualenvwrapper.sh
-
 
 #############################
 ########## Aliases ##########
@@ -207,7 +199,7 @@ function o() {
 	local ft="$(mimetype --output-format %m $file)"
 	local default_program="$(xdg-mime query default $ft)"
 	if [[ "$default_program" == "nvim.desktop" ]]; then
-	  nvim $file
+	  vim $file
 	else
 	  mimeopen $file &>/dev/null
 	fi
@@ -249,3 +241,9 @@ function monitor() {
 	*) echo "Valid options are: left|right|reset"
   esac
 }
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export PATH=/home/piero/.local/bin:$PATH

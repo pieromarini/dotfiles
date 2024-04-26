@@ -74,6 +74,9 @@ XF86MonBrightness{Up,Down}
 Print
 	flameshot gui
 
+Next
+	flameshot gui
+
 shift + Print
 	flameshot full -c
 
