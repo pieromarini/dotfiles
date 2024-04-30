@@ -13,6 +13,7 @@ return {
 				null_ls.builtins.completion.luasnip,
 				null_ls.builtins.diagnostics.cppcheck,
 				null_ls.builtins.diagnostics.glslc,
+      	null_ls.builtins.diagnostics.cmake_lint,
 			},
 		})
 

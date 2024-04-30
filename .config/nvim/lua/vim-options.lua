@@ -19,6 +19,9 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.ruler = false
 vim.opt.cursorline = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.autoread = true
 
 vim.wo.signcolumn = "yes"
 
@@ -38,6 +41,19 @@ vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv-gv")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+-- Resize
+vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { silent = true, desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { silent = true, desc = "Decrease window height" })
+vim.keymap.set("n", "<C-Left>", ":vertical :resize -2<CR>", { silent = true, desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Right>", ":vertical :resize +2<CR>", { silent = true, desc = "Increase window width" })
+
+-- Buffers navigate
+vim.keymap.set("n", "<Tab>", ":bn<CR>", { silent = true, desc = "next tab" })
+vim.keymap.set("n", "<S-Tab>", ":bp<CR>", { silent = true, desc = "prev tab" })
+
+-- Buffer delete
+vim.keymap.set("n", "<leader>c", "<cmd>Bdelete<CR>", { desc = "Delete current buffer" })
+
 -- QuickFix
 vim.keymap.set("n", "]q", ":cnext<CR>")
 vim.keymap.set("n", "[q", ":cprev<CR>")
@@ -56,9 +72,19 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 vim.keymap.set("n", "<leader>Q", vim.diagnostic.setqflist)
 
+vim.keymap.set("n", "<F3>", ":ClangdSwitchSourceHeader<CR>", { silent = true })
+
 -- DAP
-vim.keymap.set("n", "<F5>", function() require("dap").continue() end)
-vim.keymap.set("n", "<F10>", function() require("dap").step_over() end)
-vim.keymap.set("n", "<F11>", function() require("dap").step_into() end)
-vim.keymap.set("n", "<F12>", function() require("dap").step_out() end)
-vim.keymap.set("n", "<Leader>B", function() require("dap").toggle_breakpoint() end)
+vim.keymap.set({ "n", "t" }, "<F5>", function() require("dap").continue() end, { silent = true })
+vim.keymap.set({ "n", "t" }, "<F6>", function() require("dap").step_over() end, { silent = true })
+vim.keymap.set({ "n", "t" }, "<F7>", function() require("dap").step_into() end, { silent = true })
+vim.keymap.set({ "n", "t" }, "<F8>", function() require("dap").step_out() end, { silent = true })
+vim.keymap.set({ "n", "t" }, "<F11>", function() require("dap").toggle_breakpoint() end, { silent = true })
+
+vim.keymap.set("n", "<leader>dk", "<cmd>lua require'dap'.up()<CR>", { desc = "Stack up" })
+vim.keymap.set("n", "<leader>dj", "<cmd>lua require'dap'.down()<CR>", { desc = "Stack down" })
+vim.keymap.set("n", "<leader>dn", "<cmd>lua require'dap'.run_to_cursor()<CR>", { desc = "Run To Cursor" })
+vim.keymap.set("n", "<leader>dq", "<cmd>lua require'dap'.terminate()<CR>", { desc = "Terminate" })
+vim.keymap.set("n", "<leader>df", "<cmd>Telescope dap frames<CR>", { desc = "Stack frames" })
+vim.keymap.set("n", "<leader>db", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "All breakpoints" })
+vim.keymap.set("n", "<leader>ds", "<cmd>lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>", { desc = "View current scope" })

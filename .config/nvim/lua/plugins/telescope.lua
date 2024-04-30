@@ -5,7 +5,14 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		dependencies = { "nvim-lua/plenary.nvim", "telescope-fzf-native.nvim" },
+		dependencies = {
+			"nvim-telescope/telescope-dap.nvim",
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+			},
+		},
 		config = function()
 			local ts = require("telescope")
 			ts.setup({
@@ -18,7 +25,7 @@ return {
 						override_generic_sorter = true,
 						override_file_sorter = true,
 						case_mode = "smart_case",
-					}
+					},
 				},
 			})
 			local builtin = require("telescope.builtin")
@@ -31,6 +38,7 @@ return {
 
 			ts.load_extension("ui-select")
 			ts.load_extension("fzf")
+			ts.load_extension("dap")
 		end,
 	},
 	{

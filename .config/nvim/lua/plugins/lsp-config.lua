@@ -34,18 +34,42 @@ return {
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 			local lspconfig = require("lspconfig")
+			local lsp = require("utils.lsp")
+
+			vim.diagnostic.config({
+				update_in_insert = true,
+				underline = true,
+				severity_sort = true,
+				float = {
+					focusable = false,
+					style = "minimal",
+					border = "single",
+					source = "always",
+					header = "",
+					prefix = "",
+				},
+			})
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = "single",
+			})
+			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+				border = "single",
+				focusable = true,
+				relative = "cursor",
+			})
 
 			lspconfig.volar.setup({
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
 				on_new_config = function(new_config, new_root_dir)
 					new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
 				end,
 			})
 
 			lspconfig.tsserver.setup({
-				capabilities = capabilities,
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
 				init_options = {
 					plugins = {
 						{
@@ -63,16 +87,30 @@ return {
 			})
 
 			lspconfig.clangd.setup({
-				capabilities = capabilities,
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
+        on_new_config = function(new_config, _)
+          local status, cmake = pcall(require, "cmake-tools")
+          if status then
+            cmake.clangd_on_new_config(new_config)
+          end
+        end,
 				cmd = {
 					"clangd",
-					"--offset-encoding=utf-16"
-				}
+					"--offset-encoding=utf-16",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=bundled",
+					"--function-arg-placeholders",
+					"--fallback-style=llvm",
+				},
 			})
 
 			lspconfig.lua_ls.setup({
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
 				on_init = function(client)
-          print("test")
 					local path = client.workspace_folders[1].name
 					if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
 						return
@@ -81,35 +119,46 @@ return {
 					client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
 						runtime = {
 							version = "LuaJIT",
+							path = "$VIMRUNTIME/lua",
+						},
+						diagnostics = {
+							globals = { "vim" },
 						},
 						workspace = {
-							checkThirdParty = false,
 							library = {
-								vim.env.VIMRUNTIME,
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.stdpath("config") .. "/lua"] = true,
 							},
 						},
 					})
 				end,
-				settings = {
-					Lua = {},
-				},
 			})
-			lspconfig.cmake.setup({})
+
+			lspconfig.cmake.setup({
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
+			})
 
 			lspconfig.eslint.setup({
-				on_attach = function(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end,
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
 			})
 
-			lspconfig.pyright.setup({})
+			lspconfig.pyright.setup({
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
+			})
 		end,
 	},
 	{
 		"p00f/clangd_extensions.nvim",
+		lazy = true,
+		config = function() end,
+		opts = {
+			inlay_hints = {
+				inline = false,
+			},
+		},
 	},
 	{
 		"ray-x/lsp_signature.nvim",
