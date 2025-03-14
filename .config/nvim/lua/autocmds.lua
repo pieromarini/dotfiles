@@ -12,13 +12,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("LspDetach", {
-	callback = function(args)
-		vim.keymap.del("n", "<leader>r", { buffer = args.buf })
-		vim.keymap.set("n", "<leader>r", { buffer = args.buf })
-	end,
-})
-
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -27,4 +20,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 	group = highlight_group,
 	pattern = "*",
+})
+
+-- Set proper filetype for GLSL extensions
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*.frag,*.vert,*.comp,*.geo",
+  command = "setlocal filetype=glsl",
 })

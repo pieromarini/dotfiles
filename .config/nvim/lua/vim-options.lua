@@ -72,7 +72,7 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 vim.keymap.set("n", "<leader>Q", vim.diagnostic.setqflist)
 
-vim.keymap.set("n", "<F3>", ":ClangdSwitchSourceHeader<CR>", { silent = true })
+vim.keymap.set("n", "<F2>", ":ClangdSwitchSourceHeader<CR>", { silent = true })
 
 -- DAP
 vim.keymap.set({ "n", "t" }, "<F5>", function() require("dap").continue() end, { silent = true })
@@ -88,3 +88,6 @@ vim.keymap.set("n", "<leader>dq", "<cmd>lua require'dap'.terminate()<CR>", { des
 vim.keymap.set("n", "<leader>df", "<cmd>Telescope dap frames<CR>", { desc = "Stack frames" })
 vim.keymap.set("n", "<leader>db", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "All breakpoints" })
 vim.keymap.set("n", "<leader>ds", "<cmd>lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>", { desc = "View current scope" })
+
+-- Centerpad
+vim.keymap.set("n", "<leader>z", "<cmd>lua require'centerpad'.toggle{ leftpad = 80, rightpad = 80 }<cr>", { silent = true, noremap = true })

@@ -247,3 +247,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 
 export PATH=/home/piero/.local/bin:$PATH
+
+# Defining vulkan sdk location
+export VULKAN_SDK=~/vulkansdk-linux-x86_64-1.3.280.1/1.3.280.1/x86_64
+export PATH=$VULKAN_SDK/bin:$PATH
+export LD_LIBRARY_PATH=$VULKAN_SDK/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+export VK_LAYER_PATH=$VULKAN_SDK/share/vulkan/explicit_layer.d

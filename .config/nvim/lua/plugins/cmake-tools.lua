@@ -5,7 +5,7 @@ return {
 		ctest_command = "ctest",
 		cmake_regenerate_on_save = true,
 		cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
-		cmake_build_options = { "-j4" },
+		cmake_build_options = { "-j8" },
 		cmake_build_directory = "build/${variant:buildType}",
 		cmake_soft_link_compile_commands = true,
 		cmake_compile_commands_from_lsp = false,
@@ -65,6 +65,7 @@ return {
 		},
 	},
 	init = function()
+		vim.keymap.set("n", "<F3>", ":CMakeSelectBuildType<CR>", { desc = "Select Build Type" })
 		vim.keymap.set("n", "<F4>", ":CMakeRun<CR>", { desc = "Run" })
 		vim.keymap.set("n", "<F12>", ":CMakeDebug<CR>", { desc = "Debug" })
 	end,

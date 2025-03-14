@@ -11,13 +11,13 @@ if [ "$select" == "Lock" ] ; then
 	exec betterlockscreen --lock
 
 elif [ "$select" == "Suspend" ] ; then
-	prompt "systemctl suspend" Suspend
+	systemctl suspend
 		
 elif [ "$select" == "Reboot" ] ; then
-	prompt "reboot" Reboot
+	reboot
 	
 elif [ "$select" == "Poweroff" ] ; then
-	prompt "poweroff" Poweroff	
+	poweroff
 
 else
     echo $select

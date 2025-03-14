@@ -10,8 +10,15 @@ return {
 				null_ls.builtins.formatting.prettierd,
 				null_ls.builtins.formatting.cmake_format,
 				null_ls.builtins.formatting.black,
+				null_ls.builtins.formatting.clang_format,
 				null_ls.builtins.completion.luasnip,
-				null_ls.builtins.diagnostics.cppcheck,
+				null_ls.builtins.diagnostics.cppcheck.with({
+					extra_args = {
+						"--language=c++",
+						"--std=c++20",
+						"--suppres=unusedMemberStruct"
+					}
+				}),
 				null_ls.builtins.diagnostics.glslc,
       	null_ls.builtins.diagnostics.cmake_lint,
 			},

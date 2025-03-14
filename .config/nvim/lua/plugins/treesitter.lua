@@ -23,7 +23,8 @@ return {
         "python",
         "scss",
         "vue",
-        "xml"
+        "xml",
+				"glsl"
       },
       auto_install = true,
       highlight = { enable = true }

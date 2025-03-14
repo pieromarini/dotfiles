@@ -67,6 +67,9 @@ return {
 				end,
 			})
 
+			local tsdk = require('mason-registry').get_package('typescript-language-server'):get_install_path() ..
+											 '/node_modules/typescript/lib'
+
 			lspconfig.tsserver.setup({
 				on_attach = lsp.on_attach,
 				capabilities = lsp.capabilities,
@@ -74,10 +77,14 @@ return {
 					plugins = {
 						{
 							name = "@vue/typescript-plugin",
-							location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+							-- TODO: get current NVM version in use to create this path
+							location = "/home/piero/.nvm/versions/node/v18.12.0/lib/node_modules/@vue/typescript-plugin",
 							languages = { "javascript", "typescript", "vue" },
 						},
 					},
+					tsserver = {
+						path = tsdk
+					}
 				},
 				filetypes = {
 					"javascript",
@@ -147,6 +154,12 @@ return {
 			lspconfig.pyright.setup({
 				on_attach = lsp.on_attach,
 				capabilities = lsp.capabilities,
+			})
+
+			lspconfig.glsl_analyzer.setup({
+				on_attach = lsp.on_attach,
+				capabilities = lsp.capabilities,
+				filetypes = { "glsl", "frag", "vert", "comp", "geom", "tesc", "tese" }
 			})
 		end,
 	},

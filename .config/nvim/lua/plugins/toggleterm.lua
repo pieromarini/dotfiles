@@ -9,10 +9,6 @@ return {
 			direction = "float",
 			float_opts = {
 				border = "single",
-				width = 150,
-				height = 55,
-				row = 5,
-				col = 5,
 			},
 			size = 10,
 			hide_numbers = true,

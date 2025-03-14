@@ -71,8 +71,7 @@ bspc rule -a Steam desktop='7' state=tiled follow=off
 bspc rule -a discord desktop='8' state=tiled follow=off
 
 # Temp rules
-bspc rule -a 'Primal Engine' state=floating
-bspc rule -a 'Proyecto 2' state=floating
+bspc rule -a sandbox:sandbox:"Primal Engine" state=floating
 
 # Init
 bash /home/piero/.config/polybar/launch.sh &
