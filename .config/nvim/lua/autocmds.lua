@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf })
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf })
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = args.buf })
+		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", { buffer = args.buf })
 		vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = args.buf })
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { silent = true, noremap = true, desc = 'toggle signature' })
 
